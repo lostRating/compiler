@@ -23,7 +23,7 @@ public class declarator extends root
 			son = (root)vec.get(2);
 			if (son.checkSon() == WA) return WA;*/
 			
-			//函数定义后置
+			//function hou zhi ding yi
 			throw new Exception("Error: No code about it");
 //			System.out.println("declarator miss !!!");
 		}
