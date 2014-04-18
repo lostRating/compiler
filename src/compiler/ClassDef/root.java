@@ -138,11 +138,11 @@ public class root
 			vector.set(1, false);
 		}
 		
-		if (op.equals("-") && a instanceof Pointer && b instanceof Int)
+		/*if (op.equals("-") && a instanceof Pointer && b instanceof Int)
 		{
 			vector.set(4, false);
 			return vector;
-		}
+		}*/
 		
 		if (typeToType(main.GXX_INT, a) && typeToType(main.GXX_INT, b))
 		{
