@@ -1,6 +1,6 @@
 all:
 	mkdir -p bin
-	cd src/compiler2014/ast && make
+	cd src/compiler/ast && make
 	javac src/compiler/*/*.java -classpath lib/antlr-3.5-complete.jar -d bin
 
 clean:
