@@ -1,14 +1,12 @@
 grammar E ;
  
-options{ 
+options{
+	language = Java;
 	output = AST ;
 	ASTLabelType = CommonTree ;
 	backtrack = true;
 }
-
-@header {  
-    package compiler.ast;
-}  
+ 
 tokens
 {
 	GXX_program;
@@ -61,6 +59,14 @@ tokens
 	THREE;
 	FOUR;
 }
+
+@lexer::header{
+package compiler.ast;
+}
+
+@parser::header {  
+package compiler.ast;
+} 
 
 program :
 	a1=program_tmp  ->  ^(GXX_program $a1)  ;
