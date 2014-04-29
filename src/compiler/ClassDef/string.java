@@ -9,16 +9,14 @@ import compiler.main.main;
 public class string extends root
 {
 	public string(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 		son = (root)vec.get(0);
-		if (son.checkSon() == WA) return WA;
+		son.checkSon();
 		
 		Type type = (Type)new Pointer(main.GXX_CHAR, son.s);
 		
 		returnVec.add(type);
 		returnVec.add(0);
-		
-		return AC;
 	}
 }

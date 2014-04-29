@@ -7,19 +7,24 @@ import compiler.main.main;
 public class jump_statement extends root
 {
 	public jump_statement(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
-		if (vec.size() == 1)
+		son = (root)vec.get(0);
+		if (!son.s.equals("return"))
 		{
-			if (main.loop == 0) return WA;
+			if (main.loop == 0) throw new Exception("jump_statement 1");
 		}
 		else
 		{
-			son = (root)vec.get(1);
-			if (son.checkSon() == WA) return WA;
-			Type type = (Type)son.returnVec.get(2);
-			if (main.func == null || !typeToType(main.func.returnType, type)) return WA;
+			Type type = main.GXX_VOID;
+			if (vec.size() == 2)
+			{
+				son = (root)vec.get(1);
+				son.checkSon();
+				type = (Type)son.returnVec.get(2);
+			}
+			if (main.func == null || !typeToType(main.func.returnType, type))
+				throw new Exception("jump_statement 2");
 		}
-		return AC;
 	}
 }

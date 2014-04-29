@@ -8,17 +8,15 @@ import compiler.main.main;
 public class type_name extends root
 {
 	public type_name(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 		son = (root)vec.get(0);
-		if (son.checkSon() == WA) return WA;
+		son.checkSon();
 		Type type = (Type)son.returnVec.get(0);
 		
 		for (int i = 1; i < vec.size(); ++i)
 			type = new Pointer(type, "GXX_" + String.valueOf(main.noName++));
 		
 		returnVec.add(type);
-		
-		return AC;
 	}
 }

@@ -1,2 +1,12 @@
 bin/
+.metadata/
+
+.classpath
+.project
+
+src/compiler/ast/E.tokens
+src/compiler/ast/ELexer.java
+src/compiler/ast/EParser.java
+
+*.xlsx
 *.class

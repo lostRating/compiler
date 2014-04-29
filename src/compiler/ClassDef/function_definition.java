@@ -10,14 +10,14 @@ import compiler.Semantic.*;
 public class function_definition extends root
 {
 	public function_definition(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 		son = (root)vec.get(0);
-		if (son.checkSon() == WA) return WA;
+		son.checkSon();
 		Type returnType = (Type)son.returnVec.get(0);
 
 		son = (root)vec.get(1);
-		if (son.checkSon(returnType) == WA) return WA;
+		son.checkSon(returnType);
 		returnType = (Type)son.returnVec.get(0);
 		String functionName = (String)son.returnVec.get(1);
 		
@@ -25,38 +25,29 @@ public class function_definition extends root
 		if (vec.size() == 4)
 		{
 			son = (root)vec.get(2);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			argumentType = son.returnVec;
 		}
-		/*Type tmp = (Type)main.F.get(Symbol.symbol(functionName));
-		if (tmp != null && tmp.scope == main.scope) return WA;
-		main.F.put(Symbol.symbol(functionName), type);*/
-		if (returnType instanceof Name) return WA;
+		if (returnType instanceof Name) throw new Exception("function_definition");
 		Type type = new Function(returnType, argumentType, functionName);
-		if (!addSymbol(main.F, type, functionName, false)) return WA;
+		addSymbol(main.F, type, functionName, false);
 		
 		main.func = (Function)type;
 		
-		beginScope();
+		beginScope(false);
 		
 		for (int i = 0; i < argumentType.size(); i += 2)
 		{
 			String name = (String)argumentType.get(i + 1);
 			Type type2 = (Type)argumentType.get(i);
-			/*Type tmp2 = (Type)main.F.get(Symbol.symbol(name));
-			if (tmp2 != null && tmp2.scope == main.scope) return WA;
-			if (type2 instanceof Name) return WA;
-			main.F.put(Symbol.symbol(name), type2);*/
-			if (!addSymbol(main.F, type2, name, true)) return WA;
+			addSymbol(main.F, type2, name, true);
 		}
 		
 		son = (root)vec.get(vec.size() - 1);
-		if (son.checkSon() == WA) return WA;
+		son.checkSon();
 		
-		endScope();
+		endScope(false);
 		
 		main.func = null;
-		
-		return AC;
 	}
 }

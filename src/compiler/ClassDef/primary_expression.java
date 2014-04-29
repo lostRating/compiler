@@ -6,15 +6,15 @@ import compiler.Type.Type;
 public class primary_expression extends root
 {
 	public primary_expression(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 		
 		son = (root)vec.get(0);
 		if (son.s.equals("ONE"))
 		{
 			son = (root)vec.get(1);
-			if (son.checkSon() == WA) return WA;
-			if (son.returnVec.get(0) == null) return WA;
+			son.checkSon();
+			if (son.returnVec.get(0) == null) throw new Exception("primary_expression ???");
 			
 			returnVec.add(false);
 			returnVec.add(true);
@@ -24,7 +24,7 @@ public class primary_expression extends root
 		else if (son.s.equals("TWO"))
 		{
 			son = (root)vec.get(1);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			returnVec.add(true);
 			returnVec.add(false);
 			returnVec.add(son.returnVec.get(0));
@@ -33,7 +33,7 @@ public class primary_expression extends root
 		else if (son.s.equals("THREE"))
 		{
 			son = (root)vec.get(1);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			returnVec.add(true);
 			returnVec.add(false);
 			returnVec.add(son.returnVec.get(0));
@@ -42,10 +42,9 @@ public class primary_expression extends root
 		else
 		{
 			son = (root)vec.get(1);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			for (int i = 0; i < 4; ++i)
 				returnVec.add(son.returnVec.get(i));
 		}
-		return AC;
 	}
 }

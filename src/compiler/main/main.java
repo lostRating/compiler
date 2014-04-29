@@ -17,9 +17,6 @@ import compiler.Type.*;
 import compiler.Type.Void;
 
 public class main {
-	static int AC = 0;
-	static int WA = 1;
-	
 	static public Table S = new Table();
 	static public Table F = new Table();
 	static public int loop = 0;
@@ -70,19 +67,19 @@ public class main {
 			{
 				init();
 				init_op();
-				return a.checkSon();
-				//System.out.println(" ! 1");
+				a.checkSon();
+				System.out.println("ok");
 			}
 			catch (Exception t)
 			{
-				return WA;
-				//System.out.println(" ! 2");
+				System.out.println("CE");
+				System.out.println(t.getMessage());
 			}
 		}
 		catch(RecognitionException a) {
-			return WA;
-			//System.out.println(" ! 3");
+			System.out.println("antlr error");
 		}
+		return 0;
 	}
 	
 	public static List<File> getFiles(String path){
@@ -104,12 +101,12 @@ public class main {
 	
 	static public void main(String[] args) throws RecognitionException, IOException, Exception 
 	{
-//		String s = "D:\\hehe\\compiler2014-testcases\\bonus\\Syntactic&Semantic";
-//	    List<File> files = getFiles(s);
-//	    for(File f : files){
-//	    	System.out.println(f.getName());
-//	        work(s + "\\" + f.getName());
-//	    }
-		System.exit( work(new File(args[0])));
+		String s = "D:\\hehe\\compiler2014-testcases\\Normal";
+	    List<File> files = getFiles(s);
+	    for(File f : files){
+	    	System.out.println(f.getName());
+	        work(f);
+	    }
+//		System.exit( work(new File(args[0])));
 	}
 }

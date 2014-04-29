@@ -6,11 +6,9 @@ import compiler.Semantic.Table;
 public class statement extends root
 {
 	public statement(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 		son = (root)vec.get(0);
-		if (son.checkSon() == WA) return WA;
-		
-		return AC;
+		son.checkSon();
 	}
 }

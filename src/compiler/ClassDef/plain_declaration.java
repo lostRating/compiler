@@ -7,17 +7,15 @@ import compiler.Type.Type;
 public class plain_declaration extends root
 {
 	public plain_declaration(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 		son = (root)vec.get(0);
-		if (son.checkSon() == WA) return WA;
+		son.checkSon();
 		Type type = (Type)son.returnVec.get(0);
 		
 		son = (root)vec.get(1);
-		if (son.checkSon(type) == WA) return WA;
+		son.checkSon(type);
 		returnVec.add(son.returnVec.get(0));
 		returnVec.add(son.returnVec.get(1));
-		
-		return AC;
 	}
 }

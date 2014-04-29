@@ -9,23 +9,22 @@ import compiler.main.main;
 public class plain_declarator extends root
 {
 	public plain_declarator(){}
-	public int checkSon(Type type) throws Exception
+	public void checkSon(Type type) throws Exception
 	{
 		son = (root)vec.get(0);
 		if (son.s.equals("*"))
 		{
 			son = (root)vec.get(1);
 			Type newType = new Pointer(type, "GXX_" + String.valueOf(main.noName++));
-			if (son.checkSon(newType) == WA) return WA;
+			son.checkSon(newType);
 			returnVec.add(son.returnVec.get(0));
 			returnVec.add(son.returnVec.get(1));
 		}
 		else
 		{
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			returnVec.add(type);
 			returnVec.add(son.returnVec.get(1));
 		}
-		return AC;
 	}
 }

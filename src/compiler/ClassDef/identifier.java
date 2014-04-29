@@ -8,12 +8,14 @@ import compiler.main.main;
 public class identifier extends root
 {
 	public identifier(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 		son = (root)vec.get(0);
-		if (son.checkSon() == WA) return WA;
+		son.checkSon();
 		
 		String s = son.s;
+		
+		//System.out.println(s);
 		
 		Super sup = (Super)main.F.get(Symbol.symbol(s));
 		Type type;
@@ -22,7 +24,5 @@ public class identifier extends root
 		
 		returnVec.add(type);
 		returnVec.add(s);
-		
-		return AC;
 	}
 }

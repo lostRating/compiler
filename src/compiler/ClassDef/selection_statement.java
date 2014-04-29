@@ -8,20 +8,17 @@ import compiler.main.main;
 public class selection_statement extends root
 {
 	public selection_statement(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 		son = (root)vec.get(0);
-		
-		if (son.checkSon() == WA) return WA;
+		son.checkSon();
 		Type type = (Type)son.returnVec.get(2);
-		if (!typeToType(main.GXX_INT, type)) return WA;
+		if (!typeToType(main.GXX_INT, type)) throw new Exception("selcetion_statement");
 		
 		for (int i = 1; i < vec.size(); ++i)
 		{
 			son = (root)vec.get(i);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 		}
-		
-		return AC;
 	}
 }

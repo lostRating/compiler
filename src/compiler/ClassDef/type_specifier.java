@@ -8,7 +8,7 @@ import compiler.Type.*;
 public class type_specifier extends root
 {
 	public type_specifier(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 
 		son = (root)vec.get(0);
@@ -16,7 +16,7 @@ public class type_specifier extends root
 		if (vec.size() == 1)
 		{
 			son = (root)vec.get(0);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			Super sup = (Super)main.S.get(Symbol.symbol("GXX_" + son.s.toUpperCase()));
 			returnVec.add(sup.type);
 		}
@@ -24,31 +24,27 @@ public class type_specifier extends root
 		{
 			String s = "";
 			son = (root)vec.get(1);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			
 			if (vec.size() == 4)
 			{
 				son = (root)vec.get(2);
-				if (son.checkSon() == WA) return WA;
+				son.checkSon();
 				s += (String)son.returnVec.get(1);
 			}
 			else
 				s += "GXX_" + String.valueOf(main.noName++);
 			
-			beginScope();
+			beginScope(true);
 			
 			son = (root)vec.get(vec.size() - 1);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			for (int i = 0; i < son.returnVec.size(); ++i)
 				returnVec.add(son.returnVec.get(i));
 			
-			endScope();
-			
-			/*Type tmp = (Type)main.S.get(Symbol.symbol(s));
-			if (tmp != null && tmp.scope == main.scope) return WA;
-			main.S.put(Symbol.symbol(s), struct);*/
+			endScope(true);
 			Type struct = new Struct(returnVec, s);
-			if (!addSymbol(main.S, struct, s, true)) return WA;
+			addSymbol(main.S, struct, s, true);
 			
 			returnVec.removeAllElements();
 			returnVec.add(struct);
@@ -57,7 +53,7 @@ public class type_specifier extends root
 		{
 			String s = "";
 			son = (root)vec.get(1);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			s = (String)son.returnVec.get(1);
 			
 			Super sup = (Super)main.S.get(Symbol.symbol(s));
@@ -69,6 +65,5 @@ public class type_specifier extends root
 			
 			returnVec.add(struct);
 		}
-		return AC;
 	}
 }

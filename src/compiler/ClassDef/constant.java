@@ -9,12 +9,12 @@ import compiler.main.main;
 public class constant extends root
 {
 	public constant(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 		son = (root)vec.get(0);
 		String s = son.s;
 		son = (root)vec.get(1);
-		if (son.checkSon() == WA) return WA;
+		son.checkSon();
 		if (s.equals("ONE"))
 		{
 			returnVec.add(main.GXX_INT);
@@ -25,6 +25,5 @@ public class constant extends root
 			returnVec.add(main.GXX_CHAR);
 			returnVec.add(son.returnVec.get(0));
 		}
-		return AC;
 	}
 }

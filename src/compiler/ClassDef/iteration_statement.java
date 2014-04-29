@@ -8,21 +8,21 @@ import compiler.main.main;
 public class iteration_statement extends root
 {
 	public iteration_statement(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 		son = (root)vec.get(0);
 		
 		if (son.s.equals("while"))
 		{
 			son = (root)vec.get(1);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			Type type = (Type)son.returnVec.get(2);
-			if (!typeToType(main.GXX_INT, type)) return WA;
+			if (!typeToType(main.GXX_INT, type)) throw new Exception("iteration_statement");
 			
 			beginLoop();
 			
 			son = (root)vec.get(2);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			
 			endLoop();
  		}
@@ -31,20 +31,17 @@ public class iteration_statement extends root
 			for (int i = 1; i < vec.size() - 2; i += 2)
 			{
 				son = (root)vec.get(i + 1);
-				if (son.checkSon() == WA) return WA;
+				son.checkSon();
 				Type type = (Type)son.returnVec.get(2);
-				if (!typeToType(main.GXX_INT, type)) return WA;
-				//skip useless token
+				if (((root)vec.get(i)).s.equals("TWO") && !typeToType(main.GXX_INT, type)) throw new Exception("iteration_statement");
 			}
 			
 			beginLoop();
 			
 			son = (root)vec.get(vec.size() - 1);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			
 			endLoop();
  		}
-		
-		return AC;
 	}
 }

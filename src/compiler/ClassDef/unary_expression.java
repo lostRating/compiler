@@ -10,12 +10,12 @@ import compiler.Type.*;
 public class unary_expression extends root
 {
 	public unary_expression(){}
-	public int checkSon() throws Exception
+	public void checkSon() throws Exception
 	{
 		if (vec.size() == 1)
 		{
 			son = (root)vec.get(0);
-			if (son.checkSon() == WA) return WA;
+			son.checkSon();
 			for (int i = 0; i < 4; ++i)
 				returnVec.add(son.returnVec.get(i));
 		}
@@ -25,7 +25,7 @@ public class unary_expression extends root
 			if (son.s.equals("++") || son.s.equals("--"))
 			{
 				son = (root)vec.get(1);
-				if (son.checkSon() == WA) return WA;
+				son.checkSon();
 				for (int i = 0; i < 4; ++i)
 					returnVec.add(son.returnVec.get(i));
 				returnVec.set(1, false);
@@ -34,11 +34,10 @@ public class unary_expression extends root
 			{
 				String s = son.s;
 				son = (root)vec.get(1);
-				if (son.checkSon() == WA) return WA;
+				son.checkSon();
 				for (int i = 0; i < 4; ++i)
 					returnVec.add(son.returnVec.get(i));
 				Vector vec = calOne(s, returnVec);
-				if (!(boolean)vec.get(4)) return WA;
 				
 				for (int i = 0; i < 4; ++i)
 					returnVec.set(i, vec.get(i));
@@ -46,7 +45,7 @@ public class unary_expression extends root
 			else if (son.s.equals("ONE"))
 			{
 				son = (root)vec.get(1);
-				if (son.checkSon() == WA) return WA;
+				son.checkSon();
 				for (int i = 0; i < 4; ++i)
 					returnVec.add(son.returnVec.get(i));
 				returnVec.set(0, true);
@@ -56,13 +55,12 @@ public class unary_expression extends root
 			else
 			{
 				son = (root)vec.get(1);
-				if (son.checkSon() == WA) return WA;
+				son.checkSon();
 				returnVec.add(true);
 				returnVec.add(false);
 				returnVec.add(main.GXX_INT);
 				returnVec.add(0);
 			}
 		}
-		return AC;
 	}
 }
