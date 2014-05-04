@@ -11,11 +11,14 @@ public class declaration extends root
 	{
 		son = (root)vec.get(0);
 		son.checkSon();
+		
 		Type type = (Type)son.returnVec.get(0);
 		
 		if (vec.size() == 1) return;
 		
 		son = (root)vec.get(1);
 		son.checkSon(type);
+		
+		addquad(son);
 	}
 }

@@ -8,6 +8,8 @@ public final class Function extends Type{
 		for (int i = 0; i < argumentType2.size(); i += 2)
 			argumentType.add(argumentType2.get(i));
 		Name = Name2;
+		
+		size = returnType.size;
 	}
 	public Vector argumentType = new Vector();
 	public Type returnType;

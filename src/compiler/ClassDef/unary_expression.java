@@ -16,7 +16,10 @@ public class unary_expression extends root
 		{
 			son = (root)vec.get(0);
 			son.checkSon();
-			for (int i = 0; i < 4; ++i)
+			
+			addquad(son);
+			
+			for (int i = 0; i < 5; ++i)
 				returnVec.add(son.returnVec.get(i));
 		}
 		else
@@ -26,8 +29,17 @@ public class unary_expression extends root
 			{
 				son = (root)vec.get(1);
 				son.checkSon();
-				for (int i = 0; i < 4; ++i)
+				
+				addquad(son);
+				
+				for (int i = 0; i < 5; ++i)
 					returnVec.add(son.returnVec.get(i));
+				Type type = (Type)son.returnVec.get(2);
+				if (!typeToType(main.GXX_INT, type)) throw new Exception("unary_expression 1");
+				
+				__TempOprand __t = (__TempOprand)returnVec.get(4);
+				quad.add(new __BinOp(__t, __t, new __Const(1), "+"));
+				
 				returnVec.set(1, false);
 			}
 			else if (!son.s.equals("ONE") && !son.s.equals("TWO"))
@@ -35,31 +47,45 @@ public class unary_expression extends root
 				String s = son.s;
 				son = (root)vec.get(1);
 				son.checkSon();
-				for (int i = 0; i < 4; ++i)
+				
+				addquad(son);
+				
+				for (int i = 0; i < 5; ++i)
 					returnVec.add(son.returnVec.get(i));
 				Vector vec = calOne(s, returnVec);
 				
-				for (int i = 0; i < 4; ++i)
+				for (int i = 0; i < 5; ++i)
 					returnVec.set(i, vec.get(i));
 			}
 			else if (son.s.equals("ONE"))
 			{
 				son = (root)vec.get(1);
 				son.checkSon();
-				for (int i = 0; i < 4; ++i)
-					returnVec.add(son.returnVec.get(i));
-				returnVec.set(0, true);
-				returnVec.set(1, false);
-				returnVec.set(2, main.GXX_INT);
+				
+				addquad(son);
+				
+				returnVec.add(true);
+				returnVec.add(false);
+				returnVec.add(main.GXX_INT);
+				returnVec.add(((Type)son.returnVec.get(2)).size);
+				
+				__TempOprand __t = new __TempOprand(new __Temp(""));
+				quad.add(new __Move(__t, new __Const((int)returnVec.get(3))));
+				returnVec.add(__t);
 			}
 			else
 			{
 				son = (root)vec.get(1);
 				son.checkSon();
+				
 				returnVec.add(true);
 				returnVec.add(false);
 				returnVec.add(main.GXX_INT);
-				returnVec.add(0);
+				returnVec.add(((Type)son.returnVec.get(0)).size);
+				
+				__TempOprand __t = new __TempOprand(new __Temp(""));
+				quad.add(new __Move(__t, new __Const((int)returnVec.get(3))));
+				returnVec.add(__t);
 			}
 		}
 	}

@@ -11,9 +11,14 @@ public class expression extends root
 		{
 			son = (root)vec.get(i);
 			son.checkSon();
+			
+			addquad(son);
+			
 			if (i == 0)
-				for (int j = 0; j < 4; ++j)
+			{
+				for (int j = 0; j < 5; ++j)
 					returnVec.add(son.returnVec.get(j));
+			}
 		}
 	}
 }

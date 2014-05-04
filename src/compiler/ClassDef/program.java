@@ -11,6 +11,7 @@ public class program extends root
 		{
 			root son = (root)vec.get(i);
 			son.checkSon();
+			addquad(son);
 		}
 	}
 }

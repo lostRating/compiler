@@ -18,5 +18,8 @@ public class string extends root
 		
 		returnVec.add(type);
 		returnVec.add(0);
+		__TempOprand __t = new __TempOprand(new __Temp(""));
+		quad.add(new __Move(__t, new __Const((int)returnVec.get(1))));
+		returnVec.add(__t);
 	}
 }

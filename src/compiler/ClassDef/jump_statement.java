@@ -12,7 +12,9 @@ public class jump_statement extends root
 		son = (root)vec.get(0);
 		if (!son.s.equals("return"))
 		{
-			if (main.loop == 0) throw new Exception("jump_statement 1");
+			if (main.l1.empty()) throw new Exception("jump_statement 1");
+			if (son.s.equals("continue")) quad.add(new __Jump(main.l1.peek()));
+			else quad.add(new __Jump(main.l2.peek()));
 		}
 		else
 		{
@@ -21,6 +23,11 @@ public class jump_statement extends root
 			{
 				son = (root)vec.get(1);
 				son.checkSon();
+				
+				addquad(son);
+				__TempOprand __t = (__TempOprand)son.returnVec.get(4);
+				quad.add(new __Return(__t));
+				
 				type = (Type)son.returnVec.get(2);
 			}
 			if (main.func == null || !typeToType(main.func.returnType, type))

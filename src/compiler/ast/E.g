@@ -5,6 +5,7 @@ options{
 	output = AST ;
 	ASTLabelType = CommonTree ;
 	backtrack = true;
+	memoize = true;
 }
  
 tokens

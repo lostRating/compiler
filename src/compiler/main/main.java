@@ -4,22 +4,25 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.Vector;
 
 import org.antlr.runtime.RecognitionException;
 
-import compiler.ClassDef.root;
+import com.sun.org.apache.xml.internal.security.Init;
+
+import compiler.ClassDef.*;
 import compiler.Semantic.Table;
 import compiler.Semantic.makeTree;
 import compiler.ast.AST;
 import compiler.Semantic.*;
 import compiler.Type.*;
 import compiler.Type.Void;
+import compiler.init.*;
 
 public class main {
 	static public Table S = new Table();
 	static public Table F = new Table();
-	static public int loop = 0;
 	static public int scope = 0;
 	static public int noName = 0;
 	static public Function func = null;
@@ -28,36 +31,9 @@ public class main {
 	static public Type GXX_VOID = new Void();
 	static public Type GXX_VOID_STAR = new Pointer(GXX_VOID, "GXX_VOID_STAR");
 	
-	static public Table opLeft = new Table();
-	
-	public static void init_op()
-	{
-		opLeft.put(Symbol.symbol("="), "");
-//		op1.put(Symbol.symbol("*"), "");
-//		op1.put(Symbol.symbol("/"), "");
-//		op1.put(Symbol.symbol("%"), "");
-		
-	}
-	
-	public static void init()
-	{
-		S = new Table();
-		F = new Table();
-		loop = 0;
-		scope = 0;
-		noName = 0;
-		func = null;
-				
-		S.put(Symbol.symbol("GXX_INT"), new Super(GXX_INT, 0));
-		S.put(Symbol.symbol("GXX_CHAR"), new Super(GXX_CHAR, 0));
-		S.put(Symbol.symbol("GXX_VOID"), new Super(GXX_VOID, 0));
-
-		Type type = new Function(GXX_INT, new Vector(), "printf");
-		F.put(Symbol.symbol("printf"), new Super(type, 0));
-		
-		type = new Function(GXX_VOID_STAR, new Vector(), "malloc");
-		F.put(Symbol.symbol("malloc"), new Super(type, 0));
-	}
+	static public Stack<Integer> Offset = new Stack<Integer>();
+	static public Stack<__Label> l1 = new Stack<__Label>();
+	static public Stack<__Label> l2 = new Stack<__Label>();
 	
 	static public int work(File file) throws RecognitionException, IOException, Exception {
 		try	{
@@ -65,12 +41,12 @@ public class main {
 			root a = makeTree.getRoot(s);
 			try
 			{
-				init();
-				init_op();
+				init.init();
 				a.checkSon();
-				System.out.println("ok");
+				a.showquad();
+				System.out.println("-------------------------ok-------------------------------");
 			}
-			catch (Exception t)
+			catch (RecognitionException t)
 			{
 				System.out.println("CE");
 				System.out.println(t.getMessage());

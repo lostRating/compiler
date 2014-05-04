@@ -14,36 +14,51 @@ public class primary_expression extends root
 		{
 			son = (root)vec.get(1);
 			son.checkSon();
+			
+			addquad(son);
+			
 			if (son.returnVec.get(0) == null) throw new Exception("primary_expression ???");
 			
 			returnVec.add(false);
 			returnVec.add(true);
 			returnVec.add(son.returnVec.get(0));
 			returnVec.add(0);
+			returnVec.add(son.returnVec.get(2));
 		}
 		else if (son.s.equals("TWO"))
 		{
 			son = (root)vec.get(1);
 			son.checkSon();
+			
+			addquad(son);
+			
 			returnVec.add(true);
 			returnVec.add(false);
 			returnVec.add(son.returnVec.get(0));
 			returnVec.add(son.returnVec.get(1));
+			returnVec.add(son.returnVec.get(2));
 		}
 		else if (son.s.equals("THREE"))
 		{
 			son = (root)vec.get(1);
 			son.checkSon();
+			
+			addquad(son);
+			
 			returnVec.add(true);
 			returnVec.add(false);
 			returnVec.add(son.returnVec.get(0));
 			returnVec.add(son.returnVec.get(1));
+			returnVec.add(son.returnVec.get(2));
 		}
 		else
 		{
 			son = (root)vec.get(1);
 			son.checkSon();
-			for (int i = 0; i < 4; ++i)
+			
+			addquad(son);
+			
+			for (int i = 0; i < 5; ++i)
 				returnVec.add(son.returnVec.get(i));
 		}
 	}

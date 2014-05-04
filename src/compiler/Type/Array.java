@@ -5,6 +5,7 @@ public final class Array extends Pointer{
 		elementType = newType;
 		capacity = i;
 		Name = name;
+		size = elementType.size * capacity;
 	}
 	int capacity;
 }

@@ -12,6 +12,9 @@ public class type_name extends root
 	{
 		son = (root)vec.get(0);
 		son.checkSon();
+		
+		addquad(son);
+		
 		Type type = (Type)son.returnVec.get(0);
 		
 		for (int i = 1; i < vec.size(); ++i)

@@ -18,14 +18,20 @@ public class assignment_expression extends root
 			{
 				son = (root)vec.get(i);
 				son.checkSon();
+				
+				addquad(son);
+				
 				if (i == 0)
-					for (int j = 0; j < 4; ++j)
+				{
+					for (int j = 0; j < 5; ++j)
 						returnVec.add(son.returnVec.get(j));
+				}
 				else
 				{
 					String op = (String)(((root)vec.get(i - 1)).s);
 					Vector vector = calTwo(op, returnVec, son.returnVec);
-					for (int j = 0; j < 4; ++j)
+					
+					for (int j = 0; j < 5; ++j)
 						returnVec.set(j, vector.get(j));
 				}
 			}
@@ -34,7 +40,10 @@ public class assignment_expression extends root
 		{
 			son = (root)vec.get(0);
 			son.checkSon();
-			for (int i = 0; i < 4; ++i)
+			
+			addquad(son);
+			
+			for (int i = 0; i < 5; ++i)
 				returnVec.add(son.returnVec.get(i));
 		}
 	}

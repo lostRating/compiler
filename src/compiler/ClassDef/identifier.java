@@ -19,10 +19,20 @@ public class identifier extends root
 		
 		Super sup = (Super)main.F.get(Symbol.symbol(s));
 		Type type;
-		if (sup == null) type = null;
-		else type = sup.type;
+		__TempOprand __t;
+		if (sup == null)
+		{
+			type = null;
+			__t = null;
+		}
+		else
+		{
+			type = sup.type;
+			__t = new __TempOprand(sup.temp);
+		}
 		
 		returnVec.add(type);
 		returnVec.add(s);
+		returnVec.add(__t);
 	}
 }

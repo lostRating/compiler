@@ -10,5 +10,7 @@ public class statement extends root
 	{
 		son = (root)vec.get(0);
 		son.checkSon();
+		
+		addquad(son);
 	}
 }

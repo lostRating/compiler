@@ -7,6 +7,8 @@ public class Pointer extends Type{
 	public Pointer(Type type, String string) {
 		elementType = type;
 		Name = string;
+		
+		size = 4;
 	}
 
 	public Type elementType;

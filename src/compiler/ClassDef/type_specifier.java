@@ -35,14 +35,15 @@ public class type_specifier extends root
 			else
 				s += "GXX_" + String.valueOf(main.noName++);
 			
-			beginScope(true);
+			beginScope("struct");
 			
 			son = (root)vec.get(vec.size() - 1);
 			son.checkSon();
 			for (int i = 0; i < son.returnVec.size(); ++i)
 				returnVec.add(son.returnVec.get(i));
 			
-			endScope(true);
+			endScope("struct");
+			
 			Type struct = new Struct(returnVec, s);
 			addSymbol(main.S, struct, s, true);
 			

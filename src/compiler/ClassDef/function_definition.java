@@ -34,19 +34,36 @@ public class function_definition extends root
 		
 		main.func = (Function)type;
 		
-		beginScope(false);
+		quad.add(new __LabelQuad(new __Label(functionName)));
+		
+		beginScope("function");
 		
 		for (int i = 0; i < argumentType.size(); i += 2)
 		{
 			String name = (String)argumentType.get(i + 1);
 			Type type2 = (Type)argumentType.get(i);
-			addSymbol(main.F, type2, name, true);
+			__Temp tmp = addSymbol(main.F, type2, name, true);
+
+			//System.out.println(tmp);
+			Move(quad, tmp, 0);
 		}
+		
+		//System.out.println(functionName);
 		
 		son = (root)vec.get(vec.size() - 1);
 		son.checkSon();
 		
-		endScope(false);
+		addquad(son);
+		
+		type.size += main.Offset.peek();
+		
+		quad.insertElementAt(new __BinOp(__tosp, __tosp, new __Const(-type.size), "+"), 1);
+		quad.add(new __BinOp(__tosp, __tosp, new __Const(type.size), "+"));
+		
+		endScope("function");
+		
+		quad.add(new __Jump(new __Label("$ra")));
+		quad.add(new __Void(""));
 		
 		main.func = null;
 	}
