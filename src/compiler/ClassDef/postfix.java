@@ -35,11 +35,13 @@ public class postfix extends root
 			for (int i = 0; i < 5; ++i)
 				returnVec.add(i, tmpVec.get(i));
 			returnVec.set(0, false);
-			returnVec.set(2, pointer.elementType);
+			returnVec.set(2, pointer.elementType);	
 			
 			__TempOprand __t = new __TempOprand(new __Temp(""));
-			quad.add(new __BinOp(__t, (__TempOprand)returnVec.get(4), new __Const(pointer.elementType.size), "*"));
+			quad.add(new __BinOp(__t, (__TempOprand)son.returnVec.get(4), new __Const(pointer.elementType.size), "*"));
 			quad.add(new __BinOp(__t, __t, (__TempOprand)tmpVec.get(4), "+"));
+			if (!(pointer.elementType instanceof Struct) && !(pointer.elementType instanceof Array))
+				quad.add(new __Move(__t, new __Mem(__t.temp, 0)));
 			
 			returnVec.set(4, __t);
 		}

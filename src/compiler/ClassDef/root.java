@@ -14,8 +14,9 @@ public class root
 	public Vector vec = new Vector(), returnVec = new Vector();
 	public root son;
 	
+	static public boolean compAfterFunction = false;
+	
 	public Vector<__Quad> quad = new Vector<__Quad>();
-//	public __TempOprand __t = null;
 	
 	static public __Temp __tsp = new __Temp("$sp");
 	static public __TempOprand __tosp = new __TempOprand(__tsp);
@@ -45,16 +46,29 @@ public class root
 		for (int i = 0; i < quad.size(); ++i)
 			System.out.println(quad.get(i).toString());
 	}
-	public void Move(Vector<__Quad> quad, __Temp tmp, int offset2) throws Exception
+	public void Move(Vector<__Quad> quad, __Temp tmp) throws Exception
 	{
 		Type type = getSymbolType(tmp.name);
 		if (!(type instanceof Struct))
-			quad.add(new __Move(new __TempOprand(tmp), new __Mem(new __Temp("$sp"), tmp.offset + offset2)));
+			quad.add(new __Move(new __TempOprand(tmp), new __Mem(__tsp, tmp.offset)));
 		else
 		{
-			quad.add(new __BinOp(new __TempOprand(tmp), new __TempOprand(new __Temp("$sp")), new __Const(tmp.offset), "+"));
+			quad.add(new __Move(new __Mem(tmp, 0), new __Mem(__tsp, tmp.offset)));
+			for (int i = 0; i < type.size; i += 4)
+				quad.add(new __BinOp(new __Mem(tmp, tmp.offset + i + 4), __tosp, new __Const(tmp.offset + i + 4), "+"));
 			//throw new Exception("root_Move");
 		}
+	}
+	
+	public void init(__TempOprand a, __TempOprand b, Type aa, Type bb)
+	{
+		if (!(aa instanceof Struct)) quad.add(new __Move(a, b));
+		else
+		{
+			for (int i = 0; i < aa.size; i += 4)
+				quad.add(new __Move(new __Mem(a.temp, a.temp.offset + i + 4), new __Mem(b.temp, b.temp.offset + i + 4)));
+		}
+		//return new __Void("!!!!!!!!!!  root_init");
 	}
 	
 	public void beginScope(String s)
@@ -92,16 +106,18 @@ public class root
 			__Temp tmp = new __Temp(name);
 			T.put(Symbol.symbol(name), new Super(type, main.scope, tmp));
 			int tt = main.Offset.pop();
+			if (type instanceof Struct || type instanceof Array)
+			{
+				tt += 4;
+				if (tmp.Static)
+					quad.add(new __BinOp(new __TempOprand(tmp), __togp, new __Const(tt), "+"));
+				else
+					quad.add(new __BinOp(new __TempOprand(tmp), __tosp, new __Const(tt), "+"));
+			}
 			main.Offset.push(tt + type.size);
 			return tmp;
 		}
 		return null;
-	}
-	
-	public __Quad init(__TempOprand a, __TempOprand b)
-	{
-		return new __Move(a, b);
-		//return new __Void("!!!!!!!!!!  root_init");
 	}
 	
 	public Type getSymbolType(String name) throws Exception
@@ -191,7 +207,7 @@ public class root
 			{
 				if (a instanceof Array && b instanceof Array) throw new Exception("calTwo 2");
 				if (!typeToType(a, b)) throw new Exception("calTwo 3");
-				quad.add(init(__t1, __t2));
+				init(__t1, __t2, a, b);
 				return vector;
 			}
 			else
@@ -228,6 +244,7 @@ public class root
 		}
 		else throw new Exception("calTwo 4");
 		__TempOprand __t3 = new __TempOprand(new __Temp(""));
+		quad.add(new __BinOp(__t3, __t1, __t2, op));
 		vector.set(4, __t3);
 		
 		return vector;
@@ -259,6 +276,9 @@ public class root
 			if (!left) throw new Exception("calOne 1");
 			
 			vector.set(2, new Pointer(type, "GXX_" + String.valueOf(main.noName++)));
+			
+			vector.set(0, true);
+			vector.set(1, false);
 			
 			if (type instanceof Array || type instanceof Struct)
 			{

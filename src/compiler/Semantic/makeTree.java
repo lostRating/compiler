@@ -24,7 +24,7 @@ public class makeTree {
 		int n = s.length(), cnt = 0, flag = 0, FLAG = 0;
         String t = "";
         for (int i = 0; i < n; ++i) {
-        	if (i + 1 == n || s.charAt(i) == ' ') {
+        	if (i + 1 == n || (s.charAt(i) == ' ' && !(s.charAt(i - 1) == '\'' && s.charAt(i + 1) == '\''))) {
         		if (t.length() != 0) {
         			
         			//print(cnt, t);
@@ -97,7 +97,7 @@ public class makeTree {
         		++flag;
         	else if (s.charAt(i) == ')')
         		++FLAG;
-        	else if (s.charAt(i) != ' ')
+        	else if (s.charAt(i) != ' ' || (s.charAt(i) == ' ' && s.charAt(i - 1) == '\'' && s.charAt(i + 1) == '\''))
         		t = t + s.charAt(i);
         }
         return (root)vec.get(0);

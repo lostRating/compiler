@@ -12,6 +12,8 @@ public class declaration extends root
 		son = (root)vec.get(0);
 		son.checkSon();
 		
+		addquad(son);
+		
 		Type type = (Type)son.returnVec.get(0);
 		
 		if (vec.size() == 1) return;

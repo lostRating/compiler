@@ -16,6 +16,9 @@ public class init_declarator extends root
 
 		son = (root)vec.get(0);
 		son.checkSon(type);
+		
+		addquad(son);
+		
 		Type newType = (Type)son.returnVec.get(0);
 		String name = (String)son.returnVec.get(1);
 		

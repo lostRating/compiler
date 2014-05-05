@@ -7,7 +7,13 @@ public class compound_statement extends root
 	public compound_statement(){}
 	public void checkSon() throws Exception
 	{
-		beginScope("other");
+		boolean tmp = compAfterFunction;
+		
+		if (!tmp)
+		{
+			beginScope("other");
+			compAfterFunction = false;
+		}
 		
 		for (int i = 0; i < vec.size(); ++i)
 		{
@@ -17,6 +23,10 @@ public class compound_statement extends root
 			addquad(son);
 		}
 		
-		endScope("other");
+		if (!tmp)
+		{
+			endScope("other");
+			compAfterFunction = tmp;
+		}
 	}
 }

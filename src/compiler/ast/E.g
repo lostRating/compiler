@@ -342,9 +342,9 @@ String :
 	//catch[RecognitionException e] {throw e;}
 
 integer_constant :
-	Dec  ->  ^(GXX_integer_constant Dec)  |
-	Oct  ->  ^(GXX_integer_constant Oct)  |
-	Hex  ->  ^(GXX_integer_constant Hex)   ;
+	Dec  ->  ^(GXX_integer_constant ONE Dec)  |
+	Oct  ->  ^(GXX_integer_constant TWO Oct)  |
+	Hex  ->  ^(GXX_integer_constant THREE Hex)   ;
 	catch[RecognitionException e] {throw e;}
 
 Dec :

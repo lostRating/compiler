@@ -12,6 +12,9 @@ public class init_declarators extends root
 		{
 			son = (root)vec.get(i);
 			son.checkSon(type);
+			
+			addquad(son);
+			
 			returnVec.add(son.returnVec.get(0));
 			returnVec.add(son.returnVec.get(1));
  		}

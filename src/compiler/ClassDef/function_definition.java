@@ -45,10 +45,12 @@ public class function_definition extends root
 			__Temp tmp = addSymbol(main.F, type2, name, true);
 
 			//System.out.println(tmp);
-			Move(quad, tmp, 0);
+			Move(quad, tmp);
 		}
 		
 		//System.out.println(functionName);
+		
+		compAfterFunction = true;
 		
 		son = (root)vec.get(vec.size() - 1);
 		son.checkSon();

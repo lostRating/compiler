@@ -46,7 +46,7 @@ public class main {
 				a.showquad();
 				System.out.println("-------------------------ok-------------------------------");
 			}
-			catch (RecognitionException t)
+			catch (Exception t)
 			{
 				System.out.println("CE");
 				System.out.println(t.getMessage());
@@ -77,7 +77,7 @@ public class main {
 	
 	static public void main(String[] args) throws RecognitionException, IOException, Exception 
 	{
-		String s = "D:\\hehe\\compiler2014-testcases\\Normal";
+		String s = "D:\\hehe\\compiler2014-testcases\\my";
 	    List<File> files = getFiles(s);
 	    for(File f : files){
 	    	System.out.println(f.getName());
