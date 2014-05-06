@@ -28,7 +28,13 @@ public class identifier extends root
 		else
 		{
 			type = sup.type;
-			__t = new __TempOprand(sup.temp);
+			if ((type instanceof Array || type instanceof Struct) && !sup.tmp.Static)
+			{
+				__t = new __TempOprand(new __Temp(""));
+				quad.add(new __BinOp(__t, __tosp, new __Const(sup.tmp.offset), "+"));
+			}
+			else
+				__t = new __TempOprand(sup.tmp);
 		}
 		
 		returnVec.add(type);

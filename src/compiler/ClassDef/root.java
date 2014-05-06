@@ -15,6 +15,8 @@ public class root
 	public root son;
 	
 	static public boolean compAfterFunction = false;
+	static public int constant_expression = 0;
+	static public int structOrArray = 0;
 	
 	public Vector<__Quad> quad = new Vector<__Quad>();
 	
@@ -103,18 +105,12 @@ public class root
 		}
 		else
 		{
+			if (type instanceof Struct || type instanceof Array) structOrArray ++;
 			__Temp tmp = new __Temp(name);
 			T.put(Symbol.symbol(name), new Super(type, main.scope, tmp));
 			int tt = main.Offset.pop();
-			if (type instanceof Struct || type instanceof Array)
-			{
-				tt += 4;
-				if (tmp.Static)
-					quad.add(new __BinOp(new __TempOprand(tmp), __togp, new __Const(tt), "+"));
-				else
-					quad.add(new __BinOp(new __TempOprand(tmp), __tosp, new __Const(tt), "+"));
-			}
 			main.Offset.push(tt + type.size);
+			if (type instanceof Struct || type instanceof Array) structOrArray --;
 			return tmp;
 		}
 		return null;
