@@ -1,29 +1,23 @@
 package compiler.ClassDef;
 
+import compiler.Type.*;
+
 public class __Mem extends __Oprand {
 
 	public int offset;
 	public int length = 4;
-	public __Temp base;
-	public __Mem(__Temp t) {
-		base = t;
-	}
+	public __TempOprand base;
 	
-	public __Mem(__Temp t, int o) {
+	public __Mem(__TempOprand t, int o, Type type) {
 		base = t;
 		offset = o;
-	}
-	
-	public __Mem(int o) {
-		this(null, o);
+		if (type instanceof Char)
+			length = 1;
 	}
 	
 	@Override
-	public String toString() {
-		if (base == null) {
-			return offset + "($zero)";
-		}
-		else return offset + "(" + base.toString() + ")";
+	public String print() {
+		return offset + "(" + base.print() + ")";
 	}
 
 }

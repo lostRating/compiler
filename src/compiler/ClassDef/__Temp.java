@@ -7,10 +7,10 @@ public class __Temp {
 	public __Temp(String s) {
 		if (root.constant_expression > 0) return;
 		name = s;
-		if (!s.equals("$gp") && !s.equals("$sp") && !s.equals("fp"))
+		if (!s.equals("$gp") && !s.equals("$sp"))
 		{
 			Static = main.Offset.size() == 1;
-			if (!(Static || root.structOrArray > 0)) num = count++;
+			if (!Static) num = ++count;
 			offset = main.Offset.peek();
 			if (s.equals(""))
 			{
@@ -20,13 +20,12 @@ public class __Temp {
 		}
 	}
 	
-	@Override
-	public String toString() {
+	public String print() {
 		//if (name.equals("$gp") || name.equals("sp") || name.equals("fp"))
 		if (!name.equals("")) return name;
 		return "t" + num;
 	}
-	int num, offset;
+	int num = 0, offset;
 	boolean Static;
 	String name = "";
 	public static int count = 0;

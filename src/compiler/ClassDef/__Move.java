@@ -9,10 +9,20 @@ public class __Move extends __Quad {
 		src = s;
 	}
 	@Override
-	public String toString() {
-		//System.out.println(dst);
-		//System.out.println(src);
-		//System.out.println();
-		return dst.toString() + " <- " + src.toString();
+	public String print() {
+		if (dst instanceof __Mem)
+		{
+			if (((__Mem)dst).length == 4)
+				return "sw " + src.print() + ", " + dst.print();
+			else
+				return "sb " + src.print() + ", " + dst.print();
+		}
+		if (src instanceof __TempOprand && ((__TempOprand)src).temp.Static)
+			return "la " + dst.print() + ", " + src.print();
+		if (src instanceof __Const)
+			return "li " + dst.print() + ", " + src.print();
+		if (src instanceof __Mem)
+			return "lw " + dst.print() + ", " + src.print();
+		return "move " + dst.print() + ", " + src.print();
 	}
 }

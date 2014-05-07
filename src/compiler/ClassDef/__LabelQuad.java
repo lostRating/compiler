@@ -8,7 +8,7 @@ public class __LabelQuad extends __Quad {
 			
 	public __Label label;
 	@Override
-	public String toString() {
-		return label.toString() + ":";
+	public String print() {
+		return label.print() + ":";
 	}
 }

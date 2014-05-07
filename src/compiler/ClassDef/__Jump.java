@@ -7,8 +7,10 @@ public class __Jump extends __Quad {
 		label = l;
 	}
 	@Override
-	public String toString() {
-		return "jump " + label.toString();
+	public String print() {
+		if (label.name.equals("$ra"))
+			return "jr $ra";
+		return "b " + label.print();
 	}
 
 }

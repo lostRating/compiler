@@ -1,5 +1,5 @@
 package compiler.ClassDef;
 
 abstract public class __Oprand {
-	abstract public String toString();
+	abstract public String print();
 }

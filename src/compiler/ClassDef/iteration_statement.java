@@ -30,7 +30,7 @@ public class iteration_statement extends root
 			
 			__TempOprand __t = (__TempOprand)son.returnVec.get(4);
 			
-			quad.add(new __Branch(__t, l2));
+			quad.add(new __Branch(__t, l2, 0));
 			
 			if (!typeToType(main.GXX_INT, type)) throw new Exception("iteration_statement");
 			
@@ -84,7 +84,7 @@ public class iteration_statement extends root
 			quad.add(new __LabelQuad(l1));
 			addquad(quad, a2);
 			if (__t != null)
-				quad.add(new __Branch(__t, l2));
+				quad.add(new __Branch(__t, l2, 0));
 			addquad(quad, a4);
 			addquad(quad, a3);
 			quad.add(new __Jump(l1));

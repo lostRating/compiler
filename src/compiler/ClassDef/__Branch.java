@@ -4,14 +4,19 @@ public class __Branch extends __Quad {
 	public __Branch(){
 		
 	}
-	public __Branch(__Oprand opa, __Label la) {
+	public __Branch(__Oprand opa, __Label la, int num2) {
 		op = opa;
 		label = la;
+		num = num2;
 	}
 	public __Oprand op;
 	public __Label label;
+	public int num;
 	@Override
-	public String toString() {
-		return "if (" + op.toString() + " == zero) goto " + label.toString();
+	public String print() {
+		if (num == 0)
+			return "beq "+ op.print() + ", $0, " + label.print();
+		else
+			return "bneq "+ op.print() + ", $0, " + label.print();
 	}
 }

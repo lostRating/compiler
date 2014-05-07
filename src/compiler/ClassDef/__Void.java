@@ -5,7 +5,7 @@ public class __Void extends __Quad{
 		s = s2;
 	}
 	String s;
-	public String toString() {
+	public String print() {
 		return s;
 	}
 }

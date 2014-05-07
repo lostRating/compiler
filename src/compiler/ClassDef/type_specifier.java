@@ -37,14 +37,21 @@ public class type_specifier extends root
 			
 			beginScope("struct");
 			
+			Inner ++;
+			
 			son = (root)vec.get(vec.size() - 1);
 			son.checkSon();
 			for (int i = 0; i < son.returnVec.size(); ++i)
 				returnVec.add(son.returnVec.get(i));
 			
+			int tmp = main.Offset.peek();
+			
+			Inner --;
+			
 			endScope("struct");
 			
 			Type struct = new Struct(returnVec, s);
+			struct.size = tmp;
 			addSymbol(main.S, struct, s, true);
 			
 			returnVec.removeAllElements();

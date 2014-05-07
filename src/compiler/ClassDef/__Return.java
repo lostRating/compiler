@@ -8,7 +8,7 @@ public class __Return extends __Quad {
 	}
 
 	@Override
-	public String toString() {
-		return "return " + value.toString();
+	public String print() {
+		return "return " + value.print();
 	}
 }

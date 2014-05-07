@@ -9,8 +9,8 @@ public class __Label {
 	public __Label(String s) {
 		name = s;
 	}
-	
-	public String toString() {
+
+	public String print() {
 		return name;
 	}
 	

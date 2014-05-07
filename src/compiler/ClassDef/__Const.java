@@ -6,9 +6,8 @@ public class __Const extends __Oprand {
 	public __Const(int v) {
 		value = v;
 	}
-
 	@Override
-	public String toString() {
+	public String print() {
 		return value + "";
 	}
 

@@ -10,6 +10,16 @@ import compiler.main.main;
 public class postfix extends root
 {
 	public postfix(){}
+	
+	public boolean typeVectorMatch(Vector a, Vector b)
+	{
+		if (a.size() != b.size()) return false;
+		for (int i = 0; i < a.size(); ++i)
+			if (!typeToType((Type)a.get(i), (Type)b.get(i)))
+				return false;
+		return true;
+	}
+	
 	public void checkSon() throws Exception
 	{
 		Vector tmpVec = new Vector();
@@ -37,11 +47,11 @@ public class postfix extends root
 			returnVec.set(0, false);
 			returnVec.set(2, pointer.elementType);	
 			
-			__TempOprand __t = new __TempOprand(new __Temp(""));
+			__TempOprand __t = new __TempOprand(new __Temp(""), 1);
 			quad.add(new __BinOp(__t, (__TempOprand)son.returnVec.get(4), new __Const(pointer.elementType.size), "*"));
 			quad.add(new __BinOp(__t, __t, (__TempOprand)tmpVec.get(4), "+"));
-			if (!(pointer.elementType instanceof Struct) && !(pointer.elementType instanceof Array))
-				quad.add(new __Move(__t, new __Mem(__t.temp, 0)));
+			//if (!(pointer.elementType instanceof Struct) && !(pointer.elementType instanceof Array))
+			//	quad.add(new __Move(__t, new __Mem(__t, 0, pointer.elementType)));
 			
 			returnVec.set(4, __t);
 		}
@@ -97,6 +107,7 @@ public class postfix extends root
 			for (int i = 0, offset = 0; i < struct.names.size(); ++i)
 				if (name.equals((String) struct.names.get(i)))
 				{
+					offset = fixOffset((Type)struct.types.get(i), offset);
 					returnVec.removeAllElements();
 					for (int k = 0; k < 5; ++k)
 						returnVec.add(k, tmpVec.get(k));
@@ -107,7 +118,7 @@ public class postfix extends root
 					
 					Type tt = (Type)struct.types.get(i);
 					if (!(tt instanceof Array) && !(tt instanceof Struct))
-						quad.add(new __Move(__t, new __Mem(__t2.temp, offset)));
+						quad.add(new __Move(__t, new __Mem(__t2, offset, tt)));
 					else
 						quad.add(new __BinOp(__t, __t2, new __Const(offset), "+"));
 					
@@ -141,6 +152,7 @@ public class postfix extends root
 			for (int i = 0, offset = 0; i < struct.names.size(); ++i)
 				if (name.equals((String) struct.names.get(i)))
 				{
+					offset = fixOffset((Type)struct.types.get(i), offset);
 					returnVec.removeAllElements();
 					for (int k = 0; k < 5; ++k)
 						returnVec.add(k, tmpVec.get(k));
@@ -151,7 +163,7 @@ public class postfix extends root
 					
 					Type tt = (Type)struct.types.get(2);
 					if (!(tt instanceof Array) && !(tt instanceof Struct))
-						quad.add(new __Move(__t, new __Mem(__t2.temp, offset)));
+						quad.add(new __Move(__t, new __Mem(__t2, offset, tt)));
 					else
 						quad.add(new __BinOp(__t, __t2, new __Const(offset), "+"));
 					
@@ -177,7 +189,7 @@ public class postfix extends root
 			__TempOprand __t = new __TempOprand(new __Temp(""));
 			__TempOprand __t2 = (__TempOprand)returnVec.get(4);
 			quad.add(new __Move(__t, __t2));
-			quad.add(new __BinOp(__t2, __t2, new __Const(1), "+"));
+			__t = initBinOp(__t2.Mem(type), __t2.Val(quad, type), new __Const(1), son.s.substring(0, 1));
 			
 			returnVec.set(4, __t);
 			
