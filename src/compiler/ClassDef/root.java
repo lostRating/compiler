@@ -21,6 +21,8 @@ public class root
 	
 	public Vector<__Quad> quad = new Vector<__Quad>();
 	
+	static public Vector<String> data = new Vector<String>();
+	
 	static public __TempOprand __tosp = new __TempOprand(new __Temp("$sp"));
 	
 	public root(){s = "";}
@@ -41,17 +43,41 @@ public class root
 		for (int i = 0; i < b.size(); ++i)
 			a.add(b.get(i));
 	}
-	public void showquad() throws Exception
+	public void showMips() throws Exception
 	{
+		System.out.println(".data");
+		for (int i = 0; i < data.size(); ++i)
+			System.out.println(data.get(i));
+		System.out.println();
+		System.out.println(".text");
 		for (int i = 0; i < quad.size(); ++i)
 			System.out.println(quad.get(i).print());
 	}
 	
 	public void pullArg(__TempOprand tmp, Type type) throws Exception
 	{
-		if (!(type instanceof Struct || type instanceof Array))
+		if (!(type instanceof Struct))
 		{
 			quad.add(new __Move(tmp, new __Mem(__tosp, tmp.temp.offset, type)));
+		}
+		else
+		{
+			throw new Exception("pullArg");
+		}
+	}
+	
+	public void pushArg(__TempOprand tmp, Type type, int offset) throws Exception
+	{
+		if (!(type instanceof Struct))
+		{
+			if (type instanceof Array)
+				quad.add(new __Move(new __Mem(__tosp, offset, type), tmp));
+			else
+				quad.add(new __Move(new __Mem(__tosp, offset, type), tmp.Val(quad, type)));
+		}
+		else
+		{
+			throw new Exception("pushArg");
 		}
 	}
 	

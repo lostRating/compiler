@@ -21,10 +21,10 @@ public class makeTree {
 	
 	static public root getRoot(String s) {
 		Vector vec = new Vector(10000);
-		int n = s.length(), cnt = 0, flag = 0, FLAG = 0;
+		int n = s.length(), cnt = 0, flag = 0, FLAG = 0, mark = 0;
         String t = "";
         for (int i = 0; i < n; ++i) {
-        	if (i + 1 == n || (s.charAt(i) == ' ' && !(s.charAt(i - 1) == '\'' && s.charAt(i + 1) == '\''))) {
+        	if (i + 1 == n || (s.charAt(i) == ' ' && !(s.charAt(i - 1) == '\'' && s.charAt(i + 1) == '\'') && mark == 0)) {
         		if (t.length() != 0) {
         			
         			//print(cnt, t);
@@ -93,11 +93,16 @@ public class makeTree {
         		cnt -= FLAG;
         		FLAG = 0;
         	}
+        	if (s.charAt(i) == '\"')
+        	{
+        		mark = 1 - mark;
+        	}
         	if (s.charAt(i) == '(')
         		++flag;
         	else if (s.charAt(i) == ')')
         		++FLAG;
-        	else if (s.charAt(i) != ' ' || (s.charAt(i) == ' ' && s.charAt(i - 1) == '\'' && s.charAt(i + 1) == '\''))
+        	else if (s.charAt(i) != ' ' || (s.charAt(i) == ' ' && s.charAt(i - 1) == '\'' && s.charAt(i + 1) == '\'')
+        			|| (s.charAt(i) == ' ' && mark != 0))
         		t = t + s.charAt(i);
         }
         return (root)vec.get(0);

@@ -12,6 +12,18 @@ public class logical_or_expression extends root
 	public logical_or_expression(){}
 	public void checkSon() throws Exception
 	{
+		boolean jump = (vec.size() > 1);
+		__TempOprand __t = null;
+		__Label l1 = null;
+		__Label l2 = null;
+		if (jump)
+		{
+//			quad.add(new __Void("                              #  && begin"));
+			__t = new __TempOprand(new __Temp(""));
+			quad.add(new __Move(__t, new __Const(0)));
+			l1 = new __Label();
+			l2 = new __Label();
+		}
 		for (int i = 0; i < vec.size(); i += 2)
 		{
 			son = (root)vec.get(i);
@@ -23,15 +35,32 @@ public class logical_or_expression extends root
 			{
 				for (int j = 0; j < 5; ++j)
 					returnVec.add(son.returnVec.get(j));
+				if (jump)
+				{
+					quad.add(new __Branch((__TempOprand)son.returnVec.get(4), l1, 1));
+				}
 			}
 			else
 			{
-				String op = (String)(((root)vec.get(i - 1)).s);
-				Vector vector = calTwo(op, returnVec, son.returnVec);
+				//String op = (String)(((root)vec.get(i - 1)).s);
+				//Vector vector = calTwo(op, returnVec, son.returnVec);
 				
-				for (int j = 0; j < 5; ++j)
-					returnVec.set(j, vector.get(j));
+				returnVec.set(1, false);
+				
+				if (jump)
+				{
+					quad.add(new __Branch((__TempOprand)son.returnVec.get(4), l1, 1));
+				}
 			}
+		}
+		if (jump)
+		{
+			quad.add(new __Jump(l2));
+			quad.add(new __LabelQuad(l1));
+			quad.add(new __Move(__t, new __Const(1)));
+			quad.add(new __LabelQuad(l2));
+			returnVec.set(4, __t);
+//			quad.add(new __Void("                                 #  && end"));
 		}
 	}
 }

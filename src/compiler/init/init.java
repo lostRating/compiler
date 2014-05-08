@@ -23,7 +23,8 @@ public class init
 		main.S.put(Symbol.symbol("GXX_CHAR"), new Super(main.GXX_CHAR, main.scope, null));
 		main.S.put(Symbol.symbol("GXX_VOID"), new Super(main.GXX_VOID, main.scope, null));
 
-		Type type = new Function(main.GXX_INT, new Vector(), "printf");
+		Function type = new Function(main.GXX_INT, new Vector(), "printf");
+		type.size = 36;
 		main.F.put(Symbol.symbol("printf"), new Super(type, main.scope, null));
 		
 		type = new Function(main.GXX_VOID_STAR, new Vector(), "malloc");
@@ -37,5 +38,7 @@ public class init
 		
 		__Label.count = 0;
 		__Temp.count = 0;
+		
+		root.data = new Vector<String>();
 	}
 }

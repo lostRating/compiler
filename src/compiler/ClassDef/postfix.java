@@ -86,6 +86,37 @@ public class postfix extends root
 				if (!typeVectorMatch(function.argumentType, returnVec)) throw new Exception("postfix 4");
 			}
 			
+			quad.add(new __Void("#call begin"));
+			
+			quad.add(new __BinOp(__tosp, __tosp, new __Const(-function.size), "+"));
+			
+			if (function.Name.equals("printf"))
+			{
+				for (int i = 0; i < returnVec.size(); ++i)
+				{
+					Type type2 = (Type)returnVec.get(i);
+					if (i == 0)
+					{
+						quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(i)));
+					}
+					else
+					{
+						quad.add(new __Move(new __TempOprand(new __Temp("$a" + Integer.toString(i))), tt.get(i).Val(quad, type2)));
+					}
+				}
+			}
+			else if (function.Name.equals("malloc"))
+			{
+				throw new Exception("postfix malloc");
+			}
+			else
+			{
+				for (int i = 0; i < returnVec.size(); ++i)
+					pushArg(tt.get(i), (Type)returnVec.get(i), function.argOffset.get(i));
+			}
+			
+			quad.add(new __BinOp(__tosp, __tosp, new __Const(function.size), "+"));
+			
 			returnVec.removeAllElements();
 			for (int i = 0; i < 5; ++i)
 				returnVec.add(i, tmpVec.get(i));
@@ -94,7 +125,11 @@ public class postfix extends root
 			returnVec.set(2, function.returnType);
 			
 			__TempOprand __t = new __TempOprand(new __Temp(""));
-			quad.add(new __Call(new __Label(function.Name), tt, __t));
+			quad.add(new __Call(new __Label(function.Name)));
+			
+			quad.add(new __Move(__t, new __TempOprand(new __Temp("$v0"))));
+			
+			quad.add(new __Void("#call end"));
 			returnVec.set(4, __t);
 		}
 		else if (son.s.equals("THREE"))

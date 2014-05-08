@@ -42,6 +42,9 @@ public class function_definition extends root
 		{
 			String name = (String)argumentType.get(i + 1);
 			Type type2 = (Type)argumentType.get(i);
+			
+			main.func.argOffset.add(main.Offset.peek());
+			
 			__TempOprand tmp = addSymbol(main.F, type2, name, true);
 			
 			pullArg(tmp, type2);

@@ -7,7 +7,7 @@ public class __Temp {
 	public __Temp(String s) {
 		if (root.constant_expression > 0) return;
 		name = s;
-		if (!s.equals("$gp") && !s.equals("$sp"))
+		if (s.length() == 0 || s.charAt(0) != '$')
 		{
 			Static = main.Offset.size() == 1;
 			if (!Static) num = ++count;
@@ -21,8 +21,8 @@ public class __Temp {
 	}
 	
 	public String print() {
-		//if (name.equals("$gp") || name.equals("sp") || name.equals("fp"))
-		if (!name.equals("")) return name;
+		if (name.length() != 0 && name.charAt(0) == '$') return name;
+		if (Static) return name;
 		return "t" + num;
 	}
 	int num = 0, offset;

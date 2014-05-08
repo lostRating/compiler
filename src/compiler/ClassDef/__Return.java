@@ -9,6 +9,6 @@ public class __Return extends __Quad {
 
 	@Override
 	public String print() {
-		return "return " + value.print();
+		return "  return " + value.print();
 	}
 }

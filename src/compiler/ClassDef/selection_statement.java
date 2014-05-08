@@ -32,12 +32,12 @@ public class selection_statement extends root
 			
 			if (i  == 1)
 			{
-				quad.add(new __LabelQuad(label1));
 				if (vec.size() == 3)
 				{
 					label2 = new __Label();
 					quad.add(new __Jump(label2));
 				}
+				quad.add(new __LabelQuad(label1));
 			}
 			if (i == 2)
 			{

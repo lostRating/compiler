@@ -43,10 +43,10 @@ public class main {
 			{
 				init.init();
 				a.checkSon();
-				a.showquad();
+				a.showMips();
 				System.out.println("-------------------------ok-------------------------------");
 			}
-			catch (RecognitionException t)
+			catch (Exception t)
 			{
 				System.out.println("CE");
 				System.out.println(t.getMessage());

@@ -15,8 +15,8 @@ public class __Branch extends __Quad {
 	@Override
 	public String print() {
 		if (num == 0)
-			return "beq "+ op.print() + ", $0, " + label.print();
+			return "  beq "+ op.print() + ", $0, " + label.print();
 		else
-			return "bneq "+ op.print() + ", $0, " + label.print();
+			return "  bneq "+ op.print() + ", $0, " + label.print();
 	}
 }

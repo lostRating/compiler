@@ -13,4 +13,5 @@ public final class Function extends Type{
 	}
 	public Vector argumentType = new Vector();
 	public Type returnType;
+	public Vector<Integer> argOffset = new Vector<Integer>();
 }
