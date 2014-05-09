@@ -12,4 +12,8 @@ public class __Call extends __Quad {
 	public String print() {
 		return "  jal " + function.print();
 	}
+	@Override
+	public void pr() {
+		System.out.println(print());
+	}
 }

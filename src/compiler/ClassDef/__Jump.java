@@ -12,5 +12,9 @@ public class __Jump extends __Quad {
 			return "  jr $ra";
 		return "  b " + label.print();
 	}
-
+	@Override
+	public void pr()
+	{
+		System.out.println(print());
+	}
 }

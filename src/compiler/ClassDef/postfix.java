@@ -48,7 +48,7 @@ public class postfix extends root
 			returnVec.set(2, pointer.elementType);	
 			
 			__TempOprand __t = new __TempOprand(new __Temp(""), 1);
-			quad.add(new __BinOp(__t, (__TempOprand)son.returnVec.get(4), new __Const(pointer.elementType.size), "*"));
+			quad.add(new __BinOp(__t, ((__TempOprand)son.returnVec.get(4)).Val(quad, new Int()), new __Const(pointer.elementType.size), "*"));
 			quad.add(new __BinOp(__t, __t, (__TempOprand)tmpVec.get(4), "+"));
 			//if (!(pointer.elementType instanceof Struct) && !(pointer.elementType instanceof Array))
 			//	quad.add(new __Move(__t, new __Mem(__t, 0, pointer.elementType)));
@@ -88,8 +88,6 @@ public class postfix extends root
 			
 			quad.add(new __Void("#call begin"));
 			
-			quad.add(new __BinOp(__tosp, __tosp, new __Const(-function.size), "+"));
-			
 			if (function.Name.equals("printf"))
 			{
 				for (int i = 0; i < returnVec.size(); ++i)
@@ -112,10 +110,8 @@ public class postfix extends root
 			else
 			{
 				for (int i = 0; i < returnVec.size(); ++i)
-					pushArg(tt.get(i), (Type)returnVec.get(i), function.argOffset.get(i));
+					pushArg(tt.get(i), (Type)returnVec.get(i), function.argOffset.get(i) - function.size);
 			}
-			
-			quad.add(new __BinOp(__tosp, __tosp, new __Const(function.size), "+"));
 			
 			returnVec.removeAllElements();
 			for (int i = 0; i < 5; ++i)
@@ -142,7 +138,6 @@ public class postfix extends root
 			for (int i = 0, offset = 0; i < struct.names.size(); ++i)
 				if (name.equals((String) struct.names.get(i)))
 				{
-					offset = fixOffset((Type)struct.types.get(i), offset);
 					returnVec.removeAllElements();
 					for (int k = 0; k < 5; ++k)
 						returnVec.add(k, tmpVec.get(k));
@@ -187,7 +182,6 @@ public class postfix extends root
 			for (int i = 0, offset = 0; i < struct.names.size(); ++i)
 				if (name.equals((String) struct.names.get(i)))
 				{
-					offset = fixOffset((Type)struct.types.get(i), offset);
 					returnVec.removeAllElements();
 					for (int k = 0; k < 5; ++k)
 						returnVec.add(k, tmpVec.get(k));

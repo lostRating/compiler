@@ -1,7 +1,11 @@
 package compiler.init;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 import java.util.Stack;
-
 import java.util.Vector;
 
 import compiler.Semantic.*;
@@ -40,5 +44,15 @@ public class init
 		__Temp.count = 0;
 		
 		root.data = new Vector<String>();
+	}
+	
+	static public void printfs() throws IOException
+	{
+		 BufferedReader br = new BufferedReader(new FileReader("D:\\class\\bianyi\\compiler2014\\printf.s"));
+		 String s = null;
+         while((s = br.readLine())!=null){
+             System.out.println(s);
+         }
+         br.close();
 	}
 }

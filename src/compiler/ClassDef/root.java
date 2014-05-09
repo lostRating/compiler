@@ -51,7 +51,10 @@ public class root
 		System.out.println();
 		System.out.println(".text");
 		for (int i = 0; i < quad.size(); ++i)
-			System.out.println(quad.get(i).print());
+		{
+			//System.out.println(quad.get(i).print());
+			quad.get(i).pr();
+		}
 	}
 	
 	public void pullArg(__TempOprand tmp, Type type) throws Exception
@@ -135,12 +138,6 @@ public class root
 	
 	public void endLoop(){main.l1.pop(); main.l2.pop();}
 	
-	public int fixOffset(Type type, int i)
-	{
-		while (!(type instanceof Char) && i % 4 != 0) ++i;
-		return i;
-	}
-	
 	public __TempOprand addSymbol(Table T, Type type, String name, boolean VOID) throws Exception
 	{
 		Super tmp1 = (Super)T.get(Symbol.symbol(name));
@@ -149,13 +146,17 @@ public class root
 		if (VOID && (type instanceof Void)) throw new Exception("addSymbol");
 		if (T == main.S || type instanceof Function)
 		{
-			while (T == main.S && type.size % 4 != 0) ++type.size;
 			T.put(Symbol.symbol(name), new Super(type, main.scope, null));
 			return null;
 		}
 		else
 		{
-			main.Offset.push(fixOffset(type, main.Offset.pop()));
+			if (main.scope == 0)
+			{
+				__LabelAddress l = new __LabelAddress(new __Label(name));
+				T.put(Symbol.symbol(name), new Super(type, main.scope, l));
+				return null;
+			}
 			if (type instanceof Struct || type instanceof Array) structOrArray++;
 			__Temp tmp = new __Temp(name);
 			T.put(Symbol.symbol(name), new Super(type, main.scope, tmp));
@@ -259,6 +260,10 @@ public class root
 		else
 		{
 			vector.set(1, false);
+			if (op.equals("+"))
+				vector.set(3, (int)aInf.get(3) + (int)bInf.get(3));
+			if (op.equals("-"))
+				vector.set(3, (int)aInf.get(3) - (int)bInf.get(3));
 		}
 		
 		
@@ -322,16 +327,13 @@ public class root
 			vector.set(0, true);
 			vector.set(1, false);
 			
-			if (type instanceof Array || type instanceof Struct)
+			if (type instanceof Array || type instanceof Struct || __tt.pointer)
 			{
 				quad.add(new __Move(__t, __tt));
 				vector.set(4, __t);
 				return vector;
 			}
-			if (__tt.temp.Static)
-				quad.add(new __Move(__t, __tt));
-			else
-				quad.add(new __BinOp(__t, __tosp, new __Const(__tt.temp.offset), "+"));
+			quad.add(new __BinOp(__t, __tosp, new __Const(__tt.temp.offset), "+"));
 			vector.set(4, __t);
 			return vector;
 		}

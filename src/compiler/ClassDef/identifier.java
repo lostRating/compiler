@@ -15,8 +15,6 @@ public class identifier extends root
 		
 		String s = son.s;
 		
-		//System.out.println(s);
-		
 		Super sup = (Super)main.F.get(Symbol.symbol(s));
 		Type type;
 		__TempOprand __t = null;
@@ -33,18 +31,18 @@ public class identifier extends root
 		else
 		{
 			type = sup.type;
-			if ((type instanceof Array || type instanceof Struct) && !sup.tmp.Static)
+			if (sup.tmp instanceof __LabelAddress)
 			{
 				__t = new __TempOprand(new __Temp(""), 1);
-				quad.add(new __BinOp(__t, __tosp, new __Const(sup.tmp.offset), "+"));
+				quad.add(new __Move(__t, (__LabelAddress)sup.tmp));
 			}
-			else if (!sup.tmp.Static)
-				__t = new __TempOprand(sup.tmp);
+			else if (type instanceof Array || type instanceof Struct)
+			{
+				__t = new __TempOprand(new __Temp(""), 1);
+				quad.add(new __BinOp(__t, __tosp, new __Const(((__Temp)sup.tmp).offset), "+"));
+			}
 			else
-			{
-				__t = new __TempOprand(new __Temp(""), 1);
-				quad.add(new __Move(__t, new __TempOprand(sup.tmp, 1)));
-			}
+				__t = new __TempOprand((__Temp)sup.tmp);
 		}
 		
 		returnVec.add(type);

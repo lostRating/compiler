@@ -38,6 +38,8 @@ public class function_definition extends root
 		
 		beginScope("function");
 		
+		main.Offset.push(main.Offset.pop() + 16);
+		
 		for (int i = 0; i < argumentType.size(); i += 2)
 		{
 			String name = (String)argumentType.get(i + 1);
@@ -59,9 +61,18 @@ public class function_definition extends root
 		
 		addquad(son);
 		
-		type.size += main.Offset.peek();
+		type.size = main.Offset.peek();
 		
+		quad.insertElementAt(new __Move(new __Mem(__tosp, 12, new Int()), new __TempOprand(new __Temp("$s2"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, 8, new Int()), new __TempOprand(new __Temp("$s1"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, 4, new Int()), new __TempOprand(new __Temp("$s0"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, 0, new Int()), new __TempOprand(new __Temp("$ra"))),  1);
 		quad.insertElementAt(new __BinOp(__tosp, __tosp, new __Const(-type.size), "+"), 1);
+		
+		quad.add(new __Move(new __TempOprand(new __Temp("$ra")), new __Mem(__tosp, 0, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$s0")),  new __Mem(__tosp, 4, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$s1")), new __Mem(__tosp, 8, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$s2")),  new __Mem(__tosp, 12, new Int())));
 		quad.add(new __BinOp(__tosp, __tosp, new __Const(type.size), "+"));
 		
 		endScope("function");

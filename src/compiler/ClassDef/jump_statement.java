@@ -26,9 +26,15 @@ public class jump_statement extends root
 				
 				addquad(son);
 				__TempOprand __t = (__TempOprand)son.returnVec.get(4);
-				quad.add(new __Return(__t));
-				
 				type = (Type)son.returnVec.get(2);
+				
+				quad.add(new __Move(new __TempOprand(new __Temp("$ra")), new __Mem(__tosp, 0, new Int())));
+				quad.add(new __Move(new __TempOprand(new __Temp("$s0")),  new __Mem(__tosp, 4, new Int())));
+				quad.add(new __Move(new __TempOprand(new __Temp("$s1")), new __Mem(__tosp, 8, new Int())));
+				quad.add(new __Move(new __TempOprand(new __Temp("$s2")),  new __Mem(__tosp, 16, new Int())));
+				quad.add(new __Move(new __TempOprand(new __Temp("$v0")), __t.Val(quad, type)));
+				quad.add(new __Return(main.func));
+				quad.add(new __Jump(new __Label("$ra")));
 			}
 			if (main.func == null || !typeToType(main.func.returnType, type))
 				throw new Exception("jump_statement 2");

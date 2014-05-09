@@ -27,7 +27,12 @@ public class init_declarator extends root
 		returnVec.add(son.returnVec.get(0));
 		returnVec.add(son.returnVec.get(1));
 		
-		if (vec.size() == 1) return;
+		if (vec.size() == 1)
+		{
+			if (main.scope == 0)
+				data.add("  " + new __Label(name).print() + ": .space " + newType.size);
+			return;
+		}
 		
 		son = (root)vec.get(1);
 		son.checkSon();

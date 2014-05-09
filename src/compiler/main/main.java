@@ -1,7 +1,10 @@
 package compiler.main;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -44,7 +47,8 @@ public class main {
 				init.init();
 				a.checkSon();
 				a.showMips();
-				System.out.println("-------------------------ok-------------------------------");
+				init.printfs();
+				//System.out.println("-------------------------ok-------------------------------");
 			}
 			catch (Exception t)
 			{
@@ -77,10 +81,12 @@ public class main {
 	
 	static public void main(String[] args) throws RecognitionException, IOException, Exception 
 	{
+		PrintStream myout = new PrintStream(new FileOutputStream(new File("D:\\class\\bianyi\\compiler2014\\hehe.s")));       
+		System.setOut(myout);
 		String s = "D:\\hehe\\compiler2014-testcases\\my";
 	    List<File> files = getFiles(s);
 	    for(File f : files){
-	    	System.out.println(f.getName());
+	    	System.out.println("# " + f.getName());
 	        work(f);
 	    }
 //		System.exit( work(new File(args[0])));

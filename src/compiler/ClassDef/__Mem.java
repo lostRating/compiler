@@ -11,8 +11,8 @@ public class __Mem extends __Oprand {
 	public __Mem(__TempOprand t, int o, Type type) {
 		base = t;
 		offset = o;
-		if (type instanceof Char)
-			length = 1;
+		//if (type instanceof Char)
+		//	length = 1;
 	}
 	
 	@Override
@@ -20,4 +20,18 @@ public class __Mem extends __Oprand {
 		return offset + "(" + base.print() + ")";
 	}
 
+	@Override
+	public String pr() {
+		return offset + "(" + base.pr() + ")";
+	}
+
+	@Override
+	public int load(int x) {
+		return base.load(x);
+	}
+
+	@Override
+	public void store() {
+		base.store();
+	}
 }

@@ -4,7 +4,7 @@ import compiler.ClassDef.*;
 
 public class Super
 {
-	public Super(Type type2, int scope2, __Temp tmp2)
+	public Super(Type type2, int scope2, Object tmp2)
 	{
 		type = type2;
 		scope = scope2;
@@ -12,5 +12,5 @@ public class Super
 	}
 	public Type type;
 	public int scope;
-	public __Temp tmp;
+	public Object tmp;
 }

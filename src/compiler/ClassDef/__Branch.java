@@ -19,4 +19,14 @@ public class __Branch extends __Quad {
 		else
 			return "  bneq "+ op.print() + ", $0, " + label.print();
 	}
+	@Override
+	public void pr() throws Exception {
+		int tmp = 0;
+		tmp = op.load(tmp);
+		if (num == 0)
+			System.out.println("  beq "+ op.pr() + ", $0, " + label.print());
+		else
+			System.out.println("  bneq "+ op.pr() + ", $0, " + label.print());
+		op.store();
+	}
 }

@@ -11,4 +11,9 @@ public class __LabelQuad extends __Quad {
 	public String print() {
 		return label.print() + ":";
 	}
+	@Override
+	public void pr()
+	{
+		System.out.println(print());
+	}
 }

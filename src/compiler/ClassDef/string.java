@@ -22,7 +22,7 @@ public class string extends root
 		__Label l1 = new __Label();
 		__TempOprand __t = new __TempOprand(new __Temp(""), 1);
 		
-		data.add(l1.print() + ": " + ".acsciiz " + son.s);
+		data.add("  " + l1.print() + ": " + ".asciiz " + son.s);
 
 		quad.add(new __Move(__t, new __LabelAddress(l1)));
 		returnVec.add(__t);

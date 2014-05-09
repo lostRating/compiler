@@ -8,50 +8,124 @@ public class __BinOp extends __Quad {
 	public String op;
 	@Override
 	public String print() throws Exception{
-		String s = "  ";
+		String s = "";
 		if (!(left instanceof __TempOprand))
 		{
 			if (left instanceof __Const && op.equals("-"))
-				return "  neg " + dst.print() + ", " + right.print();
-			if (left instanceof __Const && op.equals("~"))
-				return "  not " + dst.print() + ", " + right.print();
-			if (left instanceof __Const && op.equals("!"))
-				return "  seq " + dst.print() + ", " + right.print() + ", $0";
-			throw new Exception("__BinOp");
+				s += "  neg " + dst.print() + ", " + right.print();
+			else if (left instanceof __Const && op.equals("~"))
+				s += "  not " + dst.print() + ", " + right.print();
+			else if (left instanceof __Const && op.equals("!"))
+				s += "  seq " + dst.print() + ", " + right.print() + ", $0";
+			else throw new Exception("__BinOp");
+			
+			return s;
 		}
 		if (op.equals("+"))
-			return "  add " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  add ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("-"))
-			return "  sub " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  sub ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("*"))
-			return "  mul " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  mul ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("/"))
-			return "  div " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  div ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("|"))
-			return "  or " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  or ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("&"))
-			return "  and " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  and ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("^"))
-			return "  xor " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  xor ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("%"))
-			return "  rem " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  rem ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("<<"))
-			return "  sll " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  sll ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals(">>"))
-			return "  srl " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  srl ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("=="))
-			return "  seq " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  seq ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("!="))
-			return "  sne " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  sne ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals(">"))
-			return "  sgt " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  sgt ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals(">="))
-			return "  sge " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  sge ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("<"))
-			return "  slt " + dst.print() + ", " + left.print() + ", " + right.print();
+			s += "  slt ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("<="))
-			return "  sle " + dst.print() + ", " + left.print() + ", " + right.print();
-		throw new Exception("__BinOp 2");
+			s += "  sle ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else throw new Exception("__BinOp 2");
+		
+		s += dst.print() + ", " + left.print() + ", " + right.print();
+		
+		return s;
+	}
+	@Override
+	public void pr() throws Exception
+	{
+		if (!(left instanceof __TempOprand))
+		{
+			throw new Exception("__BinOp 0.5");
+			
+			/*if (!(dst instanceof __TempOprand) || !(right instanceof __TempOprand))
+				throw new Exception("__BinOp 1");
+			
+			if (left instanceof __Const && op.equals("-"))
+				System.out.println("  neg $t0, $t1");
+			else if (left instanceof __Const && op.equals("~"))
+				System.out.println("  not $t0, $t1");
+			else if (left instanceof __Const && op.equals("!"))
+				System.out.println("  seq $t0, $t1, $0");
+			else throw new Exception("__BinOp");*/
+		}
+		
+		int tmp = 0;
+		
+		tmp = dst.load(tmp);
+		tmp = left.load(tmp);
+		tmp = right.load(tmp);
+		
+		String s = "";
+		if (op.equals("+"))
+			s += "  add ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("-"))
+			s += "  sub ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("*"))
+			s += "  mul ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("/"))
+			s += "  div ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("|"))
+			s += "  or ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("&"))
+			s += "  and ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("^"))
+			s += "  xor ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("%"))
+			s += "  rem ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("<<"))
+			s += "  sll ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals(">>"))
+			s += "  srl ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("=="))
+			s += "  seq ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("!="))
+			s += "  sne ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals(">"))
+			s += "  sgt ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals(">="))
+			s += "  sge ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("<"))
+			s += "  slt ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else if (op.equals("<="))
+			s += "  sle ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		else throw new Exception("__BinOp 2");
+		
+		s += dst.pr() + ", " + left.pr() + ", " + right.pr();
+		
+		System.out.println(s);
+		
+		dst.store();
+		left.store();
+		right.store();
 	}
 
 	public __BinOp(__Oprand d, __Oprand l, __Oprand r, String o) {

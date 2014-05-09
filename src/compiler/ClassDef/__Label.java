@@ -7,7 +7,10 @@ public class __Label {
 	}
 	
 	public __Label(String s) {
-		name = s;
+		if (s.equals("main") || s.equals("printf") || s.equals("$ra"))
+			name = s;
+		else
+			name = "GXX_" + s;
 	}
 
 	public String print() {
