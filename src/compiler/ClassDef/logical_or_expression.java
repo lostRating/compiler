@@ -37,7 +37,7 @@ public class logical_or_expression extends root
 					returnVec.add(son.returnVec.get(j));
 				if (jump)
 				{
-					quad.add(new __Branch((__TempOprand)son.returnVec.get(4), l1, 1));
+					quad.add(new __Branch(((__TempOprand)son.returnVec.get(4)).Val(quad, new Int()), l1, 1));
 				}
 			}
 			else
@@ -49,7 +49,7 @@ public class logical_or_expression extends root
 				
 				if (jump)
 				{
-					quad.add(new __Branch((__TempOprand)son.returnVec.get(4), l1, 1));
+					quad.add(new __Branch(((__TempOprand)son.returnVec.get(4)).Val(quad, new Int()), l1, 1));
 				}
 			}
 		}

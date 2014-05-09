@@ -34,6 +34,8 @@ public class main {
 	static public Type GXX_VOID = new Void();
 	static public Type GXX_VOID_STAR = new Pointer(GXX_VOID, "GXX_VOID_STAR");
 	
+	static public boolean mips = true;
+	
 	static public Stack<Integer> Offset = new Stack<Integer>();
 	static public Stack<__Label> l1 = new Stack<__Label>();
 	static public Stack<__Label> l2 = new Stack<__Label>();
@@ -47,7 +49,8 @@ public class main {
 				init.init();
 				a.checkSon();
 				a.showMips();
-				init.printfs();
+				if (mips)
+					init.printfs();
 				//System.out.println("-------------------------ok-------------------------------");
 			}
 			catch (Exception t)
@@ -81,8 +84,11 @@ public class main {
 	
 	static public void main(String[] args) throws RecognitionException, IOException, Exception 
 	{
-		PrintStream myout = new PrintStream(new FileOutputStream(new File("D:\\class\\bianyi\\compiler2014\\hehe.s")));       
-		System.setOut(myout);
+		if (mips)
+		{
+			PrintStream myout = new PrintStream(new FileOutputStream(new File("D:\\class\\bianyi\\compiler2014\\hehe.s")));       
+			System.setOut(myout);
+		}
 		String s = "D:\\hehe\\compiler2014-testcases\\my";
 	    List<File> files = getFiles(s);
 	    for(File f : files){

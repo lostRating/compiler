@@ -52,8 +52,10 @@ public class root
 		System.out.println(".text");
 		for (int i = 0; i < quad.size(); ++i)
 		{
-			//System.out.println(quad.get(i).print());
-			quad.get(i).pr();
+			if (!main.mips)
+				System.out.println(quad.get(i).print());
+			if (main.mips)
+				quad.get(i).pr();
 		}
 	}
 	

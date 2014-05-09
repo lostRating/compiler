@@ -21,7 +21,7 @@ public class selection_statement extends root
 		__Label label1 = new __Label();
 		__Label label2 = null;
 		
-		quad.add(new __Branch((__TempOprand)son.returnVec.get(4), label1, 0));
+		quad.add(new __Branch(((__TempOprand)son.returnVec.get(4)).Val(quad, type), label1, 0));
 		
 		for (int i = 1; i < vec.size(); ++i)
 		{

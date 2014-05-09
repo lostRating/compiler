@@ -26,7 +26,7 @@ public class __Branch extends __Quad {
 		if (num == 0)
 			System.out.println("  beq "+ op.pr() + ", $0, " + label.print());
 		else
-			System.out.println("  bneq "+ op.pr() + ", $0, " + label.print());
+			System.out.println("  bne "+ op.pr() + ", $0, " + label.print());
 		op.store();
 	}
 }

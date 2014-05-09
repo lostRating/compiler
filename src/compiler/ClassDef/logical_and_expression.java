@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import compiler.Semantic.Symbol;
 import compiler.Semantic.Table;
+import compiler.Type.Int;
 import compiler.Type.Type;
 import compiler.main.main;
 
@@ -37,7 +38,7 @@ public class logical_and_expression extends root
 					returnVec.add(son.returnVec.get(j));
 				if (jump)
 				{
-					quad.add(new __Branch((__TempOprand)son.returnVec.get(4), l1, 0));
+					quad.add(new __Branch(((__TempOprand)son.returnVec.get(4)).Val(quad, new Int()), l1, 0));
 				}
 			}
 			else
@@ -49,7 +50,7 @@ public class logical_and_expression extends root
 				
 				if (jump)
 				{
-					quad.add(new __Branch((__TempOprand)son.returnVec.get(4), l1, 0));
+					quad.add(new __Branch(((__TempOprand)son.returnVec.get(4)).Val(quad, new Int()), l1, 0));
 				}
 			}
 		}

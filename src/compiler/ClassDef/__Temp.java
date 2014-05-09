@@ -10,12 +10,12 @@ public class __Temp {
 		if (s.length() == 0 || s.charAt(0) != '$')
 		{
 			offset = main.Offset.peek();
-			if (s.equals(""))
-			{
+			//if (s.equals(""))
+			//{
 				num = ++count;
 				main.Offset.pop();
 				main.Offset.push(offset + 4);
-			}
+			//}
 		}
 	}
 	

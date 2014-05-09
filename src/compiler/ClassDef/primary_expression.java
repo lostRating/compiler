@@ -1,6 +1,7 @@
 package compiler.ClassDef;
 
 import compiler.Semantic.Table;
+import compiler.Type.Int;
 import compiler.Type.Type;
 
 public class primary_expression extends root
@@ -60,6 +61,7 @@ public class primary_expression extends root
 			
 			for (int i = 0; i < 5; ++i)
 				returnVec.add(son.returnVec.get(i));
+			//returnVec.set(4, ((__TempOprand)returnVec.get(4)).Val(quad, new Int()));
 		}
 	}
 }

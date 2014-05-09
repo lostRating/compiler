@@ -64,18 +64,22 @@ public class __BinOp extends __Quad {
 	{
 		if (!(left instanceof __TempOprand))
 		{
-			throw new Exception("__BinOp 0.5");
+			String s = "";
+			int tmp = 0;
 			
-			/*if (!(dst instanceof __TempOprand) || !(right instanceof __TempOprand))
-				throw new Exception("__BinOp 1");
+			tmp = dst.load(tmp);
+			tmp = right.load(tmp);
 			
 			if (left instanceof __Const && op.equals("-"))
-				System.out.println("  neg $t0, $t1");
+				s += "  neg " + dst.pr() + ", " + right.pr();
 			else if (left instanceof __Const && op.equals("~"))
-				System.out.println("  not $t0, $t1");
+				s += "  not " + dst.pr() + ", " + right.pr();
 			else if (left instanceof __Const && op.equals("!"))
-				System.out.println("  seq $t0, $t1, $0");
-			else throw new Exception("__BinOp");*/
+				s += "  seq " + dst.pr() + ", " + right.pr() + ", $0";
+			else throw new Exception("__BinOp");
+			
+			dst.store();
+			right.store();
 		}
 		
 		int tmp = 0;

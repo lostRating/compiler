@@ -15,6 +15,13 @@ public class initializer extends root
 			son = (root)vec.get(1);
 			son.checkSon();
 			returnVec.add(son.returnVec.get(2));
+			if (main.scope == 0)
+				returnVec.add(son.returnVec.get(3));
+			else
+			{
+				addquad(son);
+				returnVec.add(son.returnVec.get(4));
+			}
 		}
 		else
 		{
