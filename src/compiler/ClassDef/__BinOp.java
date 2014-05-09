@@ -76,10 +76,14 @@ public class __BinOp extends __Quad {
 				s += "  not " + dst.pr() + ", " + right.pr();
 			else if (left instanceof __Const && op.equals("!"))
 				s += "  seq " + dst.pr() + ", " + right.pr() + ", $0";
-			else throw new Exception("__BinOp");
+			else throw new Exception("__BinOp " + op);
+			
+			System.out.println(s);
 			
 			dst.store();
 			right.store();
+			
+			return;
 		}
 		
 		int tmp = 0;
@@ -121,7 +125,7 @@ public class __BinOp extends __Quad {
 			s += "  slt ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("<="))
 			s += "  sle ";// + dst.print() + ", " + left.print() + ", " + right.print();
-		else throw new Exception("__BinOp 2");
+		else throw new Exception("__BinOp 2 " + op);
 		
 		s += dst.pr() + ", " + left.pr() + ", " + right.pr();
 		
