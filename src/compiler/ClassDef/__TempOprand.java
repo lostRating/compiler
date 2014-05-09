@@ -38,12 +38,18 @@ public class __TempOprand extends __Oprand{
 		return temp.pr();
 	}
 	@Override
-	public int load(int x) {
+	public int init(int x) {
 		if (temp.num == 0)
 			return x;
 		temp.nowNum = x;
-		System.out.println("  lw " + temp.pr() + ", " + temp.offset + "($sp)");
 		return x + 1;
+	}
+	@Override
+	public void load()
+	{
+		if (temp.num == 0)
+			return;
+		System.out.println("  lw " + temp.pr() + ", " + temp.offset + "($sp)");
 	}
 	@Override
 	public void store() {

@@ -16,8 +16,13 @@ public class __LabelAddress extends __Oprand {
 		return print();
 	}
 	@Override
-	public int load(int x) {
+	public int init(int x) {
 		return x;
+	}
+	@Override
+	public void load()
+	{
+		return;
 	}
 	@Override
 	public void store() {

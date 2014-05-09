@@ -22,11 +22,11 @@ public class __Branch extends __Quad {
 	@Override
 	public void pr() throws Exception {
 		int tmp = 0;
-		tmp = op.load(tmp);
+		tmp = op.init(tmp);
+		op.load();
 		if (num == 0)
 			System.out.println("  beq "+ op.pr() + ", $0, " + label.print());
 		else
 			System.out.println("  bne "+ op.pr() + ", $0, " + label.print());
-		op.store();
 	}
 }

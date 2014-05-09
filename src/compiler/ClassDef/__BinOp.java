@@ -67,8 +67,11 @@ public class __BinOp extends __Quad {
 			String s = "";
 			int tmp = 0;
 			
-			tmp = dst.load(tmp);
-			tmp = right.load(tmp);
+			tmp = dst.init(tmp);
+			tmp = right.init(tmp);
+			
+			right.load();
+			dst.load();
 			
 			if (left instanceof __Const && op.equals("-"))
 				s += "  neg " + dst.pr() + ", " + right.pr();
@@ -88,9 +91,12 @@ public class __BinOp extends __Quad {
 		
 		int tmp = 0;
 		
-		tmp = dst.load(tmp);
-		tmp = left.load(tmp);
-		tmp = right.load(tmp);
+		tmp = dst.init(tmp);
+		tmp = left.init(tmp);
+		tmp = right.init(tmp);
+		
+		left.load();
+		right.load();
 		
 		String s = "";
 		if (op.equals("+"))
@@ -132,8 +138,6 @@ public class __BinOp extends __Quad {
 		System.out.println(s);
 		
 		dst.store();
-		left.store();
-		right.store();
 	}
 
 	public __BinOp(__Oprand d, __Oprand l, __Oprand r, String o) {

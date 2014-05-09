@@ -38,9 +38,10 @@ public class unary_expression extends root
 				if (!typeToType(main.GXX_INT, type)) throw new Exception("unary_expression 1");
 				
 				__TempOprand __t = (__TempOprand)returnVec.get(4);
-				quad.add(new __BinOp(__t.Mem(type), __t.Val(quad, type), new __Const(1), "+"));
+				__t = initBinOp(__t.Mem(type), __t.Val(quad, type), new __Const(1), "+");
 				
 				returnVec.set(1, false);
+				returnVec.set(4, __t);
 			}
 			else if (!son.s.equals("ONE") && !son.s.equals("TWO"))
 			{

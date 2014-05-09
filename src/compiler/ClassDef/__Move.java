@@ -24,11 +24,17 @@ public class __Move extends __Quad {
 	public void pr()
 	{
 		int tmp = 0;
-		tmp = dst.load(tmp);
-		tmp = src.load(tmp);
+		tmp = dst.init(tmp);
+		tmp = src.init(tmp);
+		
+		src.load();
 		
 		if (dst instanceof __Mem)
+		{
+			dst.load();
 			System.out.println("  sw " + src.pr() + ", " + dst.pr());
+			return;
+		}
 		else if (src instanceof __LabelAddress)
 			System.out.println("  la " + dst.pr() + ", " + src.pr());
 		else if (src instanceof __Const)
@@ -39,6 +45,5 @@ public class __Move extends __Quad {
 			System.out.println("  move " + dst.pr() + ", " + src.pr());
 		
 		dst.store();
-		src.store();
 	}
 }

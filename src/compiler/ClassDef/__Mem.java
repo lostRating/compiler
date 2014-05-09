@@ -26,8 +26,13 @@ public class __Mem extends __Oprand {
 	}
 
 	@Override
-	public int load(int x) {
-		return base.load(x);
+	public int init(int x) {
+		return base.init(x);
+	}
+	@Override
+	public void load()
+	{
+		base.load();
 	}
 
 	@Override
