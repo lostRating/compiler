@@ -9,7 +9,7 @@ public final class Function extends Type{
 			argumentType.add(argumentType2.get(i));
 		Name = Name2;
 		
-		size = 16;
+		size = 0;
 	}
 	public Vector argumentType = new Vector();
 	public Type returnType;

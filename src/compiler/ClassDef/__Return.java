@@ -1,6 +1,7 @@
 package compiler.ClassDef;
 
 import compiler.Type.Function;
+import compiler.Type.Int;
 
 public class __Return extends __Quad {
 
@@ -11,10 +12,14 @@ public class __Return extends __Quad {
 
 	@Override
 	public String print() {
-		return "  add $sp, $sp, " + func.size;
+		return "  return " + func.Name;
 	}
 	@Override
 	public void pr() {
-		System.out.println(print());
+		System.out.println("  lw $ra, " + (func.size - 16) + "($sp)");
+		System.out.println("  lw $s0, " + (func.size - 12) + "($sp)");
+		System.out.println("  lw $s1, " + (func.size - 8) + "($sp)");
+		System.out.println("  lw $s2, " + (func.size - 4) + "($sp)");
+		System.out.println("  add $sp, $sp, " + func.size);
 	}
 }
