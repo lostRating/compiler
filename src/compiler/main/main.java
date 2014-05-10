@@ -53,7 +53,7 @@ public class main {
 					init.printfs();
 				//System.out.println("-------------------------ok-------------------------------");
 			}
-			catch (Exception t)
+			catch (RecognitionException t)
 			{
 				System.out.println("CE");
 				System.out.println(t.getMessage());

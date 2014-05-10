@@ -6,6 +6,7 @@ public class __Temp {
 
 	public __Temp(String s) {
 		if (root.constant_expression > 0) return;
+		if (root.Inner > 0) return;
 		name = s;
 		if (s.length() == 0 || s.charAt(0) != '$')
 		{

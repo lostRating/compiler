@@ -45,7 +45,7 @@ public class postfix extends root
 			for (int i = 0; i < 5; ++i)
 				returnVec.add(i, tmpVec.get(i));
 			returnVec.set(0, false);
-			returnVec.set(2, pointer.elementType);	
+			returnVec.set(2, pointer.elementType);
 			
 			__TempOprand __t = new __TempOprand(new __Temp(""), 1);
 			quad.add(new __BinOp(__t, ((__TempOprand)son.returnVec.get(4)).Val(quad, new Int()), new __Const(pointer.elementType.size), "*"));
@@ -72,7 +72,10 @@ public class postfix extends root
 					if (((Type)son.returnVec.get(i)) instanceof Array)
 						tt.add((__TempOprand)son.returnVec.get(i + 1));
 					else
+					{
+						//System.out.println("!");
 						tt.add((__TempOprand)((__TempOprand)son.returnVec.get(i + 1)).Val(quad, new Int()));
+					}
 				}
 			}
 			if (!(type instanceof Function)) throw new Exception("postfix 3");
@@ -146,14 +149,14 @@ public class postfix extends root
 						returnVec.add(k, tmpVec.get(k));
 					returnVec.set(2, struct.types.get(i));
 					
-					__TempOprand __t = new __TempOprand(new __Temp(""));
+					__TempOprand __t = new __TempOprand(new __Temp(""), 1);
 					__TempOprand __t2 = (__TempOprand)tmpVec.get(4);
 					
-					Type tt = (Type)struct.types.get(i);
-					if (!(tt instanceof Array) && !(tt instanceof Struct))
-						quad.add(new __Move(__t, new __Mem(__t2, offset, tt)));
-					else
-						quad.add(new __BinOp(__t, __t2, new __Const(offset), "+"));
+					//Type tt = (Type)struct.types.get(i);
+					//if (!(tt instanceof Array) && !(tt instanceof Struct))
+					//	quad.add(new __Move(__t, new __Mem(__t2, offset, tt)));
+					//else
+					quad.add(new __BinOp(__t, __t2, new __Const(offset), "+"));
 					
 					returnVec.set(4, __t);
 					
@@ -193,11 +196,11 @@ public class postfix extends root
 					__TempOprand __t = new __TempOprand(new __Temp(""));
 					__TempOprand __t2 = (__TempOprand)tmpVec.get(4);
 					
-					Type tt = (Type)struct.types.get(2);
-					if (!(tt instanceof Array) && !(tt instanceof Struct))
-						quad.add(new __Move(__t, new __Mem(__t2, offset, tt)));
-					else
-						quad.add(new __BinOp(__t, __t2, new __Const(offset), "+"));
+					//Type tt = (Type)struct.types.get(2);
+					//if (!(tt instanceof Array) && !(tt instanceof Struct))
+					//	quad.add(new __Move(__t, new __Mem(__t2, offset, tt)));
+					//else
+					quad.add(new __BinOp(__t, __t2, new __Const(offset), "+"));
 					
 					returnVec.set(4, __t);
 					

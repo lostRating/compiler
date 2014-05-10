@@ -71,7 +71,7 @@ public class root
 		}
 	}
 	
-	public void pushArg(__TempOprand tmp, Type type, int offset) throws Exception
+	/*public void pushArg(__TempOprand tmp, Type type, int offset) throws Exception
 	{
 		if (!(type instanceof Struct))
 		{
@@ -84,7 +84,7 @@ public class root
 		{
 			throw new Exception("pushArg");
 		}
-	}
+	}*/
 	
 	public void init(__TempOprand a, __TempOprand b, Type aa, Type bb) throws Exception
 	{
@@ -103,8 +103,8 @@ public class root
 			for (int i = 0; i < aa.size; i += 4)
 			{
 				__TempOprand __t = new __TempOprand(new __Temp(""));
-				quad.add(new __Move(__t, new __Mem(b, b.temp.offset + i, new Int())));
-				quad.add(new __Move(new __Mem(a, a.temp.offset + i, new Int()), __t));
+				quad.add(new __Move(__t, new __Mem(b, i, new Int())));
+				quad.add(new __Move(new __Mem(a, i, new Int()), __t));
 			}
 		}
 		else throw new Exception("root init Array");
@@ -357,7 +357,7 @@ public class root
 			Type tt = ((Pointer)type).elementType;
 			vector.set(2, tt);
 			__t = new __TempOprand(new __Temp(""), 1);
-			quad.add(new __Move(__t, __tt));
+			quad.add(new __Move(__t, __tt.Val(quad, type)));
 			vector.set(4, __t);
 			return vector;
 		}

@@ -45,6 +45,9 @@ public class function_definition extends root
 			String name = (String)argumentType.get(i + 1);
 			Type type2 = (Type)argumentType.get(i);
 			
+			if (type2 instanceof Array)
+				type2 = new Pointer(((Array)type2).elementType, "GXX_" + String.valueOf(main.noName++));
+			
 			main.func.argOffset.add(main.Offset.peek());
 			
 			__TempOprand tmp = addSymbol(main.F, type2, name, true);

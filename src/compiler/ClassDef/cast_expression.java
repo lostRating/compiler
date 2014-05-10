@@ -33,7 +33,7 @@ public class cast_expression extends root
 			for (int i = 0; i < 5; ++i)
 				returnVec.add(son.returnVec.get(i));
 			if (!typeToType(type, (Type)returnVec.get(2))) throw new Exception("cast_expression");
-			returnVec.set(3, type);
+			returnVec.set(2, type);
  		}
 	}
 }
