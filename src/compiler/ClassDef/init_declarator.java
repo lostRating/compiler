@@ -48,8 +48,10 @@ public class init_declarator extends root
 		}
 		else
 		{
+			//System.out.println(newType);
 			addquad(son);
-			quad.add(new __Move(__t, ((__TempOprand)son.returnVec.get(1)).Val(quad, type2)));
+			init(__t, (__TempOprand)son.returnVec.get(1), newType, type2);
+			//quad.add(new __Move(__t, ((__TempOprand)son.returnVec.get(1)).Val(quad, type2)));
 		}
 		
 		if (!typeToType(newType, type2)) throw new Exception("init_declarator");

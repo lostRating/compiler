@@ -88,7 +88,13 @@ public class root
 	
 	public void init(__TempOprand a, __TempOprand b, Type aa, Type bb) throws Exception
 	{
-		if (!(aa instanceof Struct))
+		if (aa instanceof Pointer && !(aa instanceof Array))
+		{
+			//System.out.println("!!!");
+			quad.add(new __Move(a.Mem(aa), b));
+			//System.out.println(quad.get(quad.size() - 1).print());
+		}
+		else if (!(aa instanceof Struct))
 		{
 			quad.add(new __Move(a.Mem(aa), b.Val(quad, bb)));
 		}
@@ -283,6 +289,11 @@ public class root
 		else if ((op.equals("+") || op.equals("-")) && a instanceof Pointer && typeToType(main.GXX_INT, b))
 		{
 			vector.set(2, a);
+			__TempOprand __t3 = new __TempOprand(new __Temp(""));
+			quad.add(new __BinOp(__t3, __t2.Val(quad, b), new __Const(((Pointer)a).elementType.size), "*"));
+			quad.add(new __BinOp(__t3, __t1.Val(quad, a), __t3, op));
+			vector.set(4, __t3);
+			return vector;
 		}
 		else if (typeToType(main.GXX_INT, a) && typeToType(main.GXX_INT, b))
 		{
@@ -345,7 +356,8 @@ public class root
 			vector.set(1, true);
 			Type tt = ((Pointer)type).elementType;
 			vector.set(2, tt);
-			quad.add(new __Move(__t, new __Mem(__tt, 0, tt)));
+			__t = new __TempOprand(new __Temp(""), 1);
+			quad.add(new __Move(__t, __tt));
 			vector.set(4, __t);
 			return vector;
 		}
@@ -353,7 +365,7 @@ public class root
 		{
 			vector.set(1, false);
 			//vector.set(2, main.GXX_INT);
-			quad.add(new __BinOp(__t, new __Const(0), __tt, op));
+			quad.add(new __BinOp(__t, new __Const(0), __tt.Val(quad, type), op));
 			vector.set(4, __t);
 			return vector;
 		}
