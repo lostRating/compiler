@@ -101,11 +101,11 @@ public class postfix extends root
 					Type type2 = (Type)returnVec.get(i);
 					if (i == 0)
 					{
-						quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(i)));
+						quad.add(new __Move(new __Mem(__togp, 0, new Int()), tt.get(i)));
 					}
 					else
 					{
-						quad.add(new __Move(new __TempOprand(new __Temp("$a" + Integer.toString(i))), tt.get(i).Val(quad, type2)));
+						quad.add(new __Move(new __Mem(__togp, i * 4, new Int()), tt.get(i).Val(quad, type2)));
 					}
 				}
 				quad.add(new __Void("  jal printf"));
@@ -224,7 +224,7 @@ public class postfix extends root
 			__TempOprand __t = new __TempOprand(new __Temp(""));
 			__TempOprand __t2 = (__TempOprand)returnVec.get(4);
 			quad.add(new __Move(__t, __t2));
-			__t = initBinOp(__t2.Mem(type), __t2.Val(quad, type), new __Const(1), son.s.substring(0, 1));
+			initBinOp(__t2.Mem(type), __t2.Val(quad, type), new __Const(1), son.s.substring(0, 1));
 			
 			returnVec.set(4, __t);
 			

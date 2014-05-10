@@ -36,6 +36,9 @@ public class function_definition extends root
 		
 		quad.add(new __LabelQuad(new __Label(functionName)));
 		
+		if (functionName.equals("main"))
+			quad.add(new __Void("  la $gp GXX_initGP"));
+		
 		beginScope("function");
 		
 		main.Offset.push(main.Offset.pop());

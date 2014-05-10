@@ -14,11 +14,12 @@ public class expression extends root
 			
 			addquad(son);
 			
-			if (i == 0)
-			{
-				for (int j = 0; j < 5; ++j)
-					returnVec.add(son.returnVec.get(j));
-			}
+//			if (i == 0)
+//			{
+			returnVec.removeAllElements();
+			for (int j = 0; j < 5; ++j)
+				returnVec.add(son.returnVec.get(j));
+//			}
 		}
 	}
 }

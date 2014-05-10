@@ -41,9 +41,13 @@ public class init_declarator extends root
 		if (main.scope == 0)
 		{
 			if (newType instanceof Array) throw  new Exception("init Array");
-			else
+			else if (secret == null)
 			{
 				data.add("  " + new __Label(name).print() + ": .word " + (int)son.returnVec.get(1));
+			}
+			else
+			{
+				data.add("  " + new __Label(name).print() + ": .word " + secret.print());
 			}
 		}
 		else

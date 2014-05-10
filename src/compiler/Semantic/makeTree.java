@@ -97,9 +97,9 @@ public class makeTree {
         	{
         		mark = 1 - mark;
         	}
-        	if (s.charAt(i) == '(')
+        	if (s.charAt(i) == '(' && mark == 0)
         		++flag;
-        	else if (s.charAt(i) == ')')
+        	else if (s.charAt(i) == ')' && mark == 0)
         		++FLAG;
         	else if (s.charAt(i) != ' ' || (s.charAt(i) == ' ' && s.charAt(i - 1) == '\'' && s.charAt(i + 1) == '\'')
         			|| (s.charAt(i) == ' ' && mark != 0))

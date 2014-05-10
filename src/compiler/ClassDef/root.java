@@ -19,11 +19,14 @@ public class root
 	static public int Inner = 0;
 	static public int structOrArray = 0;
 	
+	static public __Label secret = null;
+	
 	public Vector<__Quad> quad = new Vector<__Quad>();
 	
 	static public Vector<String> data = new Vector<String>();
 	
 	static public __TempOprand __tosp = new __TempOprand(new __Temp("$sp"));
+	static public __TempOprand __togp = new __TempOprand(new __Temp("$gp"));
 	
 	public root(){s = "";}
 	public root(String ss){s = ss;}
@@ -48,6 +51,7 @@ public class root
 		System.out.println(".data");
 		for (int i = 0; i < data.size(); ++i)
 			System.out.println(data.get(i));
+		System.out.println("  GXX_initGP: .space 400");
 		System.out.println();
 		System.out.println(".text");
 		for (int i = 0; i < quad.size(); ++i)
