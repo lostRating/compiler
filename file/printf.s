@@ -1,3 +1,9 @@
+malloc:
+	# a0 -- size in bytes (already x4)
+	li $v0, 9
+	syscall
+	jr $ra
+
 ## Daniel J. Ellard -- 03/13/94
 ## printf.asm--
 ## an implementation of a simple printf work-alike.

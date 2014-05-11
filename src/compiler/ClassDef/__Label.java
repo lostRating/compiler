@@ -7,7 +7,7 @@ public class __Label {
 	}
 	
 	public __Label(String s) {
-		if (s.equals("main") || s.equals("printf") || s.equals("$ra"))
+		if (s.equals("main") || s.equals("printf") || s.equals("$ra") || s.equals("malloc"))
 			name = s;
 		else
 			name = "GXX_" + s;

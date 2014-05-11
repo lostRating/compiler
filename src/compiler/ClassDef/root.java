@@ -27,6 +27,7 @@ public class root
 	
 	static public __TempOprand __tosp = new __TempOprand(new __Temp("$sp"));
 	static public __TempOprand __togp = new __TempOprand(new __Temp("$gp"));
+	static public __TempOprand __toa0 = new __TempOprand(new __Temp("$a0"));
 	
 	public root(){s = "";}
 	public root(String ss){s = ss;}

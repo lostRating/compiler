@@ -35,6 +35,7 @@ public class main {
 	static public Type GXX_VOID_STAR = new Pointer(GXX_VOID, "GXX_VOID_STAR");
 	
 	static public boolean mips = true;
+	static public boolean test = false;
 	
 	static public Stack<Integer> Offset = new Stack<Integer>();
 	static public Stack<__Label> l1 = new Stack<__Label>();
@@ -51,19 +52,26 @@ public class main {
 				a.showMips();
 				if (mips)
 					init.printfs();
-				System.exit(0);
+				if (test)
+					System.exit(0);
 				//System.out.println("-------------------------ok-------------------------------");
 			}
 			catch (Exception t)
 			{
-				System.exit(1);
-				//System.out.println("CE");
-				//System.out.println(t.getMessage());
+				if (test)
+					System.exit(1);
+				else
+				{
+					System.out.println("CE");
+					System.out.println(t.getMessage());
+				}
 			}
 		}
 		catch(RecognitionException a) {
-			System.exit(1);
-			//System.out.println("antlr error");
+			if (test)
+				System.exit(1);
+			else
+				System.out.println("antlr error");
 		}
 		return 0;
 	}
@@ -87,17 +95,21 @@ public class main {
 	
 	static public void main(String[] args) throws RecognitionException, IOException, Exception 
 	{
-		/*if (mips)
+		if (!test)
 		{
-			PrintStream myout = new PrintStream(new FileOutputStream(new File("D:\\class\\bianyi\\compiler2014\\hehe.s")));       
-			System.setOut(myout);
+			if (mips)
+			{
+				PrintStream myout = new PrintStream(new FileOutputStream(new File("D:\\class\\bianyi\\compiler2014\\hehe.s")));       
+				System.setOut(myout);
+			}
+			String s = "D:\\hehe\\compiler2014-testcases\\my";
+			List<File> files = getFiles(s);
+			for(File f : files){
+				System.out.println("# " + f.getName());
+			work(f);
+			}
 		}
-		String s = "D:\\hehe\\compiler2014-testcases\\my";
-	    List<File> files = getFiles(s);
-	    for(File f : files){
-	    	System.out.println("# " + f.getName());
-	        work(f);
-	    }*/
-		System.exit( work(new File(args[0])));
+		else
+			System.exit( work(new File(args[0])));
 	}
 }

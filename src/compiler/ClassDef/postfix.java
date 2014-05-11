@@ -49,7 +49,10 @@ public class postfix extends root
 			
 			__TempOprand __t = new __TempOprand(new __Temp(""), 1);
 			quad.add(new __BinOp(__t, ((__TempOprand)son.returnVec.get(4)).Val(quad, new Int()), new __Const(pointer.elementType.size), "*"));
-			quad.add(new __BinOp(__t, __t, (__TempOprand)tmpVec.get(4), "+"));
+			if (type instanceof Array)
+				quad.add(new __BinOp(__t, __t, (__TempOprand)tmpVec.get(4), "+"));
+			else
+				quad.add(new __BinOp(__t, __t, ((__TempOprand)tmpVec.get(4)).Val(quad, new Int()), "+"));
 			//if (!(pointer.elementType instanceof Struct) && !(pointer.elementType instanceof Array))
 			//	quad.add(new __Move(__t, new __Mem(__t, 0, pointer.elementType)));
 			
@@ -112,7 +115,8 @@ public class postfix extends root
 			}
 			else if (function.Name.equals("malloc"))
 			{
-				throw new Exception("postfix malloc");
+				quad.add(new __Move(__toa0, tt.get(0).Val(quad, new Int())));
+				quad.add(new __Void("  jal malloc"));
 			}
 			else
 			{
