@@ -48,7 +48,7 @@ public class init
 	
 	static public void printfs() throws IOException
 	{
-		 BufferedReader br = new BufferedReader(new FileReader("D:\\class\\bianyi\\compiler2014\\printf.s"));
+		 BufferedReader br = new BufferedReader(new FileReader("printf.s"));
 		 String s = null;
          while((s = br.readLine())!=null){
              System.out.println(s);
