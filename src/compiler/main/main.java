@@ -35,7 +35,7 @@ public class main {
 	static public Type GXX_VOID_STAR = new Pointer(GXX_VOID, "GXX_VOID_STAR");
 	
 	static public boolean mips = true;
-	static public boolean test = false;
+	static public boolean test = true;
 	
 	static public Stack<Integer> Offset = new Stack<Integer>();
 	static public Stack<__Label> l1 = new Stack<__Label>();
