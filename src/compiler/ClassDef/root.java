@@ -91,12 +91,18 @@ public class root
 		}
 	}*/
 	
-	public void init(__TempOprand a, __TempOprand b, Type aa, Type bb) throws Exception
+	public __TempOprand init(__TempOprand a, __TempOprand b, Type aa, Type bb) throws Exception
 	{
+		__TempOprand ret = a;
 		if (aa instanceof Pointer && !(aa instanceof Array))
 		{
 			//System.out.println("!!!");
-			quad.add(new __Move(a.Mem(aa), b));
+			if (bb instanceof Array)
+				quad.add(new __Move(a.Mem(aa), b));
+			else
+				quad.add(new __Move(a.Mem(aa), b.Val(quad, bb)));
+			ret = new __TempOprand(new __Temp(""));
+			quad.add(new __Move(ret, b));
 			//System.out.println(quad.get(quad.size() - 1).print());
 		}
 		else if (!(aa instanceof Struct))
@@ -113,6 +119,7 @@ public class root
 			}
 		}
 		else throw new Exception("root init Array");
+		return ret;
 	}
 	
 	public __TempOprand initBinOp(__Oprand a, __Oprand b, __Oprand c, String op)
@@ -258,7 +265,8 @@ public class root
 			{
 				if (a instanceof Array && b instanceof Array) throw new Exception("calTwo 2");
 				if (!typeToType(a, b)) throw new Exception("calTwo 3");
-				init(__t1, __t2, a, b);
+				__TempOprand __t3 = init(__t1, __t2, a, b);
+				vector.set(4, __t3);
 				return vector;
 			}
 			else

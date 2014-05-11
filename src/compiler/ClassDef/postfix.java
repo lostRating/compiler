@@ -197,8 +197,8 @@ public class postfix extends root
 						returnVec.add(k, tmpVec.get(k));
 					returnVec.set(2, struct.types.get(i));
 					
-					__TempOprand __t = new __TempOprand(new __Temp(""));
-					__TempOprand __t2 = (__TempOprand)tmpVec.get(4);
+					__TempOprand __t = new __TempOprand(new __Temp(""), 1);
+					__TempOprand __t2 = (__TempOprand) ((__TempOprand)tmpVec.get(4)).Val(quad, new Int());
 					
 					//Type tt = (Type)struct.types.get(2);
 					//if (!(tt instanceof Array) && !(tt instanceof Struct))
