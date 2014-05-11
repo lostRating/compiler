@@ -34,7 +34,7 @@ public class __Call extends __Quad {
 			if (func.argumentType.get(i) instanceof Struct)	throw new Exception("__Call");
 			arg.get(i).init(0);
 			arg.get(i).load();
-			System.out.println("  sw " + arg.get(i).pr() + ", " + (func.argOffset.get(i) - func.size) + "($sp)");
+			System.out.println("  sw " + arg.get(i).pr() + ", " + (func.argOffset.get(i) - func.size) + "($gp)");
 			//arg.get(i).store();
 		}
 		System.out.println("  jal " + function.print());

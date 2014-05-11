@@ -68,7 +68,7 @@ public class root
 	{
 		if (!(type instanceof Struct))
 		{
-			quad.add(new __Move(tmp, new __Mem(__tosp, tmp.temp.offset, type)));
+			quad.add(new __Move(tmp, new __Mem(__togp, tmp.temp.offset, type)));
 		}
 		else
 		{
