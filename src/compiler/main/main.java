@@ -12,7 +12,7 @@ import java.util.Vector;
 
 import org.antlr.runtime.RecognitionException;
 
-import com.sun.org.apache.xml.internal.security.Init;
+//import com.sun.org.apache.xml.internal.security.Init;
 
 import compiler.ClassDef.*;
 import compiler.Semantic.Table;
@@ -51,16 +51,19 @@ public class main {
 				a.showMips();
 				if (mips)
 					init.printfs();
+				System.exit(0);
 				//System.out.println("-------------------------ok-------------------------------");
 			}
-			catch (RecognitionException t)
+			catch (Exception t)
 			{
-				System.out.println("CE");
-				System.out.println(t.getMessage());
+				System.exit(1);
+				//System.out.println("CE");
+				//System.out.println(t.getMessage());
 			}
 		}
 		catch(RecognitionException a) {
-			System.out.println("antlr error");
+			System.exit(1);
+			//System.out.println("antlr error");
 		}
 		return 0;
 	}
@@ -84,7 +87,7 @@ public class main {
 	
 	static public void main(String[] args) throws RecognitionException, IOException, Exception 
 	{
-		if (mips)
+		/*if (mips)
 		{
 			PrintStream myout = new PrintStream(new FileOutputStream(new File("D:\\class\\bianyi\\compiler2014\\hehe.s")));       
 			System.setOut(myout);
@@ -94,7 +97,7 @@ public class main {
 	    for(File f : files){
 	    	System.out.println("# " + f.getName());
 	        work(f);
-	    }
-//		System.exit( work(new File(args[0])));
+	    }*/
+		System.exit( work(new File(args[0])));
 	}
 }
