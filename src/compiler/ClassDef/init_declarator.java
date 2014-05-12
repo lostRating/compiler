@@ -5,6 +5,7 @@ import compiler.Type.Array;
 import compiler.Type.Int;
 import compiler.Type.Name;
 import compiler.Type.Pointer;
+import compiler.Type.Struct;
 import compiler.Type.Type;
 import compiler.main.main;
 
@@ -54,6 +55,12 @@ public class init_declarator extends root
 		{
 			//System.out.println(newType);
 			addquad(son);
+			if (newType instanceof Struct)
+			{
+				__TempOprand __tt = new __TempOprand(new __Temp(""), 1);
+				quad.add(new __BinOp(__tt, __tosp, new __Const(__t.temp.offset), "+"));
+				__t = __tt;
+			}
 			init(__t, (__TempOprand)son.returnVec.get(1), newType, type2);
 			//quad.add(new __Move(__t, ((__TempOprand)son.returnVec.get(1)).Val(quad, type2)));
 		}

@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import compiler.Type.Function;
 import compiler.Type.Struct;
+import compiler.Type.Type;
 
 public class __Call extends __Quad {
 
@@ -29,12 +30,21 @@ public class __Call extends __Quad {
 	}
 	@Override
 	public void pr() throws Exception {
+		//System.out.println(function.name);
 		for (int i = 0; i < arg.size(); ++i)
 		{
-			if (func.argumentType.get(i) instanceof Struct)	throw new Exception("__Call");
 			arg.get(i).init(0);
 			arg.get(i).load();
-			System.out.println("  sw " + arg.get(i).pr() + ", " + func.argOffset.get(i) + "($gp)");
+			if (func.argumentType.get(i) instanceof Struct)
+			{
+				for (int j = 0; j < ((Type) (func.argumentType.get(i))).size; j += 4)
+				{
+					System.out.println("  lw $v0, " + j + "(" + arg.get(i).pr() + ")");
+					System.out.println("  sw $v0, " + (func.argOffset.get(i) + j) + "($gp)");
+				}
+			}
+			else
+				System.out.println("  sw " + arg.get(i).pr() + ", " + func.argOffset.get(i) + "($gp)");
 			//arg.get(i).store();
 		}
 		System.out.println("  jal " + function.print());

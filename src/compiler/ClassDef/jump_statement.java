@@ -28,7 +28,10 @@ public class jump_statement extends root
 				__TempOprand __t = (__TempOprand)son.returnVec.get(4);
 				type = (Type)son.returnVec.get(2);
 				
-				quad.add(new __Move(new __TempOprand(new __Temp("$v0")), __t.Val(quad, type)));
+				if (!(type instanceof Struct))
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), __t.Val(quad, type)));
+				else
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), __t));
 				quad.add(new __Return(main.func));
 				quad.add(new __Jump(new __Label("$ra")));
 			}

@@ -56,7 +56,7 @@ public class main {
 					System.exit(0);
 				//System.out.println("-------------------------ok-------------------------------");
 			}
-			catch (Exception t)
+			catch (RecognitionException t)
 			{
 				if (test)
 					System.exit(1);

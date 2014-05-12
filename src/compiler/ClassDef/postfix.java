@@ -72,7 +72,7 @@ public class postfix extends root
 				for (int i = 0; i < son.returnVec.size(); i += 2)
 				{
 					returnVec.add(son.returnVec.get(i));
-					if (((Type)son.returnVec.get(i)) instanceof Array)
+					if (((Type)son.returnVec.get(i)) instanceof Array || ((Type)son.returnVec.get(i)) instanceof Struct)
 						tt.add((__TempOprand)son.returnVec.get(i + 1));
 					else
 					{

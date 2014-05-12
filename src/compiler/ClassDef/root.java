@@ -52,7 +52,7 @@ public class root
 		System.out.println(".data");
 		for (int i = 0; i < data.size(); ++i)
 			System.out.println(data.get(i));
-		System.out.println("  GXX_initGP: .space 400");
+		System.out.println("  GXX_initGP: .space 1000");
 		System.out.println();
 		System.out.println(".text");
 		for (int i = 0; i < quad.size(); ++i)
@@ -72,7 +72,12 @@ public class root
 		}
 		else
 		{
-			throw new Exception("pullArg");
+			for (int i = 0; i < type.size; i += 4)
+			{
+				__TempOprand __t = new __TempOprand(new __Temp(""));
+				quad.add(new __Move(__t, new __Mem(__togp, tmp.temp.offset + i, new Int())));
+				quad.add(new __Move(new __Mem(__tosp, tmp.temp.offset + i, new Int()), __t));
+			}
 		}
 	}
 	
