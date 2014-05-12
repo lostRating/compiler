@@ -120,9 +120,27 @@ public class postfix extends root
 			}
 			else
 			{
-				quad.add(new __Call(new __Label(function.Name), function, tt));
-				//for (int i = 0; i < returnVec.size(); ++i)
-				//	pushArg(tt.get(i), (Type)returnVec.get(i), function.argOffset.get(i) - function.size);
+				for (int i = 0; i < tt.size(); ++i)
+				{
+					if (function.argumentType.get(i) instanceof Struct)
+					{
+						for (int j = 0; j < ((Type) (function.argumentType.get(i))).size; j += 4)
+						{
+							__TempOprand __tt = new __TempOprand(new __Temp("$v0"));
+							quad.add(new __Move(__tt, new __Mem(tt.get(i), j, new Int())));
+							quad.add(new __Move(new __Mem(__togp, function.argOffset.get(i) + j, new Int()), __tt));
+							//System.out.println("  lw $v0, " + j + "(" + arg.get(i).pr() + ")");
+							//System.out.println("  sw $v0, " + (func.argOffset.get(i) + j) + "($gp)");
+						}
+					}
+					else
+					{
+						quad.add(new __Move(new __Mem(__togp, function.argOffset.get(i), new Int()), tt.get(i)));
+						//System.out.println("  sw " + arg.get(i).pr() + ", " + func.argOffset.get(i) + "($gp)");
+					}
+				}
+				
+				quad.add(new __Call(new __Label(function.Name)));
 			}
 			
 			returnVec.removeAllElements();

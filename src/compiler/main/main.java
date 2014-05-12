@@ -37,7 +37,7 @@ public class main {
 	static public Type GXX_VOID_STAR = new Pointer(GXX_VOID, "GXX_VOID_STAR");
 	
 	static public boolean mips = true;
-	static public boolean test = true;
+	static public boolean test = false;
 	
 	static public Stack<Integer> Offset = new Stack<Integer>();
 	static public Stack<__Label> l1 = new Stack<__Label>();
@@ -52,6 +52,7 @@ public class main {
 				init.init();
 				a.checkSon();
 				a.showMips();
+				//System.out.println(a.quad.size());
 				//allocate.toMips(a.quad);
 				if (mips)
 					init.printfs();
