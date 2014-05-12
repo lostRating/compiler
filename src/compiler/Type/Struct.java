@@ -15,4 +15,5 @@ public final class Struct extends Record{
 		}
 		Name = s;
 	}
+	public boolean union = false;
 }

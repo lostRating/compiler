@@ -26,6 +26,8 @@ public class type_specifier extends root
 			son = (root)vec.get(1);
 			son.checkSon();
 			
+			String sss = son.s;
+			
 			if (vec.size() == 4)
 			{
 				son = (root)vec.get(2);
@@ -52,6 +54,10 @@ public class type_specifier extends root
 			
 			Type struct = new Struct(returnVec, s);
 			struct.size = tmp;
+			
+			if (sss.equals("union"))
+				((Struct)struct).union = true;
+			
 			addSymbol(main.S, struct, s, true);
 			
 			returnVec.removeAllElements();

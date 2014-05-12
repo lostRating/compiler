@@ -166,7 +166,7 @@ public class postfix extends root
 					
 					return;
 				}
-				else
+				else if (!struct.union)
 					offset += ((Type)struct.types.get(i)).size;
 			
 			throw new Exception("postfix 6");
