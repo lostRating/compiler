@@ -74,7 +74,7 @@ public class root
 		{
 			for (int i = 0; i < type.size; i += 4)
 			{
-				__TempOprand __t = new __TempOprand(new __Temp(""));
+				__TempOprand __t = new __TempOprand(new __Temp("$v0"));
 				quad.add(new __Move(__t, new __Mem(__togp, tmp.temp.offset + i, new Int())));
 				quad.add(new __Move(new __Mem(__tosp, tmp.temp.offset + i, new Int()), __t));
 			}
@@ -118,7 +118,7 @@ public class root
 		{
 			for (int i = 0; i < aa.size; i += 4)
 			{
-				__TempOprand __t = new __TempOprand(new __Temp(""));
+				__TempOprand __t = new __TempOprand(new __Temp("$v0"));
 				quad.add(new __Move(__t, new __Mem(b, i, new Int())));
 				quad.add(new __Move(new __Mem(a, i, new Int()), __t));
 			}

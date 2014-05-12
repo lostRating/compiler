@@ -1,6 +1,7 @@
 package compiler.main;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import compiler.Semantic.*;
 import compiler.Type.*;
 import compiler.Type.Void;
 import compiler.init.*;
+import compiler.allocate.*;
 
 public class main {
 	static public Table S = new Table();
@@ -50,13 +52,14 @@ public class main {
 				init.init();
 				a.checkSon();
 				a.showMips();
+				//allocate.toMips(a.quad);
 				if (mips)
 					init.printfs();
 				if (test)
 					System.exit(0);
 				//System.out.println("-------------------------ok-------------------------------");
 			}
-			catch (RecognitionException t)
+			catch (Exception t)
 			{
 				if (test)
 					System.exit(1);
