@@ -97,30 +97,61 @@ public class postfix extends root
 			
 			if (function.Name.equals("printf"))
 			{
-				/*if (lastString.equals("%d "))
+				//GXX_whiteSpace
+				//GXX_nNn
+				//1 int
+				//4 str
+				
+				if (lastString.equals("%d "))
 				{
+					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(1)));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(1)));
+					quad.add(new __Void("  syscall"));
 					
+					quad.add(new __Void ("  la $a0, GXX_whiteSpace"));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(4)));
+					quad.add(new __Void("  syscall"));
 				}
-				else*/ if (lastString.equals("%d"))
+				else if (lastString.equals("%d"))
 				{
 					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(1)));
 					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(1)));
 					quad.add(new __Void("  syscall"));
 				}
-				/*else if (lastString.equals("%d\n"))
+				else if (lastString.equals("%d\n"))
 				{
+					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(1)));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(1)));
+					quad.add(new __Void("  syscall"));
 					
+					quad.add(new __Void ("  la $a0, GXX_nNn"));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(4)));
+					quad.add(new __Void("  syscall"));
 				}
-				else if (lastString.equals("%c"))
+				/*else if (lastString.equals("%c"))
 				{
 					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(1)));
 					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(4)));
 					quad.add(new __Void("  syscall"));
 				}
-				else if (lastString.equals("%d %d\n"))
+				*/else if (lastString.equals("%d %d\n"))
 				{
+					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(1)));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(1)));
+					quad.add(new __Void("  syscall"));
 					
-				}*/
+					quad.add(new __Void ("  la $a0, GXX_whiteSpace"));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(4)));
+					quad.add(new __Void("  syscall"));
+					
+					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(2)));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(1)));
+					quad.add(new __Void("  syscall"));
+					
+					quad.add(new __Void ("  la $a0, GXX_nNn"));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(4)));
+					quad.add(new __Void("  syscall"));
+				}
 				else if (lastString.equals("%s"))
 				{
 					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(1)));

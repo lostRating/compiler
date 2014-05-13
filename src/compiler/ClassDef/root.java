@@ -54,6 +54,10 @@ public class root
 		for (int i = 0; i < data.size(); ++i)
 			System.out.println(data.get(i));
 		System.out.println("  GXX_initGP: .space 1000");
+		System.out.println("  GXX_whiteSpace: .asciiz \" \"");
+		System.out.println("  \t.align 2");
+		System.out.println("  GXX_nNn: .asciiz \" \"");
+		System.out.println("  \t.align 2");
 		System.out.println();
 		System.out.println(".text");
 	}
