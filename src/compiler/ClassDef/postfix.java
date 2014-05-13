@@ -95,23 +95,30 @@ public class postfix extends root
 				if (!typeVectorMatch(function.argumentType, returnVec)) throw new Exception("postfix 4");
 			}
 			
-			quad.add(new __Void("#call begin"));
-			
 			if (function.Name.equals("printf"))
 			{
-				for (int i = 0; i < returnVec.size(); ++i)
+				if (returnVec.size() > 1)
 				{
-					Type type2 = (Type)returnVec.get(i);
-					if (i == 0)
+					for (int i = 0; i < returnVec.size(); ++i)
 					{
-						quad.add(new __Move(new __Mem(__togp, 0, new Int()), tt.get(i)));
+						Type type2 = (Type)returnVec.get(i);
+						if (i == 0)
+						{
+							quad.add(new __Move(new __Mem(__togp, 0, new Int()), tt.get(i)));
+						}
+						else
+						{
+							quad.add(new __Move(new __Mem(__togp, i * 4, new Int()), tt.get(i).Val(quad, type2)));
+						}
 					}
-					else
-					{
-						quad.add(new __Move(new __Mem(__togp, i * 4, new Int()), tt.get(i).Val(quad, type2)));
-					}
+					quad.add(new __Void("  jal printf"));
 				}
-				quad.add(new __Void("  jal printf"));
+				else
+				{
+					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(0)));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(4)));
+					quad.add(new __Void("syscall"));
+				}
 			}
 			else if (function.Name.equals("malloc"))
 			{
@@ -153,7 +160,6 @@ public class postfix extends root
 			__TempOprand __t = new __TempOprand(new __Temp(""));
 			quad.add(new __Move(__t, new __TempOprand(new __Temp("$v0"))));
 			
-			quad.add(new __Void("#call end"));
 			returnVec.set(4, __t);
 		}
 		else if (son.s.equals("THREE"))

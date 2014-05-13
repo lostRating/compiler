@@ -45,6 +45,7 @@ public class main {
 	
 	static public int work(File file) throws RecognitionException, IOException, Exception {
 		try	{
+			long startTime = System.currentTimeMillis();
 			String s = AST.getTreeString(file);
 			root a = makeTree.getRoot(s);
 			try
@@ -54,11 +55,12 @@ public class main {
 				a.showMips();
 				//System.out.println(a.quad.size());
 				//allocate.toMips(a.quad);
+				long endTime = System.currentTimeMillis();
+				System.out.println("# " + (endTime - startTime) + "ms");
 				if (mips)
 					init.printfs();
 				if (test)
 					System.exit(0);
-				//System.out.println("-------------------------ok-------------------------------");
 			}
 			catch (Exception t)
 			{
