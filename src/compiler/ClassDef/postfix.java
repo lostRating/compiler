@@ -118,7 +118,7 @@ public class postfix extends root
 					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(1)));
 					quad.add(new __Void("  syscall"));
 				}
-				else if (lastString.equals("%d\n"))
+				else if (lastString.equals("%d\\n"))
 				{
 					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(1)));
 					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(1)));
@@ -134,7 +134,7 @@ public class postfix extends root
 					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(4)));
 					quad.add(new __Void("  syscall"));
 				}
-				*/else if (lastString.equals("%d %d\n"))
+				*/else if (lastString.equals("%d %d\\n"))
 				{
 					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(1)));
 					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(1)));

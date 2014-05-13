@@ -25,7 +25,7 @@ public class string extends root
 		
 		__TempOprand __t = new __TempOprand(new __Temp(""), 1);
 		
-		lastString = son.s;
+		lastString = son.s.substring(1, son.s.length() - 1);
 		
 		data.add("  " + l1.print() + ": " + ".asciiz " + son.s + "\n\t" + ".align 2");
 
