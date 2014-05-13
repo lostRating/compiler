@@ -26,14 +26,14 @@ malloc:
 printf:
 	subu 	$sp, $sp, 36 		# set up the stack frame,
 	sw 	$ra, 32($sp) 		# saving the local environment.
-	sw 	$fp, 28($sp)
-	sw 	$s0, 24($sp)
-	sw 	$s1, 20($sp)
-	sw 	$s2, 16($sp)
-	sw 	$s3, 12($sp)
-	sw 	$s4, 8($sp)
-	sw 	$s5, 4($sp)
-	sw 	$s6, 0($sp)
+	sw 	$t0, 28($sp)
+	#sw 	$s0, 24($sp)
+	#sw 	$s1, 20($sp)
+	#sw 	$s2, 16($sp)
+	#sw 	$s3, 12($sp)
+	#sw 	$s4, 8($sp)
+	#sw 	$s5, 4($sp)
+	#sw 	$s6, 0($sp)
 
 					# grab the arguments:
 	lw 	$s0, 0($gp) 		# fmt string
@@ -146,14 +146,14 @@ printf_perc: 				# deal with a %%:
 
 printf_end:
 	lw 	$ra, 32($sp) 		# restore the prior environment:
-	lw 	$fp, 28($sp)
-	lw 	$s0, 24($sp)
-	lw 	$s1, 20($sp)
-	lw 	$s2, 16($sp)
-	lw 	$s3, 12($sp)
-	lw 	$s4, 8($sp)
-	lw 	$s5, 4($sp)
-	lw 	$s6, 0($sp)
+	lw 	$t0, 28($sp)
+	#lw 	$s0, 24($sp)
+	#lw 	$s1, 20($sp)
+	#lw 	$s2, 16($sp)
+	#lw 	$s3, 12($sp)
+	#lw 	$s4, 8($sp)
+	#lw 	$s5, 4($sp)
+	#lw 	$s6, 0($sp)
 	addu 	$sp, $sp, 36 		# release the stack frame.
 	jr 	$ra 			# return.
 

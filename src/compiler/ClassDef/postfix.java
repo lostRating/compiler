@@ -97,7 +97,37 @@ public class postfix extends root
 			
 			if (function.Name.equals("printf"))
 			{
-				if (returnVec.size() > 1)
+				/*if (lastString.equals("%d "))
+				{
+					
+				}
+				else*/ if (lastString.equals("%d"))
+				{
+					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(1)));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(1)));
+					quad.add(new __Void("  syscall"));
+				}
+				/*else if (lastString.equals("%d\n"))
+				{
+					
+				}
+				else if (lastString.equals("%c"))
+				{
+					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(1)));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(4)));
+					quad.add(new __Void("  syscall"));
+				}
+				else if (lastString.equals("%d %d\n"))
+				{
+					
+				}*/
+				else if (lastString.equals("%s"))
+				{
+					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(1)));
+					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(4)));
+					quad.add(new __Void("  syscall"));
+				}
+				else if (returnVec.size() > 1)
 				{
 					for (int i = 0; i < returnVec.size(); ++i)
 					{
@@ -117,7 +147,7 @@ public class postfix extends root
 				{
 					quad.add(new __Move(new __TempOprand(new __Temp("$a0")), tt.get(0)));
 					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), new __Const(4)));
-					quad.add(new __Void("syscall"));
+					quad.add(new __Void("  syscall"));
 				}
 			}
 			else if (function.Name.equals("malloc"))

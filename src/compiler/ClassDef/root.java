@@ -20,6 +20,7 @@ public class root
 	static public int structOrArray = 0;
 	
 	static public __Label secret = null;
+	static public String lastString = null;
 	
 	public Vector<__Quad> quad = new Vector<__Quad>();
 	
@@ -55,13 +56,6 @@ public class root
 		System.out.println("  GXX_initGP: .space 1000");
 		System.out.println();
 		System.out.println(".text");
-		for (int i = 0; i < quad.size(); ++i)
-		{
-			if (!main.mips)
-				System.out.println(quad.get(i).print());
-			if (main.mips)
-				quad.get(i).pr();
-		}
 	}
 	
 	public void pullArg(__TempOprand tmp, Type type) throws Exception
