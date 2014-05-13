@@ -56,7 +56,7 @@ public class root
 		System.out.println("  GXX_initGP: .space 1000");
 		System.out.println("  GXX_whiteSpace: .asciiz \" \"");
 		System.out.println("  \t.align 2");
-		System.out.println("  GXX_nNn: .asciiz \" \"");
+		System.out.println("  GXX_nNn: .asciiz \"\\n\"");
 		System.out.println("  \t.align 2");
 		System.out.println();
 		System.out.println(".text");
