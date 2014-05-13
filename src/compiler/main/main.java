@@ -62,7 +62,7 @@ public class main {
 				if (test)
 					System.exit(0);
 			}
-			catch (Exception t)
+			catch (RecognitionException t)
 			{
 				if (test)
 					System.exit(1);

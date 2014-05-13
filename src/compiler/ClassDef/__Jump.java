@@ -8,8 +8,6 @@ public class __Jump extends __Quad {
 	}
 	@Override
 	public String print() {
-		if (label.name.equals("$ra"))
-			return "  jr $ra";
 		return "  b " + label.print();
 	}
 	@Override

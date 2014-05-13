@@ -33,7 +33,7 @@ public class jump_statement extends root
 				else
 					quad.add(new __Move(new __TempOprand(new __Temp("$v0")), __t));
 				quad.add(new __Return(main.func));
-				quad.add(new __Jump(new __Label("$ra")));
+				quad.add(new __Void("  jr $ra"));
 			}
 			if (main.func == null || !typeToType(main.func.returnType, type))
 				throw new Exception("jump_statement 2");

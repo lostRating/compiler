@@ -85,7 +85,7 @@ public class function_definition extends root
 		
 		endScope("function");
 		
-		quad.add(new __Jump(new __Label("$ra")));
+		quad.add(new __Void("  jr $ra"));
 		quad.add(new __Void(""));
 		
 		main.func = null;
