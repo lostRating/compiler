@@ -149,8 +149,8 @@ public class activeAnalyze
 	
 	static public Vector<Integer> before[] = new Vector[5500];
 	static public Vector<Integer> after[] = new Vector[5500];
-	static String reg[] = {"$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$t8", "$t9"};
-	static int regNum = 10;
+	static String reg[] = {"$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$t8", "$t9", "$s4"};
+	static int regNum = 11;
 	static int use[] = new int[regNum];
 	
 	static public void interval(Vector<__Quad> quad, int left, int right) throws Exception
