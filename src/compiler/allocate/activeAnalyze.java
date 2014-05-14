@@ -190,7 +190,10 @@ public class activeAnalyze
 			int rr = RR.get(a);
 			
 			if (ll == 1000000000) continue;
-			if (register.get(a).temp.danger) continue;
+			if (register.get(a).temp.danger)
+			{
+				continue;
+			}
 			
 			before[ll].add(a);
 			after[rr].add(a);
