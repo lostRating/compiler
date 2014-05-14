@@ -90,20 +90,20 @@ printf_pre:
 	sub $s5, $s5, 48
 	add $s0, $s0, 2
 	
-	li $t1, 0
-	move $t2, $s1
+	li $a1, 0
+	move $a2, $s1
 printf_digits_begin:
-	beqz $t2, printf_digits_end
-	add $t1, $t1, 1
-	div $t2, $t2, 10
+	beqz $a2, printf_digits_end
+	add $a1, $a1, 1
+	div $a2, $a2, 10
 	b printf_digits_begin
 	
 printf_digits_end:
-	sub $t1, $s5, $t1
+	sub $a1, $s5, $a1
 	
 printf_pre_output_zero_begin:
-	beqz $t1, printf_pre_output_zero_end
-	sub $t1, $t1, 1
+	beqz $a1, printf_pre_output_zero_end
+	sub $a1, $a1, 1
 	li $a0, 0
 	li $v0, 1
 	syscall
