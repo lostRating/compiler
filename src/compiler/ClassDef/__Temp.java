@@ -18,13 +18,14 @@ public class __Temp {
 				main.Offset.push(offset + 4);
 			//}
 		}
+		copy = num;
 	}
 	
 	public String print() {
 		if (name.length() != 0 && name.charAt(0) == '$') return name;
 		return "t" + num;
 	}
-	public int num = 0, offset, nowNum;
+	public int num = 0, offset, nowNum, copy;
 	public String name = "";
 	public static int count = 0;
 	public boolean danger = false;
