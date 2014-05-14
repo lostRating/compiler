@@ -204,14 +204,15 @@ public class activeAnalyze
 				allocate(num);
 			}
 			
-			if (!main.mips)
-				System.out.println(quad.get(i).print());
-			if (main.mips)
-				quad.get(i).pr();
-			
 			for (int j = 0; j < after[i].size(); ++j)
 			{
 				int num = after[i].get(j);
+				for (int k = 0; k < regNum; ++k)
+					if  (use[k] == num)
+					{
+						use[k] = -1;
+						break;
+					}
 			}
 		}
 	}
@@ -232,9 +233,6 @@ public class activeAnalyze
 		if (j == -1) return;
 		if (RR.get(num) >= RR.get(use[j])) return;
 
-		if (!main.mips)
-			System.out.print("#");
-		System.out.println("  sw " + reg[j] + ", " + register.get(use[j]).temp.offset + "($sp)");
 		gxxOut(use[j]);
 		gxxIn(j, num);
 	}
@@ -244,9 +242,6 @@ public class activeAnalyze
 		use[i] = num;
 		register.get(num).temp.num = 0;
 		register.get(num).temp.name = reg[i];
-		if (!main.mips)
-			System.out.print("#");
-		System.out.println("  lw " + reg[i] + ", " + register.get(num).temp.offset + "($sp)");
 	}
 	
 	static public void gxxOut(int num)
