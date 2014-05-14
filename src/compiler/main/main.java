@@ -52,7 +52,8 @@ public class main {
 			{
 				init.init();
 				a.checkSon();
-				//a.showMips();
+				if (mips)
+					a.showMips();
 				allocate.toMips(a.quad);
 				long endTime = System.currentTimeMillis();
 				System.out.println("# " + (endTime - startTime) + "ms");
