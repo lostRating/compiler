@@ -13,7 +13,7 @@ public class optimize
 		for (int i = left; i <= right; ++i)
 		{
 			__TempOprand __t = quad.get(i).def();
-			if (__t != null && activeAnalyze.out[i].get(__t.temp.copy) == null)
+			if (__t != null && activeAnalyze.out[i].get(__t.temp.copy) == null && !__t.temp.danger)
 			{
 				continue;
 			}
