@@ -326,6 +326,6 @@ public class activeAnalyze
 		iteration(quad, left, right);
 		interval(quad, left, right);
 		Vector<__Quad> q = optimize.work(quad, left, right);
-		print(quad, 0, quad.size() - 1);
+		print(q, 0, q.size() - 1);
 	}
 }
