@@ -43,7 +43,7 @@ printf:
 	lw  $s7, 16($gp)		# arg4 (optional)
 	lw  $a3, 20($gp)		# arg5 (optional)
 
-	li 	$s4, 0 			# set # of formats = 0
+	#li 	$s4, 0 			# set # of formats = 0
 	la 	$s6, printf_buf 	# set s6 = base of printf buffer.
 
 printf_loop: 				# process each character in the fmt:
@@ -66,7 +66,7 @@ printf_fmt:
 	lb 	$s5, 0($s0) 		# see what the fmt character is,
 	addu 	$s0, $s0, 1 		# and bump up the pointer.
 
-	beq 	$s4, 5, printf_loop 	# if we've already processed 3 args,
+	#beq 	$s4, 5, printf_loop 	# if we've already processed 3 args,
 					# then *ignore* this fmt.
 	beq $s5, '0', printf_pre
 	beq 	$s5, 'd', printf_int 	# if 'd', print as a decimal integer.
@@ -81,7 +81,7 @@ printf_shift_args: 			# shift over the fmt args,
 	move $s3, $s7 # $s3 = $s7
 	move $s7, $a3
 
-	add 	$s4, $s4, 1 		# increment # of args processed.
+	#add 	$s4, $s4, 1 		# increment # of args processed.
 
 	b 	printf_loop 		# and continue the main loop.
 	
