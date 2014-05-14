@@ -25,7 +25,7 @@ public class __Temp {
 		return "t" + num;
 	}
 	public int num = 0, offset, nowNum;
-	String name = "";
+	public String name = "";
 	public static int count = 0;
 	public boolean danger = false;
 	

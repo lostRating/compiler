@@ -190,6 +190,7 @@ public class activeAnalyze
 			int rr = RR.get(a);
 			
 			if (ll == 1000000000) continue;
+			if (register.get(a).temp.danger) continue;
 			
 			before[ll].add(a);
 			after[rr].add(a);
@@ -200,21 +201,64 @@ public class activeAnalyze
 			for (int j = 0; j < before[i].size(); ++j)
 			{
 				int num = before[i].get(j);
-				for (int k = 0; k < regNum; ++k)
-				{
-					//if ()
-				}
+				allocate(num);
 			}
 			
-			//begin
-			
-			//end
+			if (!main.mips)
+				System.out.println(quad.get(i).print());
+			if (main.mips)
+				quad.get(i).pr();
 			
 			for (int j = 0; j < after[i].size(); ++j)
 			{
-				
+				int num = after[i].get(j);
 			}
 		}
+	}
+	
+	static public void allocate(int num)
+	{
+		int j = -1;
+		for (int i = 0; i < regNum; ++i)
+		{
+			if (use[i] == -1)
+			{
+				gxxIn(i, num);
+				return;
+			}
+			if (j == -1 || RR.get(use[i]) > RR.get(use[j]))
+				j = i;
+		}
+		if (j == -1) return;
+		if (RR.get(num) >= RR.get(use[j])) return;
+
+		if (!main.mips)
+			System.out.print("#");
+		System.out.println("  sw " + reg[j] + ", " + register.get(use[j]).temp.offset + "($sp)");
+		gxxOut(use[j]);
+		gxxIn(j, num);
+	}
+	
+	static public void gxxIn(int i, int num)
+	{
+		use[i] = num;
+		register.get(num).temp.num = 0;
+		register.get(num).temp.name = reg[i];
+		if (!main.mips)
+			System.out.print("#");
+		System.out.println("  lw " + reg[i] + ", " + register.get(num).temp.offset + "($sp)");
+	}
+	
+	static public void gxxOut(int num)
+	{
+		for (int k = 0; k < regNum; ++k)
+			if  (use[k] == num)
+			{
+				use[k] = -1;
+				break;
+			}
+		register.get(num).temp.num = num;
+		register.get(num).temp.name = "";
 	}
 	
 	static public void functionAnalyze(Vector<__Quad> quad, int left, int right) throws Exception

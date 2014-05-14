@@ -69,18 +69,32 @@ public class function_definition extends root
 		
 		int ttt = main.Offset.peek();
 		
-		type.size = ttt + 16;
+		type.size = ttt + 44;
 		
-		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 12, new Int()), new __TempOprand(new __Temp("$s2"))),  1);
-		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 8, new Int()), new __TempOprand(new __Temp("$s1"))),  1);
-		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 4, new Int()), new __TempOprand(new __Temp("$s0"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 40, new Int()), new __TempOprand(new __Temp("$t9"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 36, new Int()), new __TempOprand(new __Temp("$t8"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 32, new Int()), new __TempOprand(new __Temp("$t7"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 28, new Int()), new __TempOprand(new __Temp("$t6"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 24, new Int()), new __TempOprand(new __Temp("$t5"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 20, new Int()), new __TempOprand(new __Temp("$t4"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 16, new Int()), new __TempOprand(new __Temp("$t3"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 12, new Int()), new __TempOprand(new __Temp("$t2"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 8, new Int()), new __TempOprand(new __Temp("$t1"))),  1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 4, new Int()), new __TempOprand(new __Temp("$t0"))),  1);
 		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 0, new Int()), new __TempOprand(new __Temp("$ra"))),  1);
 		quad.insertElementAt(new __BinOp(__tosp, __tosp, new __Const(-type.size), "+"), 1);
 		
 		quad.add(new __Move(new __TempOprand(new __Temp("$ra")), new __Mem(__tosp, ttt + 0, new Int())));
-		quad.add(new __Move(new __TempOprand(new __Temp("$s0")),  new __Mem(__tosp, ttt + 4, new Int())));
-		quad.add(new __Move(new __TempOprand(new __Temp("$s1")), new __Mem(__tosp, ttt + 8, new Int())));
-		quad.add(new __Move(new __TempOprand(new __Temp("$s2")),  new __Mem(__tosp, ttt + 12, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$t0")), new __Mem(__tosp, ttt + 4, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$t1")), new __Mem(__tosp, ttt + 8, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$t2")), new __Mem(__tosp, ttt + 12, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$t3")), new __Mem(__tosp, ttt + 16, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$t4")), new __Mem(__tosp, ttt + 20, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$t5")), new __Mem(__tosp, ttt + 24, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$t6")), new __Mem(__tosp, ttt + 28, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$t7")), new __Mem(__tosp, ttt + 32, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$t8")), new __Mem(__tosp, ttt + 36, new Int())));
+		quad.add(new __Move(new __TempOprand(new __Temp("$t9")), new __Mem(__tosp, ttt + 40, new Int())));
 		quad.add(new __BinOp(__tosp, __tosp, new __Const(type.size), "+"));
 		
 		endScope("function");
