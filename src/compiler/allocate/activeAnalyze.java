@@ -8,6 +8,8 @@ import java.util.Vector;
 import compiler.ClassDef.__Quad;
 import compiler.main.main;
 import compiler.ClassDef.*;
+import compiler.Semantic.Symbol;
+import compiler.Type.*;
 
 public class activeAnalyze
 {
@@ -150,7 +152,8 @@ public class activeAnalyze
 	static public Vector<Integer> before[] = new Vector[5500];
 	static public Vector<Integer> after[] = new Vector[5500];
 	static String reg[] = {"$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$t8", "$t9", "$s4"};
-	static int regNum = 11;
+	public static int regNum = 11;
+	static public int useReg[] = new int[regNum];
 	static int use[] = new int[regNum];
 	
 	static public void interval(Vector<__Quad> quad, int left, int right) throws Exception
@@ -161,7 +164,10 @@ public class activeAnalyze
 			after[i] = new Vector<Integer>();
 		}
 		for (int i = 0; i < regNum; ++i)
+		{
 			use[i] = -1;
+			useReg[i] = 0;
+		}
 		
 		for (int i = left; i < right; ++i)
 		{
@@ -242,6 +248,7 @@ public class activeAnalyze
 	
 	static public void gxxIn(int i, int num)
 	{
+		useReg[i] = 1;
 		use[i] = num;
 		register.get(num).temp.num = 0;
 		register.get(num).temp.name = reg[i];
@@ -259,10 +266,65 @@ public class activeAnalyze
 		register.get(num).temp.name = "";
 	}
 	
+	static public void print(Vector<__Quad> quad, int left, int right) throws Exception
+	{
+		if (!main.mips) System.out.println(quad.get(left).print());
+		else quad.get(left).pr();
+		
+		String s = ((__LabelQuad)quad.get(left)).label.copy;
+		Super tmp = (Super) main.F.get(Symbol.symbol(s));
+		Function func = (Function)tmp.type;
+
+		System.out.println("  add $sp, $sp, -" + func.size);
+		System.out.println("  sw $ra, " + (func.size - 48) + "($sp)");
+		if (!s.equals("main"))
+		{
+			if (activeAnalyze.useReg[0] == 1) System.out.println("  sw $t0, " + (func.size - 44) + "($sp)");
+			if (activeAnalyze.useReg[1] == 1) System.out.println("  sw $t1, " + (func.size - 40) + "($sp)");
+			if (activeAnalyze.useReg[2] == 1) System.out.println("  sw $t2, " + (func.size - 36) + "($sp)");
+			if (activeAnalyze.useReg[3] == 1) System.out.println("  sw $t3, " + (func.size - 32) + "($sp)");
+			if (activeAnalyze.useReg[4] == 1) System.out.println("  sw $t4, " + (func.size - 28) + "($sp)");
+			if (activeAnalyze.useReg[5] == 1) System.out.println("  sw $t5, " + (func.size - 24) + "($sp)");
+			if (activeAnalyze.useReg[6] == 1) System.out.println("  sw $t6, " + (func.size - 20) + "($sp)");
+			if (activeAnalyze.useReg[7] == 1) System.out.println("  sw $t7, " + (func.size - 16) + "($sp)");
+			if (activeAnalyze.useReg[8] == 1) System.out.println("  sw $t8, " + (func.size - 12) + "($sp)");
+			if (activeAnalyze.useReg[9] == 1) System.out.println("  sw $t9, " + (func.size - 8) + "($sp)");
+			if (activeAnalyze.useReg[10] == 1) System.out.println("  sw $s4, " + (func.size - 4) + "($sp)");
+		}
+		
+		for (int i = left + 1; i < right; ++i)
+		{			
+			if (!main.mips)
+				System.out.println(quad.get(i).print());
+			if (main.mips)
+				quad.get(i).pr();
+		}
+
+		System.out.println("  lw $ra, " + (func.size - 48) + "($sp)");
+		if (!s.equals("main"))
+		{
+			if (activeAnalyze.useReg[0] == 1) System.out.println("  lw $t0, " + (func.size - 44) + "($sp)");
+			if (activeAnalyze.useReg[1] == 1) System.out.println("  lw $t1, " + (func.size - 40) + "($sp)");
+			if (activeAnalyze.useReg[2] == 1) System.out.println("  lw $t2, " + (func.size - 36) + "($sp)");
+			if (activeAnalyze.useReg[3] == 1) System.out.println("  lw $t3, " + (func.size - 32) + "($sp)");
+			if (activeAnalyze.useReg[4] == 1) System.out.println("  lw $t4, " + (func.size - 28) + "($sp)");
+			if (activeAnalyze.useReg[5] == 1) System.out.println("  lw $t5, " + (func.size - 24) + "($sp)");
+			if (activeAnalyze.useReg[6] == 1) System.out.println("  lw $t6, " + (func.size - 20) + "($sp)");
+			if (activeAnalyze.useReg[7] == 1) System.out.println("  lw $t7, " + (func.size - 16) + "($sp)");
+			if (activeAnalyze.useReg[8] == 1) System.out.println("  lw $t8, " + (func.size - 12) + "($sp)");
+			if (activeAnalyze.useReg[9] == 1) System.out.println("  lw $t9, " + (func.size - 8) + "($sp)");
+			if (activeAnalyze.useReg[10] == 1) System.out.println("  lw $s4, " + (func.size - 4) + "($sp)");
+		}
+		System.out.println("  add $sp, $sp, " + func.size);
+		System.out.println("  jr $ra");
+		System.out.println();
+	}
+	
 	static public void functionAnalyze(Vector<__Quad> quad, int left, int right) throws Exception
 	{
 		init(quad, left, right);
 		iteration(quad, left, right);
 		interval(quad, left, right);
+		print(quad, left, right);
 	}
 }

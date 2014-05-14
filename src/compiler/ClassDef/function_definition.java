@@ -71,7 +71,7 @@ public class function_definition extends root
 		
 		type.size = ttt + 48;
 		
-		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 44, new Int()), new __TempOprand(new __Temp("$s4"))),  1);
+		/*quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 44, new Int()), new __TempOprand(new __Temp("$s4"))),  1);
 		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 40, new Int()), new __TempOprand(new __Temp("$t9"))),  1);
 		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 36, new Int()), new __TempOprand(new __Temp("$t8"))),  1);
 		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 32, new Int()), new __TempOprand(new __Temp("$t7"))),  1);
@@ -82,10 +82,10 @@ public class function_definition extends root
 		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 12, new Int()), new __TempOprand(new __Temp("$t2"))),  1);
 		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 8, new Int()), new __TempOprand(new __Temp("$t1"))),  1);
 		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 4, new Int()), new __TempOprand(new __Temp("$t0"))),  1);
-		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 0, new Int()), new __TempOprand(new __Temp("$ra"))),  1);
-		quad.insertElementAt(new __BinOp(__tosp, __tosp, new __Const(-type.size), "+"), 1);
+		quad.insertElementAt(new __Move(new __Mem(__tosp, ttt + 0, new Int()), new __TempOprand(new __Temp("$ra"))),  1);*/
+		//quad.insertElementAt(new __BinOp(__tosp, __tosp, new __Const(-type.size), "+"), 1);
 		
-		quad.add(new __Move(new __TempOprand(new __Temp("$ra")), new __Mem(__tosp, ttt + 0, new Int())));
+		/*quad.add(new __Move(new __TempOprand(new __Temp("$ra")), new __Mem(__tosp, ttt + 0, new Int())));
 		quad.add(new __Move(new __TempOprand(new __Temp("$t0")), new __Mem(__tosp, ttt + 4, new Int())));
 		quad.add(new __Move(new __TempOprand(new __Temp("$t1")), new __Mem(__tosp, ttt + 8, new Int())));
 		quad.add(new __Move(new __TempOprand(new __Temp("$t2")), new __Mem(__tosp, ttt + 12, new Int())));
@@ -96,12 +96,12 @@ public class function_definition extends root
 		quad.add(new __Move(new __TempOprand(new __Temp("$t7")), new __Mem(__tosp, ttt + 32, new Int())));
 		quad.add(new __Move(new __TempOprand(new __Temp("$t8")), new __Mem(__tosp, ttt + 36, new Int())));
 		quad.add(new __Move(new __TempOprand(new __Temp("$t9")), new __Mem(__tosp, ttt + 40, new Int())));
-		quad.add(new __Move(new __TempOprand(new __Temp("$s4")), new __Mem(__tosp, ttt + 44, new Int())));
-		quad.add(new __BinOp(__tosp, __tosp, new __Const(type.size), "+"));
+		quad.add(new __Move(new __TempOprand(new __Temp("$s4")), new __Mem(__tosp, ttt + 44, new Int())));*/
+		//quad.add(new __BinOp(__tosp, __tosp, new __Const(type.size), "+"));
 		
 		endScope("function");
 		
-		quad.add(new __Void("  jr $ra"));
+		//quad.add(new __Void("  jr $ra"));
 		quad.add(new __Void(""));
 		
 		main.func = null;

@@ -1,7 +1,6 @@
 package compiler.main;
 
 import java.io.File;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,6 +13,7 @@ import java.util.Vector;
 import org.antlr.runtime.RecognitionException;
 
 //import com.sun.org.apache.xml.internal.security.Init;
+
 
 import compiler.ClassDef.*;
 import compiler.Semantic.Table;
@@ -37,7 +37,7 @@ public class main {
 	static public Type GXX_VOID_STAR = new Pointer(GXX_VOID, "GXX_VOID_STAR");
 	
 	static public boolean mips = true;
-	static public boolean test = true;
+	static public boolean test = false;
 	
 	static public Stack<Integer> Offset = new Stack<Integer>();
 	static public Stack<__Label> l1 = new Stack<__Label>();
@@ -52,8 +52,9 @@ public class main {
 			{
 				init.init();
 				a.checkSon();
-				if (mips) a.showMips();
-				allocate.toMips(a.quad);
+				if (mips)
+					a.showMips();
+				activeAnalyze.work(a.quad);
 				long endTime = System.currentTimeMillis();
 				System.out.println("# " + (endTime - startTime) + "ms");
 				if (mips)
