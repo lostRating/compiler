@@ -1,6 +1,8 @@
 package compiler.allocate;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Vector;
 
 import compiler.ClassDef.__Quad;
@@ -9,8 +11,6 @@ import compiler.ClassDef.*;
 
 public class activeAnalyze
 {
-	static public Vector<Integer> pre[] = new Vector[5500];
-	
 	static public void work(Vector<__Quad> quad) throws Exception
 	{
 		for (int left = 0; left < quad.size();)
@@ -29,15 +29,28 @@ public class activeAnalyze
 		}
 	}
 	
-	static public void addEdge(Vector<__Quad> quad, int left, int right) throws Exception
+	static public Vector<Integer> pre[] = new Vector[5500];
+	static public HashMap<Integer, __TempOprand> in[] = new HashMap[5500];
+	static public HashMap<Integer, __TempOprand> out[] = new HashMap[5500];
+	static public int inNum[] = new int[5500];
+	static public int outNum[] = new int[5500];
+	static public HashMap<Integer, Integer> LL, RR;
+	static public HashMap<Integer, __TempOprand> register;
+	
+	static public void init(Vector<__Quad> quad, int left, int right) throws Exception
 	{
-		//init begin
 		HashMap<String, Integer> label = new HashMap<String, Integer>();
-		for (int i = left; i <= right; ++i)
-			pre[i] = new Vector<Integer>();
-		//init end
+		LL = new HashMap<Integer, Integer>();
+		RR = new HashMap<Integer, Integer>();
+		register = new HashMap<Integer, __TempOprand>();
 		
-		//Label begin
+		for (int i = left; i <= right; ++i)
+		{
+			pre[i] = new Vector<Integer>();
+			in[i] = new HashMap<Integer, __TempOprand>();
+			out[i] = new HashMap<Integer, __TempOprand>();
+		}
+		
 		for (int i = left; i < right; ++i)
 		{
 			if (quad.get(i) instanceof __LabelQuad)
@@ -46,12 +59,9 @@ public class activeAnalyze
 				label.put(tmp, i);
 			}
 		}
-		//Label end
 		
-		//Jump & Branch begin
-		/*for (int i = left; i < right; ++i)
+		for (int i = left; i < right; ++i)
 		{
-			//System.out.println(quad.get(i));
 			if (quad.get(i) instanceof __Jump)
 			{
 				String tmp = ((__Jump)quad.get(i)).label.print();
@@ -69,13 +79,148 @@ public class activeAnalyze
 			{
 				pre[i + 1].add(i);
 			}
-		}*/
-		//Jump & Branch end
+
+			//init in[i]
+			Vector<__TempOprand> tmp = quad.get(i).use();
+			for (int j = 0; j < tmp.size(); ++j)
+			{
+				__TempOprand b = tmp.get(j);
+				if (b == null) continue;
+				in[i].put(b.temp.num, b);
+				
+				if (b.temp.num == 0) throw new Exception("active Analyze 1");
+				
+				register.put(b.temp.num, b);
+				LL.put(b.temp.num, 1000000000);
+				RR.put(b.temp.num, -1000000000);
+			}
+			__TempOprand b = quad.get(i).def();
+			
+			if (b == null) continue;
+			if (b.temp.num == 0) throw new Exception("active Analyze 1");
+			
+			register.put(b.temp.num, b);
+			LL.put(b.temp.num, 1000000000);
+			RR.put(b.temp.num, -1000000000);
+		}
+	}
+	
+	static public void iteration(Vector<__Quad> quad, int left, int right) throws Exception
+	{
+		while (true)
+		{
+			for (int i = left; i < right; ++i)
+			{
+				inNum[i] = in[i].size();
+				outNum[i] = out[i].size();
+			}
+			
+			for (int i = right - 1; i >= left; --i)
+			{
+				Iterator iter = out[i].keySet().iterator();
+				while (iter.hasNext())
+				{
+					int a = (int) iter.next();
+					__TempOprand b = out[i].get(a);
+					__TempOprand c = quad.get(i).def();
+					if (c == null || (b.temp.num != c.temp.num))
+						in[i].put(a, b);
+				}
+				
+				iter = in[i].keySet().iterator();
+				while (iter.hasNext())
+				{
+					int a = (int) iter.next();
+					__TempOprand b = in[i].get(a);
+					for (int j = 0; j < pre[i].size(); ++j)
+						out[pre[i].get(j)].put(a, b);
+				}
+			}
+			
+			boolean flag = true;
+			for (int i = left; i < right; ++i)
+			{
+				if (inNum[i] != in[i].size()) flag = false;
+				if (outNum[i] != out[i].size()) flag = false;
+			}
+			if (flag) return;
+		}
+	}
+	
+	static public Vector<Integer> before[] = new Vector[5500];
+	static public Vector<Integer> after[] = new Vector[5500];
+	static String reg[] = {"$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$t8", "$t9"};
+	static int regNum = 10;
+	static int use[] = new int[regNum];
+	
+	static public void interval(Vector<__Quad> quad, int left, int right) throws Exception
+	{
+		for (int i = left; i <= right; ++i)
+		{
+			before[i] = new Vector<Integer>();
+			after[i] = new Vector<Integer>();
+		}
+		for (int i = 0; i < regNum; ++i)
+			use[i] = -1;
+		
+		for (int i = left; i < right; ++i)
+		{
+			Iterator iter = in[i].keySet().iterator();
+			while (iter.hasNext())
+			{
+				int a = (int) iter.next();
+				if (i < LL.get(a)) LL.put(a, i);
+				if (i > RR.get(a)) RR.put(a, i);
+			}
+			
+			iter = out[i].keySet().iterator();
+			while (iter.hasNext())
+			{
+				int a = (int) iter.next();
+				if (i < LL.get(a)) LL.put(a, i);
+				if (i > RR.get(a)) RR.put(a, i);
+			}
+		}
+		
+		Iterator iter = register.keySet().iterator();
+		while (iter.hasNext())
+		{
+			int a = (int) iter.next();
+			int ll = LL.get(a);
+			int rr = RR.get(a);
+			
+			if (ll == 1000000000) continue;
+			
+			before[ll].add(a);
+			after[rr].add(a);
+		}
+		
+		for (int i = left; i < right; ++i)
+		{
+			for (int j = 0; j < before[i].size(); ++j)
+			{
+				int num = before[i].get(j);
+				for (int k = 0; k < regNum; ++k)
+				{
+					//if ()
+				}
+			}
+			
+			//begin
+			
+			//end
+			
+			for (int j = 0; j < after[i].size(); ++j)
+			{
+				
+			}
+		}
 	}
 	
 	static public void functionAnalyze(Vector<__Quad> quad, int left, int right) throws Exception
 	{
-		addEdge(quad, left, right);
-		
+		init(quad, left, right);
+		iteration(quad, left, right);
+		interval(quad, left, right);
 	}
 }

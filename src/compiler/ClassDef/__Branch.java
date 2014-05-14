@@ -1,5 +1,7 @@
 package compiler.ClassDef;
 
+import java.util.Vector;
+
 public class __Branch extends __Quad {
 	public __Branch(){
 		
@@ -28,5 +30,15 @@ public class __Branch extends __Quad {
 			System.out.println("  beq "+ op.pr() + ", $0, " + label.print());
 		else
 			System.out.println("  bne "+ op.pr() + ", $0, " + label.print());
+	}
+	@Override
+	public __TempOprand def() throws Exception {
+		return null;
+	}
+	@Override
+	public Vector<__TempOprand> use() throws Exception {
+		Vector<__TempOprand> tmp = new Vector<__TempOprand>();
+		tmp.add(op.use());
+		return tmp;
 	}
 }

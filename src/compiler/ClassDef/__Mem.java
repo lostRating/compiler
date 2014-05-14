@@ -39,4 +39,14 @@ public class __Mem extends __Oprand {
 	public void store() {
 		base.store();
 	}
+
+	@Override
+	__TempOprand use() {
+		return base.use();
+	}
+	
+	@Override
+	__TempOprand def() throws Exception {
+		throw new Exception("__Mem use");
+	}
 }

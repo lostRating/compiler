@@ -57,4 +57,16 @@ public class __TempOprand extends __Oprand{
 			return;
 		System.out.println("  sw " + temp.pr() + ", " + temp.offset + "($sp)");
 	}
+	@Override
+	__TempOprand use()
+	{
+		if (temp.num == 0) return null;
+		return this;
+	}
+	@Override
+	__TempOprand def()
+	{
+		if (temp.num == 0) return null;
+		return this;
+	}
 }

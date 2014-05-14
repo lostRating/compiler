@@ -24,9 +24,10 @@ public class __Temp {
 		if (name.length() != 0 && name.charAt(0) == '$') return name;
 		return "t" + num;
 	}
-	int num = 0, offset, nowNum;
+	public int num = 0, offset, nowNum;
 	String name = "";
 	public static int count = 0;
+	public boolean danger = false;
 	
 	public String pr()
 	{

@@ -28,4 +28,12 @@ public class __LabelAddress extends __Oprand {
 	public void store() {
 		return; 
 	}
+	@Override
+	__TempOprand use(){
+		return null;
+	}
+	@Override
+	__TempOprand def() {
+		return null;
+	}
 }

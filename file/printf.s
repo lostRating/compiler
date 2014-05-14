@@ -26,7 +26,7 @@ malloc:
 printf:
 	subu 	$sp, $sp, 36 		# set up the stack frame,
 	sw 	$ra, 32($sp) 		# saving the local environment.
-	sw 	$t0, 28($sp)
+	#sw 	$a3, 28($sp)
 	#sw 	$s0, 24($sp)
 	#sw 	$s1, 20($sp)
 	#sw 	$s2, 16($sp)
@@ -41,7 +41,7 @@ printf:
 	lw 	$s2, 8($gp) 		# arg2 (optional)
 	lw 	$s3, 12($gp) 		# arg3 (optional)
 	lw  $s7, 16($gp)		# arg4 (optional)
-	lw  $t0, 20($gp)		# arg5 (optional)
+	lw  $a3, 20($gp)		# arg5 (optional)
 
 	li 	$s4, 0 			# set # of formats = 0
 	la 	$s6, printf_buf 	# set s6 = base of printf buffer.
@@ -79,7 +79,7 @@ printf_shift_args: 			# shift over the fmt args,
 	move $s1, $s2 # $s1 = $s2
 	move $s2, $s3 # $s2 = $s3
 	move $s3, $s7 # $s3 = $s7
-	move $s7, $t0
+	move $s7, $a3
 
 	add 	$s4, $s4, 1 		# increment # of args processed.
 
@@ -146,7 +146,7 @@ printf_perc: 				# deal with a %%:
 
 printf_end:
 	lw 	$ra, 32($sp) 		# restore the prior environment:
-	lw 	$t0, 28($sp)
+	#lw 	$a3, 28($sp)
 	#lw 	$s0, 24($sp)
 	#lw 	$s1, 20($sp)
 	#lw 	$s2, 16($sp)

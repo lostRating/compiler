@@ -1,5 +1,7 @@
 package compiler.ClassDef;
 
+import java.util.Vector;
+
 public class __Jump extends __Quad {
 
 	public __Label label;
@@ -14,5 +16,13 @@ public class __Jump extends __Quad {
 	public void pr()
 	{
 		System.out.println(print());
+	}
+	@Override
+	public __TempOprand def() throws Exception {
+		return null;
+	}
+	@Override
+	public Vector<__TempOprand> use() throws Exception {
+		return new Vector<__TempOprand>();
 	}
 }

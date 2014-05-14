@@ -358,6 +358,7 @@ public class root
 			
 			if (type instanceof Array || type instanceof Struct || __tt.pointer)
 			{
+				__tt.temp.danger = true;
 				quad.add(new __Move(__t, __tt));
 				vector.set(4, __t);
 				return vector;

@@ -1,5 +1,7 @@
 package compiler.ClassDef;
 
+import java.util.Vector;
+
 public class __Move extends __Quad {
 	
 	public __Oprand src;
@@ -45,5 +47,19 @@ public class __Move extends __Quad {
 			System.out.println("  move " + dst.pr() + ", " + src.pr());
 		
 		dst.store();
+	}
+	@Override
+	public __TempOprand def() throws Exception {
+		if (!(dst instanceof __Mem))
+			return dst.def();
+		return null;
+	}
+	@Override
+	public Vector<__TempOprand> use() throws Exception {
+		Vector<__TempOprand> tmp = new Vector<__TempOprand>();
+		tmp.add(src.use());
+		if (dst instanceof __Mem)
+			tmp.add(dst.use());
+		return tmp;
 	}
 }

@@ -1,5 +1,7 @@
 package compiler.ClassDef;
 
+import java.util.Vector;
+
 public class __BinOp extends __Quad {
 
 	public __Oprand left;
@@ -145,5 +147,16 @@ public class __BinOp extends __Quad {
 		left = l;
 		right = r;
 		op = o;
+	}
+	@Override
+	public __TempOprand def() throws Exception {
+		return dst.def();
+	}
+	@Override
+	public Vector<__TempOprand> use() throws Exception {
+		Vector<__TempOprand> tmp = new Vector<__TempOprand>();
+		tmp.add(left.use());
+		tmp.add(right.use());
+		return tmp;
 	}
 }

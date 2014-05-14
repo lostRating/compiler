@@ -8,8 +8,6 @@ import compiler.ClassDef.*;
 
 public class allocate
 {
-	static String register[] = {"$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$t8", "$t9"};
-	
 	static public void toMips(Vector<__Quad> quad) throws Exception
 	{
 		activeAnalyze.work(quad);

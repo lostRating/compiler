@@ -22,4 +22,12 @@ public class __Call extends __Quad {
 		//System.out.println(function.name);
 		System.out.println("  jal " + function.print());
 	}
+	@Override
+	public __TempOprand def() throws Exception {
+		return null;
+	}
+	@Override
+	public Vector<__TempOprand> use() throws Exception {
+		return new Vector<__TempOprand>();
+	}
 }
