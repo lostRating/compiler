@@ -78,7 +78,8 @@ public class optimize
 						if (__a.src instanceof __Const && __b.src instanceof __TempOprand &&
 							__a.def().temp.copy == ((__TempOprand) __b.src).temp.copy)
 						{
-							__b.src = __a.src;
+							if (__b.def() != null)
+								__b.src = __a.src;
 						}
 					}
 				}
