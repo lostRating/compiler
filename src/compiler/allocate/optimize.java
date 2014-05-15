@@ -57,7 +57,7 @@ public class optimize
 			{
 				__Move __a = (__Move) quad.get(i);
 				
-				for (int j = i + 1; j <= i + 10 && j < quad.size(); ++j)
+				for (int j = i + 1; j <= i + 10 && j <= right; ++j)
 				{
 					if (quad.get(j) instanceof __Branch) break;
 					if (quad.get(j) instanceof __Jump) break;

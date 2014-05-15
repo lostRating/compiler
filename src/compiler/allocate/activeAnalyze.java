@@ -326,19 +326,11 @@ public class activeAnalyze
 	
 	static public void functionAnalyze(Vector<__Quad> quad) throws Exception
 	{
-		int last = quad.size();
-		while (true)
-		{
-			quad = optimize.peepHole(quad, 0, quad.size() - 1);
-			init(quad, 0, quad.size() - 1);
-			iteration(quad, 0, quad.size() - 1);
-			quad = optimize.work(quad, 0, quad.size() - 1);
-			if (quad.size() == last) break;
-			last = quad.size();
-		}
+		quad = optimize.peepHole(quad, 0, quad.size() - 1);
 		init(quad, 0, quad.size() - 1);
 		iteration(quad, 0, quad.size() - 1);
 		interval(quad, 0, quad.size() - 1);
+		quad = optimize.work(quad, 0, quad.size() - 1);
 		
 		print(quad, 0, quad.size() - 1);
 	}
