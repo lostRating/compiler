@@ -15,8 +15,6 @@ public class activeAnalyze
 {
 	static public void work(Vector<__Quad> quad) throws Exception
 	{
-		quad = optimize.peepHole(quad);
-		
 		for (int left = 0; left < quad.size();)
 		{
 			int right = left;
@@ -27,7 +25,11 @@ public class activeAnalyze
 				++right;
 			}
 			
-			functionAnalyze(quad, left, right);
+			Vector<__Quad> q = new Vector<__Quad>();
+			for (int i = left; i <= right; ++i)
+				q.add(quad.get(i));
+			
+			functionAnalyze(q);
 			
 			left = right + 1;
 		}
@@ -322,18 +324,22 @@ public class activeAnalyze
 		System.out.println();
 	}
 	
-	static public void functionAnalyze(Vector<__Quad> quad, int left, int right) throws Exception
+	static public void functionAnalyze(Vector<__Quad> quad) throws Exception
 	{
-		init(quad, left, right);
-		iteration(quad, left, right);
-		interval(quad, left, right);
-		Vector<__Quad> q = optimize.work(quad, left, right);
+		int last = quad.size();
+		while (true)
+		{
+			quad = optimize.peepHole(quad, 0, quad.size() - 1);
+			init(quad, 0, quad.size() - 1);
+			iteration(quad, 0, quad.size() - 1);
+			quad = optimize.work(quad, 0, quad.size() - 1);
+			if (quad.size() == last) break;
+			last = quad.size();
+		}
+		init(quad, 0, quad.size() - 1);
+		iteration(quad, 0, quad.size() - 1);
+		interval(quad, 0, quad.size() - 1);
 		
-		/*int cnt = 0;
-		for (int i = 0; i < regNum; ++i)
-			if (useReg[i] == 1) ++cnt;
-		System.out.println(cnt);*/
-		
-		print(q, 0, q.size() - 1);
+		print(quad, 0, quad.size() - 1);
 	}
 }

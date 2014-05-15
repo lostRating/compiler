@@ -10,13 +10,9 @@ public class optimize
 	{
 		Vector<__Quad> q = new Vector<__Quad>();
 		
-		//System.out.println(quad.get(left).print() + left);
-		
 		for (int i = left; i <= right; ++i)
 		{
 			__TempOprand __t = quad.get(i).def();
-			//if (i == 109)
-			//	System.out.println(__t.temp.copy);
 			if (__t != null && activeAnalyze.out[i].get(__t.temp.copy) == null && !__t.temp.danger)
 			{
 				continue;
@@ -27,11 +23,11 @@ public class optimize
 		return q;
 	}
 	
-	public static Vector<__Quad> peepHole(Vector<__Quad> quad) throws Exception
+	public static Vector<__Quad> peepHole(Vector<__Quad> quad, int left, int right) throws Exception
 	{
 		Vector<__Quad> q = new Vector<__Quad>();
 		
-		for (int i = 0; i < quad.size(); ++i)
+		for (int i = left; i <= right; ++i)
 		{
 			if ((quad.get(i) instanceof __BinOp) && (quad.get(i + 1) instanceof __Branch))
 			{
@@ -83,7 +79,9 @@ public class optimize
 							__a.def().temp.copy == ((__TempOprand) __b.src).temp.copy)
 						{
 							if (__b.def() != null)
+							{
 								__b.src = __a.src;
+							}
 						}
 					}
 				}
