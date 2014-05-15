@@ -6,6 +6,7 @@ public class __Move extends __Quad {
 	
 	public __Oprand src;
 	public __Oprand dst;
+	public boolean special = false;
 	public __Move(__Oprand d, __Oprand s) {
 		dst = d;
 		src = s;
@@ -31,7 +32,11 @@ public class __Move extends __Quad {
 		
 		src.load();
 		
-		if (dst instanceof __Mem)
+		if (special)
+		{
+			System.out.println("  lw " + dst.pr() + ", " + src.pr() + "($0)");
+		}
+		else if (dst instanceof __Mem)
 		{
 			dst.load();
 			System.out.println("  sw " + src.pr() + ", " + dst.pr());

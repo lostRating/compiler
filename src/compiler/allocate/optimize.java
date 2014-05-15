@@ -23,7 +23,7 @@ public class optimize
 		return q;
 	}
 	
-	public static Vector<__Quad> seq_sne(Vector<__Quad> quad) throws Exception
+	public static Vector<__Quad> peepHole(Vector<__Quad> quad) throws Exception
 	{
 		Vector<__Quad> q = new Vector<__Quad>();
 		
@@ -52,6 +52,21 @@ public class optimize
 						__bb.op = __b.left;
 						__bb.op2 = __b.right;
 					}
+				}
+			}
+			else if ((quad.get(i) instanceof __Move) && (quad.get(i + 1) instanceof __Move))
+			{
+				q.add(quad.get(i));
+				
+				__Move __a = (__Move) quad.get(i);
+				__Move __b = (__Move) quad.get(i + 1);
+				
+				if (__a.src instanceof __LabelAddress && __b.src instanceof __Mem &&
+					__a.def().temp.copy == ((__Mem) __b.src).base.temp.copy)
+				{
+					__b.special = true;
+					__b.src = __a.src;
+					//System.out.println("!!!");
 				}
 			}
 			else

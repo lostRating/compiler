@@ -15,7 +15,7 @@ public class activeAnalyze
 {
 	static public void work(Vector<__Quad> quad) throws Exception
 	{
-		quad = optimize.seq_sne(quad);
+		quad = optimize.peepHole(quad);
 		
 		for (int left = 0; left < quad.size();)
 		{
