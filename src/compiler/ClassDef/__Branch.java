@@ -31,7 +31,15 @@ public class __Branch extends __Quad {
 		else if (num == 1)
 			System.out.println("  bne " + op.pr() + ", $0, " + label.print());
 		else if (num == 2)
+		{
+			op2.load();
 			System.out.println("  bne " + op.pr() + ", " + op2.pr() + ", " + label.print());
+		}
+		else if (num == 3)
+		{
+			op2.load();
+			System.out.println("  beq " + op.pr() + ", " + op2.pr() + ", " + label.print());
+		}
 	}
 	@Override
 	public __TempOprand def() throws Exception {

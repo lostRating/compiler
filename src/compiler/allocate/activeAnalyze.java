@@ -328,6 +328,12 @@ public class activeAnalyze
 		iteration(quad, left, right);
 		interval(quad, left, right);
 		Vector<__Quad> q = optimize.work(quad, left, right);
+		
+		/*int cnt = 0;
+		for (int i = 0; i < regNum; ++i)
+			if (useReg[i] == 1) ++cnt;
+		System.out.println(cnt);*/
+		
 		print(q, 0, q.size() - 1);
 	}
 }

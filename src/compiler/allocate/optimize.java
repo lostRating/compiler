@@ -44,6 +44,15 @@ public class optimize
 						__bb.op2 = __b.right;
 					}
 				}
+				if (__b.op.equals("!=") && __b.def().temp.copy == ((__TempOprand)__bb.op).temp.copy)
+				{
+					if (__bb.num == 0)
+					{
+						__bb.num = 3;
+						__bb.op = __b.left;
+						__bb.op2 = __b.right;
+					}
+				}
 			}
 			else
 				q.add(quad.get(i));
