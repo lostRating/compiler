@@ -60,13 +60,13 @@ public class __TempOprand extends __Oprand{
 	@Override
 	__TempOprand use()
 	{
-		if (temp.num == 0) return null;
+		if (temp.copy == 0) return null;
 		return this;
 	}
 	@Override
 	__TempOprand def()
 	{
-		if (temp.num == 0) return null;
+		if (temp.copy == 0) return null;
 		return this;
 	}
 }

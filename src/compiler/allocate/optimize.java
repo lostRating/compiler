@@ -10,9 +10,13 @@ public class optimize
 	{
 		Vector<__Quad> q = new Vector<__Quad>();
 		
+		//System.out.println(quad.get(left).print() + left);
+		
 		for (int i = left; i <= right; ++i)
 		{
 			__TempOprand __t = quad.get(i).def();
+			//if (i == 109)
+			//	System.out.println(__t.temp.copy);
 			if (__t != null && activeAnalyze.out[i].get(__t.temp.copy) == null && !__t.temp.danger)
 			{
 				continue;

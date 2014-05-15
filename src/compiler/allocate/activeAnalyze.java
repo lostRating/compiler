@@ -238,7 +238,7 @@ public class activeAnalyze
 				gxxIn(i, num);
 				return;
 			}
-			if (j == -1 || RR.get(use[i]) > RR.get(use[j]))
+			if (j == -1 || (RR.get(use[i]) > RR.get(use[j])))
 				j = i;
 		}
 		if (j == -1) return;
