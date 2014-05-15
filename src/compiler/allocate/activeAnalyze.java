@@ -15,6 +15,8 @@ public class activeAnalyze
 {
 	static public void work(Vector<__Quad> quad) throws Exception
 	{
+		quad = optimize.seq_sne(quad);
+		
 		for (int left = 0; left < quad.size();)
 		{
 			int right = left;
@@ -279,17 +281,17 @@ public class activeAnalyze
 		System.out.println("  sw $ra, " + (func.size - 48) + "($sp)");
 		if (!s.equals("main"))
 		{
-			if (activeAnalyze.useReg[0] == 1) System.out.println("  sw $t0, " + (func.size - 44) + "($sp)");
-			if (activeAnalyze.useReg[1] == 1) System.out.println("  sw $t1, " + (func.size - 40) + "($sp)");
-			if (activeAnalyze.useReg[2] == 1) System.out.println("  sw $t2, " + (func.size - 36) + "($sp)");
-			if (activeAnalyze.useReg[3] == 1) System.out.println("  sw $t3, " + (func.size - 32) + "($sp)");
-			if (activeAnalyze.useReg[4] == 1) System.out.println("  sw $t4, " + (func.size - 28) + "($sp)");
-			if (activeAnalyze.useReg[5] == 1) System.out.println("  sw $t5, " + (func.size - 24) + "($sp)");
-			if (activeAnalyze.useReg[6] == 1) System.out.println("  sw $t6, " + (func.size - 20) + "($sp)");
-			if (activeAnalyze.useReg[7] == 1) System.out.println("  sw $t7, " + (func.size - 16) + "($sp)");
-			if (activeAnalyze.useReg[8] == 1) System.out.println("  sw $t8, " + (func.size - 12) + "($sp)");
-			if (activeAnalyze.useReg[9] == 1) System.out.println("  sw $t9, " + (func.size - 8) + "($sp)");
-			if (activeAnalyze.useReg[10] == 1) System.out.println("  sw $s4, " + (func.size - 4) + "($sp)");
+			if (useReg[0] == 1) System.out.println("  sw $t0, " + (func.size - 44) + "($sp)");
+			if (useReg[1] == 1) System.out.println("  sw $t1, " + (func.size - 40) + "($sp)");
+			if (useReg[2] == 1) System.out.println("  sw $t2, " + (func.size - 36) + "($sp)");
+			if (useReg[3] == 1) System.out.println("  sw $t3, " + (func.size - 32) + "($sp)");
+			if (useReg[4] == 1) System.out.println("  sw $t4, " + (func.size - 28) + "($sp)");
+			if (useReg[5] == 1) System.out.println("  sw $t5, " + (func.size - 24) + "($sp)");
+			if (useReg[6] == 1) System.out.println("  sw $t6, " + (func.size - 20) + "($sp)");
+			if (useReg[7] == 1) System.out.println("  sw $t7, " + (func.size - 16) + "($sp)");
+			if (useReg[8] == 1) System.out.println("  sw $t8, " + (func.size - 12) + "($sp)");
+			if (useReg[9] == 1) System.out.println("  sw $t9, " + (func.size - 8) + "($sp)");
+			if (useReg[10] == 1) System.out.println("  sw $s4, " + (func.size - 4) + "($sp)");
 		}
 		
 		for (int i = left + 1; i < right; ++i)
@@ -303,17 +305,17 @@ public class activeAnalyze
 		System.out.println("  lw $ra, " + (func.size - 48) + "($sp)");
 		if (!s.equals("main"))
 		{
-			if (activeAnalyze.useReg[0] == 1) System.out.println("  lw $t0, " + (func.size - 44) + "($sp)");
-			if (activeAnalyze.useReg[1] == 1) System.out.println("  lw $t1, " + (func.size - 40) + "($sp)");
-			if (activeAnalyze.useReg[2] == 1) System.out.println("  lw $t2, " + (func.size - 36) + "($sp)");
-			if (activeAnalyze.useReg[3] == 1) System.out.println("  lw $t3, " + (func.size - 32) + "($sp)");
-			if (activeAnalyze.useReg[4] == 1) System.out.println("  lw $t4, " + (func.size - 28) + "($sp)");
-			if (activeAnalyze.useReg[5] == 1) System.out.println("  lw $t5, " + (func.size - 24) + "($sp)");
-			if (activeAnalyze.useReg[6] == 1) System.out.println("  lw $t6, " + (func.size - 20) + "($sp)");
-			if (activeAnalyze.useReg[7] == 1) System.out.println("  lw $t7, " + (func.size - 16) + "($sp)");
-			if (activeAnalyze.useReg[8] == 1) System.out.println("  lw $t8, " + (func.size - 12) + "($sp)");
-			if (activeAnalyze.useReg[9] == 1) System.out.println("  lw $t9, " + (func.size - 8) + "($sp)");
-			if (activeAnalyze.useReg[10] == 1) System.out.println("  lw $s4, " + (func.size - 4) + "($sp)");
+			if (useReg[0] == 1) System.out.println("  lw $t0, " + (func.size - 44) + "($sp)");
+			if (useReg[1] == 1) System.out.println("  lw $t1, " + (func.size - 40) + "($sp)");
+			if (useReg[2] == 1) System.out.println("  lw $t2, " + (func.size - 36) + "($sp)");
+			if (useReg[3] == 1) System.out.println("  lw $t3, " + (func.size - 32) + "($sp)");
+			if (useReg[4] == 1) System.out.println("  lw $t4, " + (func.size - 28) + "($sp)");
+			if (useReg[5] == 1) System.out.println("  lw $t5, " + (func.size - 24) + "($sp)");
+			if (useReg[6] == 1) System.out.println("  lw $t6, " + (func.size - 20) + "($sp)");
+			if (useReg[7] == 1) System.out.println("  lw $t7, " + (func.size - 16) + "($sp)");
+			if (useReg[8] == 1) System.out.println("  lw $t8, " + (func.size - 12) + "($sp)");
+			if (useReg[9] == 1) System.out.println("  lw $t9, " + (func.size - 8) + "($sp)");
+			if (useReg[10] == 1) System.out.println("  lw $s4, " + (func.size - 4) + "($sp)");
 		}
 		System.out.println("  add $sp, $sp, " + func.size);
 		System.out.println("  jr $ra");

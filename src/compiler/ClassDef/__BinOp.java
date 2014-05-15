@@ -44,9 +44,13 @@ public class __BinOp extends __Quad {
 		else if (op.equals(">>"))
 			s += "  srl ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals("=="))
+		{
 			s += "  seq ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		}
 		else if (op.equals("!="))
+		{
 			s += "  sne ";// + dst.print() + ", " + left.print() + ", " + right.print();
+		}
 		else if (op.equals(">"))
 			s += "  sgt ";// + dst.print() + ", " + left.print() + ", " + right.print();
 		else if (op.equals(">="))

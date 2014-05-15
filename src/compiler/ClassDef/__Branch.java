@@ -11,7 +11,7 @@ public class __Branch extends __Quad {
 		label = la;
 		num = num2;
 	}
-	public __Oprand op;
+	public __Oprand op, op2;
 	public __Label label;
 	public int num;
 	@Override
@@ -27,9 +27,11 @@ public class __Branch extends __Quad {
 		tmp = op.init(tmp);
 		op.load();
 		if (num == 0)
-			System.out.println("  beq "+ op.pr() + ", $0, " + label.print());
-		else
-			System.out.println("  bne "+ op.pr() + ", $0, " + label.print());
+			System.out.println("  beq " + op.pr() + ", $0, " + label.print());
+		else if (num == 1)
+			System.out.println("  bne " + op.pr() + ", $0, " + label.print());
+		else if (num == 2)
+			System.out.println("  bne " + op.pr() + ", " + op2.pr() + ", " + label.print());
 	}
 	@Override
 	public __TempOprand def() throws Exception {
