@@ -31,8 +31,6 @@ public class optimize
 		{
 			if ((quad.get(i) instanceof __BinOp) && (quad.get(i + 1) instanceof __Branch))
 			{
-				q.add(quad.get(i));
-				
 				__BinOp __b = (__BinOp) quad.get(i);
 				__Branch __bb = (__Branch) quad.get(i + 1);
 				if (__b.op.equals("==") && __b.def().temp.copy == ((__TempOprand)__bb.op).temp.copy)
@@ -54,10 +52,9 @@ public class optimize
 					}
 				}
 			}
-			else if ((quad.get(i) instanceof __Move) && (quad.get(i + 1) instanceof __Move))
+			
+			if ((quad.get(i) instanceof __Move) && (quad.get(i + 1) instanceof __Move))
 			{
-				q.add(quad.get(i));
-				
 				__Move __a = (__Move) quad.get(i);
 				__Move __b = (__Move) quad.get(i + 1);
 				
@@ -69,8 +66,36 @@ public class optimize
 					//System.out.println("!!!");
 				}
 			}
-			else
-				q.add(quad.get(i));
+			
+			if ((quad.get(i) instanceof __Move) && i + 2 < quad.size() && (quad.get(i + 2) instanceof __Move))
+			{
+				__Move __a = (__Move) quad.get(i);
+				__Move __b = (__Move) quad.get(i + 2);
+				
+				if (__a.src instanceof __LabelAddress && __b.src instanceof __Mem &&
+					__a.def().temp.copy == ((__Mem) __b.src).base.temp.copy)
+				{
+					__b.special = true;
+					__b.src = __a.src;
+					//System.out.println("!!!");
+				}
+			}
+			
+			if ((quad.get(i) instanceof __Move) && i + 3 < quad.size() && (quad.get(i + 3) instanceof __Move))
+			{
+				__Move __a = (__Move) quad.get(i);
+				__Move __b = (__Move) quad.get(i + 3);
+				
+				if (__a.src instanceof __LabelAddress && __b.src instanceof __Mem &&
+					__a.def().temp.copy == ((__Mem) __b.src).base.temp.copy)
+				{
+					__b.special = true;
+					__b.src = __a.src;
+					//System.out.println("!!!");
+				}
+			}
+			
+			q.add(quad.get(i));
 		}
 		return q;
 	}
