@@ -25,7 +25,7 @@ public class __Temp {
 		if (name.length() != 0 && name.charAt(0) == '$') return name;
 		return "t" + num;
 	}
-	public int num = 0, offset, nowNum, copy;
+	public int num = 0, offset, nowNum, copy = 0;
 	public String name = "";
 	public static int count = 0;
 	public boolean danger = false;
