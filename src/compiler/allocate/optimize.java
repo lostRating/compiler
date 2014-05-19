@@ -12,9 +12,12 @@ public class optimize
 		
 		for (int i = left; i <= right; ++i)
 		{
+			//quad.get(i).pr();
 			__TempOprand __t = quad.get(i).def();
 			if (__t != null && activeAnalyze.out[i].get(__t.temp.copy) == null && !__t.temp.danger)
 			{
+				//System.out.print("!!!   ");
+				//quad.get(i).pr();
 				continue;
 			}
 			q.add(quad.get(i));
@@ -71,8 +74,15 @@ public class optimize
 						if (__a.src instanceof __LabelAddress && __b.src instanceof __Mem &&
 							__a.def().temp.copy == ((__Mem) __b.src).base.temp.copy)
 						{
-							__b.special = true;
+							__b.special = 1;
 							__b.src = __a.src;
+						}
+						
+						if (__a.src instanceof __LabelAddress && __b.dst instanceof __Mem &&
+							__a.def().temp.copy == ((__Mem) __b.dst).base.temp.copy)
+						{
+							__b.special = 2;
+							__b.dst = __a.src;
 						}
 						
 						if (__a.src instanceof __Const && __b.src instanceof __TempOprand &&
