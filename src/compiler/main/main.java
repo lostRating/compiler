@@ -39,13 +39,15 @@ public class main {
 	static public boolean mips = true;
 	static public boolean test = true;
 	
+	static public long startTime, endTime;
+	
 	static public Stack<Integer> Offset = new Stack<Integer>();
 	static public Stack<__Label> l1 = new Stack<__Label>();
 	static public Stack<__Label> l2 = new Stack<__Label>();
 	
 	static public int work(File file) throws RecognitionException, IOException, Exception {
 		try	{
-			long startTime = System.currentTimeMillis();
+			startTime = System.currentTimeMillis();
 			String s = AST.getTreeString(file);
 			root a = makeTree.getRoot(s);
 			try
@@ -55,7 +57,7 @@ public class main {
 				if (mips)
 					a.showMips();
 				activeAnalyze.work(a.quad);
-				long endTime = System.currentTimeMillis();
+				endTime = System.currentTimeMillis();
 				System.out.println("# " + (endTime - startTime) + "ms");
 				if (mips)
 					init.printfs();

@@ -335,6 +335,8 @@ public class activeAnalyze
 			quad = optimize.work(quad, 0, quad.size() - 1);
 			
 			if (quad.size() == last) break;
+			main.endTime = System.currentTimeMillis();
+			if (main.endTime - main.startTime > 7000) break;
 			
 			last = quad.size();
 		}

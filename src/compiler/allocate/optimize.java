@@ -94,6 +94,17 @@ public class optimize
 							}
 						}
 					}
+					
+					if (quad.get(j) instanceof __BinOp)
+					{
+						__BinOp __b = (__BinOp) quad.get(j);
+						
+						if (__a.src instanceof __TempOprand && __b.left instanceof __TempOprand &&
+							__a.def().temp.copy == ((__TempOprand) __b.left).temp.copy)
+						{
+							__b.left = __a.src;
+						}
+					}
 				}
 			}
 			
