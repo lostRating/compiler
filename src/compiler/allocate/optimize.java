@@ -90,6 +90,14 @@ public class optimize
 			if (quad.get(i) instanceof __BinOp && quad.get(i).def() != null)
 			{
 				__BinOp __a = (__BinOp) quad.get(i);
+				Vector<__TempOprand> tmp = __a.use();
+				boolean flag = false;
+				for (int j = 0; j < tmp.size(); ++j)
+				{
+					__TempOprand __t  = tmp.get(j);
+					if (__t == null) continue;
+					if (__a.def().temp.copy == __t.temp.copy) flag = true;
+				}
 				
 				for (int j = i + 1; j <= i + 10 && j <= right; ++j)
 				{
@@ -97,6 +105,7 @@ public class optimize
 					if (quad.get(j) instanceof __Jump) break;
 					if (quad.get(j) instanceof __Return) break;
 					if (quad.get(j).def() != null && quad.get(j).def().temp.copy == __a.def().temp.copy) break;
+					if (flag) break;
 					
 					if (quad.get(j) instanceof __Move)
 					{
