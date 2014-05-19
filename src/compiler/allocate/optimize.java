@@ -106,9 +106,8 @@ public class optimize
 							__a.def().temp.copy == ((__TempOprand) __b.left).temp.copy)
 						{
 							__TempOprand __t = (__TempOprand) __a.src;
-							if (__t.temp.copy == 0)
+							if (__t.temp.copy == 0 && !(__t.temp.name.equals("$v0")))
 							{
-								//System.out.println(__t.pr());
 								__b.left = __a.src;
 							}
 						}
