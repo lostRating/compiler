@@ -345,7 +345,7 @@ public class activeAnalyze
 		iteration(quad, 0, quad.size() - 1);
 		interval(quad, 0, quad.size() - 1);
 		quad = optimize.work(quad, 0, quad.size() - 1);
-		
+			
 		print(quad, 0, quad.size() - 1);
 	}
 }

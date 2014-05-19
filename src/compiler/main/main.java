@@ -118,6 +118,6 @@ public class main {
 			}
 		}
 		else
-			System.exit( work(new File(args[0])));
+			System.exit(work(new File(args[0])));
 	}
 }

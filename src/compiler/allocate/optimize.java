@@ -102,29 +102,13 @@ public class optimize
 					{
 						__BinOp __b = (__BinOp) quad.get(j);
 						
-						if (__a.src instanceof __TempOprand && __b.left instanceof __TempOprand &&
-							__a.def().temp.copy == ((__TempOprand) __b.left).temp.copy)
-						{
-							__TempOprand __t = (__TempOprand) __a.src;
-							if (__t.temp.copy == 0 && !(__t.temp.name.equals("$v0")))
-							{
-								__b.left = __a.src;
-							}
-						}
-					}
-					
-					if (quad.get(j) instanceof __BinOp)
-					{
-						__BinOp __b = (__BinOp) quad.get(j);
-						
-						if (__a.src instanceof __TempOprand && __b.right instanceof __TempOprand &&
+						if (__a.src instanceof __Const && __b.right instanceof __TempOprand &&
 							__a.def().temp.copy == ((__TempOprand) __b.right).temp.copy)
 						{
-							__TempOprand __t = (__TempOprand) __a.src;
-							if (__t.temp.copy == 0 && !(__t.temp.name.equals("$v0")))
-							{
-								__b.right = __a.src;
-							}
+							//__a.pr();
+							//__b.pr();
+							//System.out.println("!!!");
+							__b.right = __a.src;
 						}
 					}
 				}
