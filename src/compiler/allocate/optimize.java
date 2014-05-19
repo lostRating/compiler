@@ -87,6 +87,33 @@ public class optimize
 				}
 			}
 			
+			if (quad.get(i) instanceof __BinOp && quad.get(i).def() != null)
+			{
+				__BinOp __a = (__BinOp) quad.get(i);
+				
+				for (int j = i + 1; j <= i + 10 && j <= right; ++j)
+				{
+					if (quad.get(j) instanceof __Branch) break;
+					if (quad.get(j) instanceof __Jump) break;
+					if (quad.get(j) instanceof __Return) break;
+					if (quad.get(j).def() != null && quad.get(j).def().temp.copy == __a.def().temp.copy) break;
+					
+					if (quad.get(j) instanceof __Move)
+					{
+						__Move __b = (__Move) quad.get(j);
+						
+						if (__b.src instanceof __TempOprand && __a.def().temp.copy == ((__TempOprand) __b.src).temp.copy)
+						{
+							if (__b.def() != null)
+							{
+								//System.out.println("!!!");
+								quad.set(j, new __BinOp(__b.def(), __a.left, __a.right, __a.op));
+							}
+						}
+					}
+				}
+			}
+			
 			q.add(quad.get(i));
 		}
 		return q;
