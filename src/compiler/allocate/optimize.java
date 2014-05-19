@@ -12,12 +12,9 @@ public class optimize
 		
 		for (int i = left; i <= right; ++i)
 		{
-			//quad.get(i).pr();
 			__TempOprand __t = quad.get(i).def();
 			if (__t != null && activeAnalyze.out[i].get(__t.temp.copy) == null && !__t.temp.danger)
 			{
-				//System.out.print("!!!   ");
-				//quad.get(i).pr();
 				continue;
 			}
 			q.add(quad.get(i));
@@ -68,6 +65,7 @@ public class optimize
 					if (quad.get(j) instanceof __Jump) break;
 					if (quad.get(j) instanceof __Return) break;
 					if (quad.get(j).def() != null && quad.get(j).def().temp.copy == __a.def().temp.copy) break;
+					if (quad.get(j).def() != null && quad.get(j).def().temp.danger) break;
 					if (flag) break;
 					
 					if (quad.get(j) instanceof __Move)
@@ -106,7 +104,9 @@ public class optimize
 							__a.def().temp.copy == ((__TempOprand) __b.right).temp.copy)
 						{
 							if (__b.left instanceof __TempOprand)
+							{
 								__b.right = __a.src;
+							}
 						}
 					}
 				}
