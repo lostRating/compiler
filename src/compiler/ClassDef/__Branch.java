@@ -11,7 +11,7 @@ public class __Branch extends __Quad {
 		label = la;
 		num = num2;
 	}
-	public __Oprand op, op2;
+	public __Oprand op, op2 = null;
 	public __Label label;
 	public int num;
 	@Override
@@ -49,6 +49,7 @@ public class __Branch extends __Quad {
 	public Vector<__TempOprand> use() throws Exception {
 		Vector<__TempOprand> tmp = new Vector<__TempOprand>();
 		tmp.add(op.use());
+		if (op2 != null) tmp.add(op2.use());
 		return tmp;
 	}
 }
