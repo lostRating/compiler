@@ -37,7 +37,7 @@ public class main {
 	static public Type GXX_VOID_STAR = new Pointer(GXX_VOID, "GXX_VOID_STAR");
 	
 	static public boolean mips = true;
-	static public boolean test = false;
+	static public boolean test = true;
 	
 	static public long startTime, endTime;
 	
