@@ -11,5 +11,6 @@ src/compiler/ast/antlrworks-1.5rc2.jar
 
 *.xlsx
 *.class
+*.docx
 
 hehe.s
