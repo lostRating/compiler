@@ -1,0 +1,7 @@
+C to MIPS compiler in Java
+
+-------------------------------
+
+It can compile many general C codes to MIPS codes, and can run on SPIM MIPS simulator.
+
+parser: antlr 3.5
